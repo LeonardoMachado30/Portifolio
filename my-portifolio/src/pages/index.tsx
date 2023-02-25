@@ -134,23 +134,23 @@ export default function Home() {
           ref={itemsRef}
         >
           <Content
-            className={`bg-welcome hidden`}
+            className={`bg-welcome`}
             title={`BEM VINDO AO MEU PORTIFOLIO`}
           />
 
-          <Content className={`bg-content-1 hidden`} title={`Sobre mim`}>
+          <Content className={`bg-content-1`} title={`Sobre mim`}>
             <AboutMe />
           </Content>
 
-          <Content className={`bg-content-2 hidden`} title={`Experiencias`}>
+          <Content className={`bg-content-2`} title={`Experiencias`}>
             <Experience />
           </Content>
 
-          <Content className={`bg-content-3 hidden`} title={`Escolaridade`}>
+          <Content className={`bg-content-3`} title={`Escolaridade`}>
             <Schooling />
           </Content>
 
-          <Content className={`bg-content-4 hidden`} title={`Projetos`}>
+          <Content className={`bg-content-4`} title={`Projetos`}>
             <Repositories />
           </Content>
         </div>

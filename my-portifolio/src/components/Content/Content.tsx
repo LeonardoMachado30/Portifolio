@@ -12,7 +12,9 @@ export default function Content({
   title = "",
 }: MyComponentProps) {
   return (
-    <div className={`fixed h-screen w-full p-4 text-white ${className}`}>
+    <div
+      className={`fixed hidden h-screen w-full p-4  text-black ${className}`}
+    >
       <h2 className="mb-4 text-xl font-semibold">{title}</h2>
       {children}
     </div>
