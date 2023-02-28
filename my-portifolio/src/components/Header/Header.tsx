@@ -5,7 +5,7 @@ interface MyComponentProps {
   onClick: (valur: string) => void;
 }
 
-function Header({ activeTab, onClick }: MyComponentProps) {
+function Header({ activeTab, onClick }: MyComponentProps): JSX.Element {
   const Arr: Array<string> = [
     "Perfil",
     "Experiencias",

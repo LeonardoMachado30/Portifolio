@@ -15,108 +15,142 @@ import {
   Experience,
   Schooling,
   Repositories,
-} from "../components/export";
+} from "@/components/export";
 import { gsap } from "gsap";
-import debounce from "./Controllers/debounce";
+import debounce from "@/controllers/debounce";
+import experience from "@/models/experience";
 
-export default function Home() {
-  const [activeTab, setActiveTab] = useState("welcome");
-  const [scrollFocus, setScrollFocus] = useState<boolean>(true);
-  const [scrollPagination, setScrollPagination] = useState<number>(0);
+interface Scroll {
+  focus?: boolean;
+  up?: boolean;
+  down?: boolean;
+  page: number;
+  current?: number;
+}
+
+export default function Home(): JSX.Element {
   const itemsRef = useRef<HTMLDivElement>(null);
+  const [activeTab, setActiveTab] = useState("Welcome");
+  const [heightView, setHeightView] = useState(0);
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
+  const [scroll, setScroll] = useState<Scroll>({
+    focus: false,
+    up: false,
+    down: false,
+    page: 0,
+    current: 0,
+  });
+  const activeTabTypes = [
+    "Welcome",
+    "Perfil",
+    "Experiencias",
+    "Escolaridade",
+    "Projetos",
+  ];
+  const gsapParms = {
+    end: {
+      opacity: 1,
+      x: 0,
+      duration: 1.5,
+      delay: 0.2,
+      ease: "power3.out",
+    },
+    start: {
+      opacity: 0,
+      x: -500,
+      duration: 1,
+      delay: 0,
+      ease: "power3.out",
+    },
+  };
 
   const handleActiveTab = (tab: string) => {
     setActiveTab(tab);
-
-    if (tab === "Perfil") {
-      setScrollPagination(1);
-    } else if (tab === "Experiencias") {
-      setScrollPagination(2);
-    } else if (tab === "Escolaridade") {
-      setScrollPagination(3);
-    } else if (tab === "Projetos") {
-      setScrollPagination(4);
-    }
+    activeTabTypes.map((element, index) => {
+      if (tab === element) {
+        setScroll({ page: index });
+      }
+    });
   };
 
-  useEffect(() => {
-    let prevScrollPosition = window.pageYOffset;
-    const debouncedFn = debounce(() => {
-      const currentScrollPosition = window.pageYOffset;
+  function numberBetween(
+    constante: number,
+    value: { min: number; max: number }
+  ): boolean {
+    return constante >= value.min && constante <= value.max ? true : false;
+  }
 
-      if (scrollPagination >= 0 && scrollPagination <= 4) {
-        if (currentScrollPosition > prevScrollPosition) {
-          setScrollFocus(true);
-          setScrollPagination(scrollPagination + 1);
-          return;
+  useEffect(() => {
+    // itemsRef.style.overflowY = "scroll";
+    // itemsRef.style.visibility = "hidden";
+    function handleSize() {
+      setHeightView(window.innerHeight);
+    }
+
+    handleSize();
+  }, []);
+
+  useEffect(() => {
+    const scrollPosition =
+      window.pageYOffset || document.documentElement.scrollTop;
+    const debouncedFn = debounce(() => {
+      const scrollPosition =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const visibleHeight = document.documentElement.clientHeight;
+      const totalHeight = document.documentElement.scrollHeight;
+      const scrolledAmount = totalHeight - visibleHeight - scrollPosition;
+      const items = itemsRef.current?.children;
+
+      let down = scrollPosition > scrolledAmount ? true : false;
+
+      if (items) {
+        // Array.from(items).forEach((item, index) => {
+        //   item.classList.add("hidden");
+        // });
+
+        if (numberBetween(scroll?.page, { min: 0, max: 4 })) {
+          setScroll({
+            focus: true,
+            down: down,
+            page: down ? scroll?.page + 1 : scroll?.page - 1,
+            current: scrollPosition,
+          });
         } else {
-          setScrollFocus(false);
-          setScrollPagination(scrollPagination - 1);
-          return;
+          setScroll({
+            focus: false,
+            down: false,
+            page: 0,
+            current: 0,
+          });
         }
+        setLastScrollPosition(scrollPosition);
       }
-    }, 25);
+    }, 50);
 
     window.addEventListener("scroll", debouncedFn);
+
     return () => {
       window.removeEventListener("scroll", debouncedFn);
     };
-  }, [scrollPagination]);
+  }, [scroll]);
 
   useEffect(() => {
     const items = itemsRef.current?.children;
 
-    if (items && scrollPagination >= 0 && scrollPagination < 5) {
+    const tl = gsap.timeline();
+    if (items && scroll?.page >= 0 && scroll?.page < 5) {
       Array.from(items).forEach((item, index) => {
-        const obj = {
-          opacity: 1,
-          x: 0,
-          duration: 2,
-          delay: 0.2,
-          ease: "power3.out",
-        };
+        let element = null;
+        if (scroll?.page === index) {
+          element = item;
 
-        const obj2 = {
-          opacity: 0,
-          x: -100,
-          duration: 1,
-          delay: 0.2,
-          ease: "power3.out",
-        };
-
-        console.log("scrollPagination: " + scrollPagination);
-        let element = item;
-
-        gsap.to(element, obj2);
-        // item.classList.add("hidden");
-
-        if (scrollPagination === 0) {
-          element = items[scrollPagination];
-          setActiveTab("welcome");
-        } else if (scrollPagination === 1) {
-          setActiveTab("Perfil");
-          element = items[scrollPagination];
-        } else if (scrollPagination === 2) {
-          setActiveTab("Experiencias");
-          element = items[scrollPagination];
-        } else if (scrollPagination === 3) {
-          setActiveTab("Escolaridade");
-          element = items[scrollPagination];
-        } else if (scrollPagination === 4) {
-          setActiveTab("Projetos");
-          element = items[scrollPagination];
+          // tl.to(element, gsapParms.start);
+          // tl.to(element, gsapParms.end);
+          setActiveTab(activeTabTypes[index]);
         }
-
-        element.classList.remove("hidden");
-
-        gsap.to(element, obj);
       });
-    } else {
-      setScrollPagination(0);
-      setScrollFocus(true);
-      window.scroll(0, 0);
     }
-  }, [scrollPagination]);
+  }, [scroll]);
 
   return (
     <>
@@ -127,23 +161,19 @@ export default function Home() {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <Header activeTab={activeTab} onClick={handleActiveTab} />
-      <main className="h-screen">
-        <div
-          style={{ height: "1050px" }}
-          className=" flex flex-col items-center"
-          ref={itemsRef}
-        >
+      <main>
+        <div className="relative flex flex-col items-center" ref={itemsRef}>
           <Content
             className={`bg-welcome`}
             title={`BEM VINDO AO MEU PORTIFOLIO`}
           />
 
-          <Content className={`bg-content-1`} title={`Sobre mim`}>
+          <Content className={`bg-content-1 AboutMe`} title={`Sobre mim`}>
             <AboutMe />
           </Content>
 
           <Content className={`bg-content-2`} title={`Experiencias`}>
-            <Experience />
+            <Experience empresa={experience} />
           </Content>
 
           <Content className={`bg-content-3`} title={`Escolaridade`}>
