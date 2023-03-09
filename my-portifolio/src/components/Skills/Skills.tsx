@@ -31,10 +31,6 @@ type Vaga = {
   competencias?: string[];
 };
 
-type Empresa = {
-  vagas: Vaga[];
-};
-
 const Skills: React.FC = () => {
   const listSkillsRef = useRef<HTMLDivElement>(null);
 
