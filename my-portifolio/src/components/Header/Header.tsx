@@ -3,20 +3,25 @@ import React, { useState, ReactElement, Dispatch, SetStateAction } from "react";
 interface MyComponentProps {
   activeTab: string;
   onClick: (valur: string) => void;
+  listTab: Array<string>;
 }
 
-function Header({ activeTab, onClick }: MyComponentProps): JSX.Element {
-  const Arr: Array<string> = [
-    "Perfil",
-    "Experiencias",
-    "Escolaridade",
-    "Projetos",
-  ];
+function Header({
+  activeTab,
+  onClick,
+  listTab,
+}: MyComponentProps): JSX.Element {
+  // const Arr: Array<string> = [
+  //   "Perfil",
+  //   "Experiencias",
+  //   "Escolaridade",
+  //   "Projetos",
+  // ];
 
   return (
     <header className="fixed z-50 flex w-full items-center justify-center bg-blue-200 p-4">
       <nav className="flex space-x-4">
-        {Arr.map((item, index) => {
+        {listTab.map((item, index) => {
           return (
             <button
               key={index}

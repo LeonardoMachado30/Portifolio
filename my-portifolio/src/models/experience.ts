@@ -1,11 +1,12 @@
 const experience = {
-  empresa: "TrabalhaBrasil",
-  logo: "Logo da empresa TrabalhaBrasil",
+
   vagas: [
     {
-      cargo: "Desenvolvedor de front-end (Razor - C#)",
+      empresa: "Trabalha Brasil / Red Trabaja",
+      cargo: "Desenvolvedor front-end",
       tipo: "Tempo integral",
-      periodo: "jun de 2021 - jan de 2023 · 1 ano 8 meses",
+      regime: "PJ",
+      periodo: { inicio: "jun de 2021", fim: "jan de 2023 ", total: "1 ano 8 meses" },
       localizacao: "Colombo, Paraná, Brasil",
       descricao: [
         "- Experiência focada em front-end, impactando mais de 50 milhões de pessoas.",
@@ -27,9 +28,11 @@ const experience = {
       competencias: ["JavaScript", "JQuery", "C#"],
     },
     {
+      empresa: "Trabalha Brasil",
       cargo: "Estagiário",
       tipo: "Meio período",
-      periodo: "abr de 2021 - jun de 2021 · 3 meses",
+      regime: "Estagiário",
+      periodo: { inicio: "abr de 2021", fim: "jun de 2021", total: "3 meses" },
       localizacao: "Colombo, Paraná, Brasil",
       descricao: [
         "- HTML, SCSS, JavaScript.",

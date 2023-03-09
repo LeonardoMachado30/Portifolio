@@ -1,28 +1,67 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { User } from "@/models/user";
+import { gsap } from "gsap";
 
-export default function AboutMe(): JSX.Element {
+export default function AboutMe({ page }: any): JSX.Element {
   const [user, setUser] = useState<User>();
+  const [isFocus, setIsFocused] = useState<boolean>(false);
+  const aboutMeRef = useRef<HTMLParagraphElement>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       let data;
       data = localStorage.getItem("User");
 
       if (!data) {
-        // console.log("REQUISIÇÂO FEITA");
         const resp = await fetch("/api/User");
         data = await resp.json();
         localStorage.setItem("User", JSON.stringify(data));
       }
-      // console.log(JSON.parse(data));
-      setUser(JSON.parse(data));
+      setUser(data);
     };
 
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (page === 1) {
+      // aboutMeRef?.current?.classList.remove("animation-horizontal");
+      gsap.fromTo(
+        aboutMeRef.current,
+        {
+          opacity: 0,
+          x: "150%",
+          duration: 1,
+          ease: "ease",
+        },
+        {
+          opacity: 1,
+
+          x: "0",
+          delay: 1,
+          duration: 0.5,
+          ease: "ease-in",
+
+          onComplete: () => {
+            aboutMeRef?.current?.classList.add("animation-horizontal");
+
+            // gsap.to(textRef?.current, {
+            //   // rotate: -90,
+            //   // x: "-=100",
+            //   // y: "+=100",
+            //   // duration: 1,
+            // });
+          },
+        }
+      );
+    }
+  }, [page]);
+
   return (
-    <p>
+    <p
+      className={`mb:mb-0 scroll-custom mb-20 overflow-auto bg-scroll pr-4 `}
+      ref={aboutMeRef}
+    >
       Olá, meu nome é Flávio Leonardo. Iniciei minha jornada na tecnologia
       trabalhando com reparos em dispositivos eletrônicos, como notebooks,
       computadores, celulares e outros. Realizei um estágio no Colégio Objetivo
