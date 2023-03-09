@@ -36,7 +36,6 @@ export default function AboutMe({ page }: any): JSX.Element {
         },
         {
           opacity: 1,
-
           x: "0",
           delay: 1,
           duration: 0.5,
@@ -44,13 +43,6 @@ export default function AboutMe({ page }: any): JSX.Element {
 
           onComplete: () => {
             aboutMeRef?.current?.classList.add("animation-horizontal");
-
-            // gsap.to(textRef?.current, {
-            //   // rotate: -90,
-            //   // x: "-=100",
-            //   // y: "+=100",
-            //   // duration: 1,
-            // });
           },
         }
       );

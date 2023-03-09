@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import logo_trabalhaBrasil from "@/assets/logo_trabalhaBrasil.jpeg";
 import {
   html,
   css,
@@ -14,8 +13,8 @@ import {
   react,
   csharp,
   php,
+  gsap,
 } from "@/assets/svg/index";
-import experience from "@/models/experience";
 
 type Vaga = {
   empresa: string;
@@ -37,7 +36,6 @@ type Empresa = {
 };
 
 const Skills: React.FC = () => {
-  const [skill, setSkill] = useState<Empresa>(experience);
   const listSkillsRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -54,6 +52,7 @@ const Skills: React.FC = () => {
             <Image src={bootstrap} alt={"bootstrap"} />
             <Image src={jquery} alt={"jquery"} />
             <Image src={sass} alt={"sass"} />
+            <Image src={gsap} alt={"gsap"} />
           </div>
         </div>
         <div className="flex flex-col">
