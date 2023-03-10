@@ -10,7 +10,7 @@ import {
 } from "@/components/export";
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -20,6 +20,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Parallax, Navigation } from "swiper";
+import React from "react";
 
 interface Scroll {
   focus?: boolean;
@@ -30,18 +31,18 @@ interface Scroll {
 }
 
 export default function Home(): JSX.Element {
-  const [page, setPage] = useState(0);
-  const swiperRef = useRef(null);
+  const [page, setPage] = useState<number | undefined>(0);
+  const swiperRef = useRef<SwiperRef>(null);
 
   useEffect(() => {
     const swipeNext = document.querySelector(".swiper-button-next");
     const swipePrev = document.querySelector(".swiper-button-prev");
     swipeNext?.addEventListener("click", () => {
-      setPage(swiperRef?.current?.swiper.activeIndex);
+      setPage(swiperRef?.current?.swiper?.activeIndex);
     });
 
     swipePrev?.addEventListener("click", () => {
-      setPage(swiperRef?.current?.swiper.activeIndex);
+      setPage(swiperRef?.current?.swiper?.activeIndex);
     });
 
     () => {};
@@ -56,10 +57,6 @@ export default function Home(): JSX.Element {
       </Head>
       <main className="overflow-hidden">
         <Swiper
-          style={{
-            "--swiper-navigation-color": "#fff",
-            "--swiper-pagination-color": "#fff",
-          }}
           speed={600}
           parallax={true}
           pagination={{
