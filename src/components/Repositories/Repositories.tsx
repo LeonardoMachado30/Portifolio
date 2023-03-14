@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Respositories } from "@/models/Respositories";
+import { RepositoriesModel } from "@/models/Repositories";
 import moment from "moment";
+import axios from "axios";
 
 export default function Repositories(): JSX.Element {
-  const [repositories, setRepositories] = useState<Array<Respositories>>();
-  const [error, setError] = useState<boolean>(false);
+  const [repositories, setRepositories] =
+    useState<Array<RepositoriesModel> | null>();
 
   function formatDate(date: any) {
     const dateCurrent = moment();
@@ -48,21 +49,26 @@ export default function Repositories(): JSX.Element {
   }
 
   async function fetchData() {
-    const getStorage = localStorage.getItem("Respositories");
-    let respositories = getStorage && JSON.parse(getStorage);
+    const getStorage = localStorage.getItem("Repositories");
+    let reposObject = getStorage && JSON.parse(getStorage);
 
-    if (!respositories) {
-      const resp = await fetch("/api/Repositories");
-      respositories = await resp.json();
-      console.log(resp);
-      if (resp.status === 200) {
-        localStorage.setItem("Respositories", JSON.stringify(respositories));
-      } else {
-        setError(true);
-      }
+    if (reposObject !== null) {
+      setRepositories(reposObject);
+      return;
     }
 
-    respositories = respositories?.map((element: any) => {
+    const resp = await axios.get(
+      `https://api.github.com/users/LeonardoMachado30/repos`
+    );
+
+    reposObject = await resp.data;
+
+    if (resp.status !== 200) {
+      setRepositories(null);
+      return;
+    }
+
+    const reposNewObjectSelect = reposObject?.map((element: any) => {
       return {
         name: element.name,
         created_at: element.created_at,
@@ -74,8 +80,9 @@ export default function Repositories(): JSX.Element {
       };
     });
 
-    const dataSort = orderByDate(respositories);
-    setRepositories(dataSort);
+    const reposNewObjectOrder = orderByDate(reposNewObjectSelect);
+    localStorage.setItem("Repositories", JSON.stringify(reposNewObjectOrder));
+    setRepositories(reposNewObjectOrder);
     return;
   }
   useEffect(() => {
@@ -84,7 +91,7 @@ export default function Repositories(): JSX.Element {
 
   return (
     <>
-      {!error ? (
+      {repositories ? (
         <div className="card-list flex w-4/5 gap-4 overflow-x-auto overflow-y-hidden p-4">
           {repositories?.map((element, index) => {
             const created_at = moment(element.created_at);

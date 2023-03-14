@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import {
   html,
@@ -16,26 +16,11 @@ import {
   gsap,
 } from "@/assets/svg/index";
 
-type Vaga = {
-  empresa: string;
-  cargo: string;
-  tipo: string;
-  periodo: {
-    inicio: string;
-    fim: string;
-    total: string;
-  };
-  regime: string;
-  localizacao: string;
-  descricao: string[];
-  competencias?: string[];
-};
-
 const Skills: React.FC = () => {
   const listSkillsRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="card box flex flex-col">
+    <section className="card box flex flex-col">
       <div className="flex w-full max-w-xl flex-col gap-10" ref={listSkillsRef}>
         <div className="flex flex-col">
           <h3 className="mb-4 text-center text-3xl">Front-end</h3>
@@ -61,7 +46,7 @@ const Skills: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

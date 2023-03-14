@@ -1,31 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import { User } from "@/models/user";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export default function AboutMe({ page }: any): JSX.Element {
-  const [user, setUser] = useState<User>();
-  const [isFocus, setIsFocused] = useState<boolean>(false);
   const aboutMeRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      let data;
-      data = localStorage.getItem("User");
-
-      if (!data) {
-        const resp = await fetch("/api/User");
-        data = await resp.json();
-        localStorage.setItem("User", JSON.stringify(data));
-      }
-      setUser(data);
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     if (page === 1) {
-      // aboutMeRef?.current?.classList.remove("animation-horizontal");
       gsap.fromTo(
         aboutMeRef.current,
         {
