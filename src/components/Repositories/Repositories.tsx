@@ -1,12 +1,24 @@
-import { useEffect, useState } from "react";
-import { RepositoriesModel } from "@/models/Repositories";
+import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import axios from "axios";
+import Image from "next/image";
+import { RepositoriesModel } from "@/models/Repositories";
+import { info } from "@/assets/svg/index";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
 
-export default function Repositories(): JSX.Element {
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-cube";
+import "swiper/css/pagination";
+
+// import required modules
+import { EffectCube, Pagination, Mousewheel } from "swiper";
+
+export default function Repositories({ page }: any): JSX.Element {
   const [repositories, setRepositories] =
     useState<Array<RepositoriesModel> | null>();
-
+  const swiperRef = useRef<any>();
   function formatDate(date: any) {
     const dateCurrent = moment();
     const dateLastUpdate = moment(date.updated_at);
@@ -89,44 +101,102 @@ export default function Repositories(): JSX.Element {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (page === 3) {
+      swiperRef?.current?.classList?.add("bounce-in-top");
+    }
+  }, [page]);
+
   return (
     <>
       {repositories ? (
-        <div className="card-list flex w-4/5 gap-4 overflow-x-auto overflow-y-hidden p-4">
+        <Swiper
+          effect={"cube"}
+          direction={"vertical"}
+          grabCursor={true}
+          cubeEffect={{
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+          }}
+          mousewheel={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[EffectCube, Pagination, Mousewheel]}
+          className="mySwiper flex max-h-96 max-w-sm items-center justify-center "
+          style={{ background: "transparent" }}
+          ref={swiperRef}
+        >
           {repositories?.map((element, index) => {
             const created_at = moment(element.created_at);
             const lastUpdate = formatDate(element);
 
             return (
-              <a
+              <SwiperSlide
+                className="  bg-white bg-transparent"
+                style={{ padding: 0 }}
                 key={index}
-                href={`${element.url}`}
-                className="flex w-72 flex-col justify-between bg-white p-7 text-gray-600 shadow-md hover:shadow-lg"
-                style={{ minWidth: "300px" }}
-                target="_blank"
-                title={element.name}
               >
-                <div>
-                  <h2 className="mb-2 text-2xl font-bold text-black">
-                    {element.name}
-                  </h2>
-                  <p className="mb-9">Tecnologia: {element.language}</p>
+                <a
+                  href={`${element.url}`}
+                  className="flex h-full flex-col justify-between bg-white p-7 text-gray-600 shadow-md hover:shadow-lg"
+                  style={{ minWidth: "300px" }}
+                  target="_blank"
+                  title={element.name}
+                >
+                  <div>
+                    <h2 className="mb-2 text-2xl font-bold text-black">
+                      {element.name
+                        .replace(/[-]/g, " ")
+                        .replace(/_/g, " ")
+                        .toLocaleUpperCase()}
+                    </h2>
+                    <p className="mb-9 text-black">
+                      Tecnologia: {element.language ?? "Não listada"}
+                    </p>
 
-                  <p>
-                    {element.description !== null
-                      ? element.description
-                      : "(Descrição em desenvolvimento)"}
-                  </p>
-                </div>
-                <div className="text-sm">
-                  <p>Ultima atualização: {lastUpdate}</p>
+                    <p>
+                      {element.description !== null
+                        ? element.description
+                        : "(Descrição em desenvolvimento)"}
+                    </p>
+                  </div>
+                  <div className="text-sm">
+                    <div className="flex gap-2">
+                      fork: {element.fork ? "SIM" : "NÂO"}{" "}
+                      <div className="relative">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="info h-5 w-5 hover:fill-cyan-400"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
 
-                  <p>Criado: {created_at.format("DD/MM/YYYY")}</p>
-                </div>
-              </a>
+                        <p className="tootip absolute rounded bg-zinc-600 p-1 text-xs text-white ">
+                          “fork” é simplesmente o mesmo projeto no seu
+                          namespace, permitindo que você faça alterações
+                          publicamente em um projeto como uma forma mais aberta
+                          de contribuir
+                        </p>
+                      </div>
+                    </div>
+                    <p>Ultima atualização: {lastUpdate}</p>
+
+                    <p>Criado: {created_at.format("DD/MM/YYYY")}</p>
+                  </div>
+                </a>
+              </SwiperSlide>
             );
           })}
-        </div>
+        </Swiper>
       ) : (
         <div>Erro</div>
       )}

@@ -8,9 +8,10 @@ export default function BlindsEffect(): JSX.Element {
 
       <Image
         alt="Blind Effect"
-        className="asset-img opacity-0"
+        className="asset-img h-3/4 opacity-0 md:h-3/5"
         id="light-img"
         src={lightBlindsEffect}
+        style={{ width: "100%" }}
       />
     </>
   );

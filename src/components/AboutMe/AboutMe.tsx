@@ -31,20 +31,21 @@ export default function AboutMe({ page }: any): JSX.Element {
 
   return (
     <p
-      className={`mb:mb-0 scroll-custom mb-20 overflow-auto bg-scroll pr-4 `}
+      className={`mb:mb-0 scroll-custom mx-12 overflow-auto bg-scroll px-4 text-center md:max-w-4xl`}
       ref={aboutMeRef}
     >
-      Olá, meu nome é Flávio Leonardo. Iniciei minha jornada na tecnologia
-      trabalhando com reparos em dispositivos eletrônicos, como notebooks,
-      computadores, celulares e outros. Realizei um estágio no Colégio Objetivo
-      por 6 meses como suporte técnico, ajudando os funcionários durante a
-      pandemia com as aulas online. Minhas responsabilidades incluíam suporte
-      aos aplicativos do pacote Office, configurações das aulas em plataformas
-      como Meet, Zoom e Teams, bem como a formatação e manutenção dos
-      equipamentos da escola. Após a experiência como suporte, comecei a
-      trabalhar como programador no site "Trabalha Brasil" como desenvolvedor
-      front-end. Aprendi sobre a criação de landing pages, telas dinâmicas,
-      transferência de dados, consumo de APIs, otimização de navegação e SEO.
+      Iniciei minha jornada na tecnologia trabalhando com reparos em
+      dispositivos eletrônicos, como notebooks, computadores, celulares e
+      outros. Realizei um estágio no Colégio Objetivo por 6 meses como suporte
+      técnico, ajudando os funcionários durante a pandemia com as aulas online.
+      Minhas responsabilidades incluíam suporte aos aplicativos do pacote
+      Office, configurações das aulas em plataformas como Meet, Zoom e Teams,
+      bem como a formatação e manutenção dos equipamentos da escola. Após a
+      experiência como suporte, comecei a trabalhar como programador no site
+      "Trabalha Brasil" como desenvolvedor front-end. Aprendi sobre a criação de
+      landing pages, telas dinâmicas, transferência de dados, consumo de APIs,
+      otimização de navegação e SEO.
+      <br />
       <br />
       Minha meta profissional é me tornar um desenvolvedor de jogos, usando meus
       conhecimentos e habilidades para criar soluções inovadoras e proporcionar
@@ -55,7 +56,9 @@ export default function AboutMe({ page }: any): JSX.Element {
       criação de jogos dinâmicos e interativos. Além disso, meu conhecimento em
       tecnologias como React e NextJs, bem como meu trabalho anterior como
       suporte técnico, me permitirão ajudar a resolver problemas de maneira
-      eficiente e garantir a qualidade final do produto. <br />
+      eficiente e garantir a qualidade final do produto.
+      <br />
+      <br />
       Estou animado com a possibilidade de usar minhas habilidades para
       contribuir com a criação de jogos que possam ser apreciados por pessoas de
       todas as idades e lugares. Acredito que a combinação de minhas habilidades

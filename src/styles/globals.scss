@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 @import "./animations.scss";
+@import "./swiperSlider.scss";
 
 html,
 body,
 main {
+  font-family: "Roboto", "Helvetica", "Arial";
   height: 100vh;
   margin: 0;
   padding: 0;
@@ -14,56 +16,32 @@ main {
   left: 0;
 }
 
-main {
-  font-family: "Roboto", "Helvetica", "Arial";
-}
+// body {
+//   overflow: hidden;
+// }
 
-body {
-  overflow: hidden;
-}
-
-.bg-welcome {
+.welcome {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 0 !important;
 
-  & > h2 {
-    font-size: 4rem;
-    font-weight: bold;
-    line-height: 1.5;
-    text-align: center;
-    word-break: break-word;
-    position: absolute;
+  // & > h2 {
+  //   // font-size: 4rem;
+  //   font-weight: bold;
+  //   line-height: 1.5;
+  //   text-align: center;
+  //   word-break: break-word;
+  //   position: absolute;
 
-    @media screen and (max-width: 900px) {
-      padding: 20% 0;
-      font-size: 3.2rem;
-    }
-  }
+  //   @media screen and (max-width: 900px) {
+  //     padding: 20% 0;
+  //     font-size: 3.2rem;
+  //   }
+  // }
 }
 
-.aboutMe {
-  & > h2 {
-    // font-size: 4rem;
-    font-weight: bold;
-    line-height: 1.5;
-    text-align: center;
-    word-break: break-word;
-  }
-
-  & > p {
-    max-width: 900px;
-    text-align: center;
-    @media screen and (max-width: 900px) {
-      font-size: 1rem;
-    }
-  }
-
-  @media screen and (max-width: 900px) {
-    padding: 20% 5%;
-  }
-}
-
+.aboutMe,
 .skills {
   & > h2 {
     // font-size: 4rem;
@@ -72,20 +50,40 @@ body {
     text-align: center;
     word-break: break-word;
   }
-  & > p {
-    max-width: 900px;
-    text-align: center;
-  }
+
+  // & > p {
+  //   max-width: 900px;
+  //   text-align: center;
+  //   @media screen and (max-width: 900px) {
+  //     font-size: 1rem;
+  //   }
+  // }
 
   @media screen and (max-width: 900px) {
-    padding: 20% 0;
-    font-size: 3.2rem;
+    padding: 20% 5%;
   }
 }
 
-.aboutMe,
-.skills,
-.repositories {
+// .skills {
+//   & > h2 {
+//     // font-size: 4rem;
+//     font-weight: bold;
+//     line-height: 1.5;
+//     text-align: center;
+//     word-break: break-word;
+//   }
+//   & > p {
+//     max-width: 900px;
+//     text-align: center;
+//   }
+
+//   @media screen and (max-width: 900px) {
+//     padding: 20% 0;
+//     font-size: 3.2rem;
+//   }
+// }
+
+.spacing_content {
   padding: 6% 0;
 }
 
@@ -102,32 +100,10 @@ body {
   }
 }
 
-.card-list:hover {
-  & > :not(:hover) {
-    opacity: 0.6;
-  }
-}
-
-.swiper {
+.bg-animation {
   width: 100%;
-  height: 100%;
-  background: #000;
-}
-
-.swiper-slide {
-  font-size: 18px;
-  color: #fff;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 40px 60px;
-}
-
-.parallax-bg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 130%;
-  height: 100%;
+  background-size: 500% 100% !important;
+  height: 100vh;
   background: rgb(131, 58, 180);
   background: -moz-linear-gradient(
     111deg,
@@ -141,23 +117,9 @@ body {
     rgba(253, 29, 29, 1) 50%,
     rgba(252, 176, 69, 1) 87%
   );
-  background: linear-gradient(111deg, rgba(131, 58, 180, 1) 14%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 87%);
+  background: linear-gradient(45deg, rgba(131, 58, 180, 1) 14%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 87%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4",endColorstr="#fcb045",GradientType=1);
-}
-
-.swiper-slide .title {
-  font-size: 41px;
-  font-weight: 300;
-}
-
-.swiper-slide .subtitle {
-  font-size: 21px;
-}
-
-.swiper-slide .text {
-  font-size: 14px;
-  max-width: 400px;
-  line-height: 1.3;
+  animation: backgroundPosition 16s ease-in-out infinite;
 }
 
 .scroll-custom {
@@ -196,4 +158,59 @@ body {
   &::-webkit-scrollbar-thumb:active {
     background-color: #626cee;
   }
+}
+
+.tootip {
+  visibility: hidden;
+  opacity: 0;
+  min-width: 290px;
+  top: -80px;
+  left: -90px;
+}
+
+.info {
+  &:hover ~ .tootip {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* ANIMATIONS CLASS */
+.jello-horizontal img:hover {
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 1s both;
+}
+
+.animation-horizontal {
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 1s both;
+}
+
+.slide-in-bck-center {
+  -webkit-animation: slide-in-bck-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-bck-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.focus-in-expand {
+  -webkit-animation: focus-in-expand 0.8s ease-in-out both;
+  animation: focus-in-expand 0.8s ease-in-out both;
+}
+
+.scale-up-center {
+  -webkit-animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+.slide-fwd-center {
+  -webkit-animation: slide-fwd-center 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-fwd-center 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.bounce-in-top {
+  -webkit-animation: bounce-in-top 1.1s 1s both;
+  animation: bounce-in-top 1.1s 1s both;
+}
+
+.tracking-in-expand-fwd {
+  -webkit-animation: tracking-in-expand-fwd 2s cubic-bezier(0.215, 0.61, 0.355, 1) 1s both;
+  animation: tracking-in-expand-fwd 2s cubic-bezier(0.215, 0.61, 0.355, 1) 1s both;
 }

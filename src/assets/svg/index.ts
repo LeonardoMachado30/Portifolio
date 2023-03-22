@@ -11,6 +11,7 @@ import csharp from "./Csharp.svg";
 import sass from "./sass.svg";
 import php from "./php.svg";
 import gsap from "./gsap.svg";
+import info from "./info.svg";
 
 
-export { css, gulp, html, javascript, typescript, next, bootstrap, jquery, react, csharp, sass, php, gsap }
+export { css, gulp, html, javascript, typescript, next, bootstrap, jquery, react, csharp, sass, php, gsap, info }

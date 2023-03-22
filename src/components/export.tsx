@@ -7,6 +7,7 @@ import Repositories from "./Repositories/Repositories";
 import Character from "./Character/Character";
 import BlindsEffect from "./BlindsEffect/BlindsEffect";
 import StampLinkedIn from "./StampLinkedIn/StampLinkedIn";
+import ContactMe from "./ContactMe/ContactMe";
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   Character,
   BlindsEffect,
   StampLinkedIn,
+  ContactMe,
 };
