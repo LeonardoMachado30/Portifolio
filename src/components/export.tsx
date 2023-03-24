@@ -8,6 +8,7 @@ import Character from "./Character/Character";
 import BlindsEffect from "./BlindsEffect/BlindsEffect";
 import StampLinkedIn from "./StampLinkedIn/StampLinkedIn";
 import ContactMe from "./ContactMe/ContactMe";
+import Hexagonal from "./Hexagonal/Hexagonal";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   BlindsEffect,
   StampLinkedIn,
   ContactMe,
+  Hexagonal,
 };

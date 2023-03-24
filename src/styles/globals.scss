@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import "./animations.scss";
 @import "./swiperSlider.scss";
+@import "./hexagonal.scss";
 
 html,
 body,
@@ -172,6 +173,39 @@ main {
   &:hover ~ .tootip {
     visibility: visible;
     opacity: 1;
+  }
+}
+
+.hexagono {
+  width: 160px;
+  height: 115px;
+  background: red;
+  position: absolute;
+  bottom: 200px;
+  border: 1px solid #000;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 25px solid red;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-top: 25px solid red;
   }
 }
 
