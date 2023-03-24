@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { icon_github, icon_redirect } from "@/assets/svg/index";
 import moment from "moment";
 import axios from "axios";
-import Image from "next/image";
 import { RepositoriesModel } from "@/models/Repositories";
-import { info } from "@/assets/svg/index";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cube";
@@ -21,7 +20,7 @@ export default function Repositories({ page }: any): JSX.Element {
   const swiperRef = useRef<any>();
   function formatDate(date: any) {
     const dateCurrent = moment();
-    const dateLastUpdate = moment(date.updated_at);
+    const dateLastUpdate = moment(date?.updated_at);
     const year: number = dateCurrent.diff(dateLastUpdate, "years");
     const mouth: number = dateCurrent.diff(dateLastUpdate, "months") % 12;
     const day: number = dateCurrent.diff(dateLastUpdate, "days");
@@ -46,7 +45,7 @@ export default function Repositories({ page }: any): JSX.Element {
     const dateCurrent = moment();
     return date
       .map((objeto: any) => {
-        const dateLastUpdate = moment(objeto.updated_at);
+        const dateLastUpdate = moment(objeto?.updated_at);
         return dateCurrent.diff(dateLastUpdate, "days");
       })
       .sort((a: any, b: any) => {
@@ -54,7 +53,7 @@ export default function Repositories({ page }: any): JSX.Element {
       })
       .map((data: any) => {
         return date.find((obj: any) => {
-          const dateLastUpdate = moment(obj.updated_at);
+          const dateLastUpdate = moment(obj?.updated_at);
           return data === dateCurrent.diff(dateLastUpdate, "days");
         });
       });
@@ -63,7 +62,7 @@ export default function Repositories({ page }: any): JSX.Element {
   async function fetchData() {
     const getStorage = localStorage.getItem("Repositories");
     let reposObject = getStorage && JSON.parse(getStorage);
-
+    console.log(reposObject);
     if (reposObject !== null) {
       setRepositories(reposObject);
       return;
@@ -89,10 +88,15 @@ export default function Repositories({ page }: any): JSX.Element {
         url: element.html_url,
         fork: element.fork,
         description: element.description,
+        homepage: element.homepage,
       };
     });
 
-    const reposNewObjectOrder = orderByDate(reposNewObjectSelect);
+    const reposNewObjectFilter = reposNewObjectSelect.filter(
+      (obj: any) => !obj.fork && obj.language !== null
+    );
+
+    const reposNewObjectOrder = orderByDate(reposNewObjectFilter);
     localStorage.setItem("Repositories", JSON.stringify(reposNewObjectOrder));
     setRepositories(reposNewObjectOrder);
     return;
@@ -130,7 +134,7 @@ export default function Repositories({ page }: any): JSX.Element {
           ref={swiperRef}
         >
           {repositories?.map((element, index) => {
-            const created_at = moment(element.created_at);
+            const created_at = moment(element?.created_at);
             const lastUpdate = formatDate(element);
 
             return (
@@ -139,60 +143,58 @@ export default function Repositories({ page }: any): JSX.Element {
                 style={{ padding: 0 }}
                 key={index}
               >
-                <a
-                  href={`${element.url}`}
-                  className="flex h-full flex-col justify-between bg-white p-7 text-gray-600 shadow-md hover:shadow-lg"
+                <div
+                  // href={`${element?.url}`}
+                  className="relative flex h-full flex-col justify-between bg-white p-7 text-gray-600 shadow-md hover:shadow-lg"
                   style={{ minWidth: "300px" }}
-                  target="_blank"
-                  title={element.name}
+                  // target="_blank"
+                  title={element?.name}
                 >
+                  {element?.homepage && (
+                    <a
+                      href={element.homepage}
+                      target="_blank"
+                      title={"Ir para o site"}
+                      type="button"
+                      className="absolute right-20 bottom-8 flex w-10 justify-center rounded p-2 shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                    >
+                      <Image src={icon_redirect} alt="Ir para site" />
+                    </a>
+                  )}
+
+                  <a
+                    href={element.url}
+                    target="_blank"
+                    title={"Ir para o repositorio"}
+                    type="button"
+                    className="absolute right-6 bottom-8 flex w-10 justify-center rounded p-2 shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                  >
+                    <Image src={icon_github} alt="Github" />
+                  </a>
+
                   <div>
                     <h2 className="mb-2 text-2xl font-bold text-black">
-                      {element.name
+                      {element?.name
                         .replace(/[-]/g, " ")
                         .replace(/_/g, " ")
                         .toLocaleUpperCase()}
                     </h2>
                     <p className="mb-9 text-black">
-                      Tecnologia: {element.language ?? "Não listada"}
+                      Tecnologia: {element?.language ?? "Não listada"}
                     </p>
 
                     <p>
-                      {element.description !== null
-                        ? element.description
+                      {element?.description !== null
+                        ? element?.description
                         : "(Descrição em desenvolvimento)"}
                     </p>
                   </div>
-                  <div className="text-sm">
-                    <div className="flex gap-2">
-                      fork: {element.fork ? "SIM" : "NÂO"}{" "}
-                      <div className="relative">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="info h-5 w-5 hover:fill-cyan-400"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-
-                        <p className="tootip absolute rounded bg-zinc-600 p-1 text-xs text-white ">
-                          “fork” é simplesmente o mesmo projeto no seu
-                          namespace, permitindo que você faça alterações
-                          publicamente em um projeto como uma forma mais aberta
-                          de contribuir
-                        </p>
-                      </div>
-                    </div>
+                  <div className="w-full text-sm">
                     <p>Ultima atualização: {lastUpdate}</p>
 
                     <p>Criado: {created_at.format("DD/MM/YYYY")}</p>
                   </div>
-                </a>
+                </div>
               </SwiperSlide>
             );
           })}

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import {
-  Content,
   AboutMe,
   Skills,
   Repositories,
   BlindsEffect,
   ContactMe,
+  Hexagonal,
 } from "@/components/export";
 
 // Import Swiper React components
@@ -60,14 +60,18 @@ export default function Home(): JSX.Element {
         }}
       >
         <SwiperSlide className={`${classDefault} welcome sm:p-12`}>
-          <div>{/* <Image src={} alt={"profile"} /> */}</div>
           <h2
             className={`absolute px-10 text-center text-3xl font-semibold sm:text-5xl`}
           >
-            Olá, me chamo Flávio <br />
+            Olá, me chamo Flávio
+            <br />
             BEM VINDO AO MEU PORTIFOLIO
           </h2>
+
           <BlindsEffect />
+          {/* <div className="absolute bottom-52">
+            <Hexagonal />
+          </div> */}
         </SwiperSlide>
 
         <SwiperSlide className={`${classDefault} aboutMe`}>

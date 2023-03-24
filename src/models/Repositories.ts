@@ -6,4 +6,5 @@ export interface RepositoriesModel {
     url: string;
     fork: boolean;
     description: string;
+    homepage: string;
 }
