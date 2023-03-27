@@ -23,14 +23,14 @@ function Setting(): JSX.Element {
       <Image
         src={icon_settings}
         alt="setting"
-        className="cursor-pointer fixed bottom-28  right-7 md:right-10 z-10"
+        className="cursor-pointer fixed bottom-28 right-7 md:right-10 z-10 opacity-60 hover:opacity-100"
         onClick={() => {
           handle();
         }}
         ref={refBtnSettings}
       />
       {openSetting &&
-        <div className="arrowLeftBottom-3 fixed bottom-40 right-7 md:right-10 z-10 flex flex-col items-center justify-center gap-2 rounded border bg-white px-0.5 py-1 shadow-md"
+        <div className="arrowLeftBottom-3 fixed bottom-36 right-7 md:right-10 z-10 flex flex-col items-center justify-center gap-2 rounded border bg-white px-0.5 py-1 shadow-md"
         >
 
           <Language openSetting={openSetting} />

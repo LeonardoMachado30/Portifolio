@@ -11,12 +11,12 @@ function ContactMe(): JSX.Element {
   const [textGeneration, setTextGeneration] = useState<string>("");
   const email = "flmp.leonardo@gmail.com";
   const refButtonClipboard = useRef<HTMLButtonElement>(null);
+  const opacityHandle = openModalEmail ? "opacity-100" : "opacity-60";
 
   return (
     <div className="fixed bottom-10 right-6 z-10 md:right-9">
       <Image
-        className={`icon mb-2 cursor-pointer ${openModalEmail ? "hover:opacity-100" : "opacity-30"
-          }`}
+        className={`icon mb-2 cursor-pointer hover:opacity-100 ${opacityHandle}`}
         src={icon_email}
         alt="email"
         width={30}
@@ -65,8 +65,7 @@ function ContactMe(): JSX.Element {
       )}
 
       <Image
-        className={`icon cursor-pointer ${openModalWhatsapp ? "hover:opacity-100" : "opacity-30"
-          } `}
+        className={`icon cursor-pointer hover:opacity-100 ${opacityHandle}`}
         src={icon_whatsapp}
         alt="whatsapp"
         width={30}
