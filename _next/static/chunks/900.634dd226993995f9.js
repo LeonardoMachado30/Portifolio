@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[900],{9900:function(e,l,o){o.r(l),o.d(l,{localizer:function(){return c}});let c={myName:"Ol\xe1, me chamo Fl\xe1vio",welcome:"BEM VINDO AO MEU PORTIFOLIO",altProfileImage:"Foto de perfil"}}}]);
