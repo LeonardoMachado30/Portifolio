@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/BlindsEffect/effect.js"
+    "src/components/Welcome/effect.js"
   ],
   "exclude": ["node_modules"]
 }
