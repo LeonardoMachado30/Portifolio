@@ -6,7 +6,6 @@ const isProd =
     ? "https://leonardomachado30.github.io/React__app__portifolio/"
     : process.env.STATIC_ASSETS_URL;
 
-console.log(process.env.STATIC_ASSETS_URL);
 const nextConfig = {
   reactStrictMode: true,
   assetPrefix: isProd,
