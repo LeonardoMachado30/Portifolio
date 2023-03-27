@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[164],{8164:function(e,t,i){i.r(t),i.d(t,{localizer:function(){return l}});let l={title:"Habilidades"}}}]);

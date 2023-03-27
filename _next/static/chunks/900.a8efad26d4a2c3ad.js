@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[900],{9900:function(e,c,l){l.r(c),l.d(c,{localizer:function(){return n}});let n={myName:"Ol\xe1, me chamo Fl\xe1vio",welcome:"BEM VINDO AO MEU PORTIFOLIO"}}}]);
