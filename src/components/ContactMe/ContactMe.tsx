@@ -1,94 +1,138 @@
+import Image from "next/image";
+import { icon_whatsapp, icon_email } from "@/assets/svg/index";
+import { useEffect, useRef, useState } from "react";
+
 function ContactMe(): JSX.Element {
+  const [openModalWhatsapp, setOpenModalWhatsapp] = useState(false);
+  const [openModalEmail, setOpenModalEmail] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [subject, setSubject] = useState<string>("");
+  const [textGeneration, setTextGeneration] = useState<string>("");
+  const email = "flmp.leonardo@gmail.com";
+  const refButtonClipboard = useRef<HTMLButtonElement>(null);
+
   return (
-    <section className="flex w-full max-w-md flex-col">
-      {/*BOTÃO DE NOME*/}
-      <div className="my-2 mx-auto flex    w-10/12  items-center justify-center rounded-md border border-[2px] shadow-md">
-        <button
-          type="submit"
-          className="flex h-12 w-12 items-center justify-center rounded-l-md border border-white bg-gray-100 text-white "
+    <div className="fixed bottom-10 right-6 z-10 md:right-9">
+      <Image
+        className={`icon mb-2 cursor-pointer ${openModalEmail ? "hover:opacity-100" : "opacity-30"
+          }`}
+        src={icon_email}
+        alt="email"
+        width={30}
+        height={30}
+        onClick={() => {
+          setOpenModalEmail(!openModalEmail);
+          setOpenModalWhatsapp(false);
+        }}
+      />
+      {openModalEmail && (
+        <div
+          className={`arrowLeftBottom-1 absolute bottom-10 right-9 rounded bg-white p-2`}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-gray-900"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-
-        <div className="w-full">
-          <input
-            type="search"
-            x-model="input1"
-            className="h-12 w-full rounded-r-md border border-gray-100 px-4 py-1 text-gray-800 focus:outline-none"
-            placeholder="Nome"
-          />
-        </div>
-      </div>
-
-      {/* PHONE*/}
-      <div className="my-2 mx-auto flex w-10/12  items-center justify-center rounded-md border border-[2px] shadow-md">
-        <div>
+          <p className="p-2 text-sm text-gray-500 md:text-lg">{email}</p>
           <button
-            type="submit"
-            className="flex h-12 w-12 items-center justify-center rounded-l-md border border-white bg-gray-100 text-white "
-            // :class="(search.length > 0) ? 'bg-purple-500' : 'bg-gray-500 cursor-not-allowed'"
-            // :disabled="search.length == 0"
+            ref={refButtonClipboard}
+            className="w-full rounded  bg-teal-500 p-2 text-sm text-white md:text-lg"
+            onClick={(e) => {
+              const button = refButtonClipboard?.current;
+              if (button) {
+                navigator.clipboard.writeText(email).then(
+                  function () {
+                    button?.classList.remove("bg-teal-500");
+                    button?.classList.remove("bg-red-500");
+                    button?.classList.add("bg-green-500");
+                    button.textContent = "copiado";
+                  },
+                  function (err) {
+                    button?.classList.remove("bg-teal-500");
+                    button?.classList.add("bg-red-500");
+                    button.textContent = "Erro ao copiar";
+                  }
+                );
+                setTimeout(() => {
+                  button?.classList.add("bg-teal-500");
+                  button?.classList.remove("bg-red-500");
+                  button?.classList.remove("bg-green-500");
+                  button.textContent = "copiar";
+                }, 3000);
+              }
+            }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-900"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-            </svg>
+            Copiar
           </button>
         </div>
+      )}
 
-        <div className="  w-full">
-          <input
-            type="search"
-            x-model="input2"
-            className="h-12 w-full rounded-r-md border border-gray-100 px-4 py-1 text-gray-800 focus:outline-none"
-            placeholder="Celular"
-          />
+      <Image
+        className={`icon cursor-pointer ${openModalWhatsapp ? "hover:opacity-100" : "opacity-30"
+          } `}
+        src={icon_whatsapp}
+        alt="whatsapp"
+        width={30}
+        height={30}
+        onClick={() => {
+          setOpenModalEmail(false);
+          setOpenModalWhatsapp(!openModalWhatsapp);
+        }}
+      />
+      {openModalWhatsapp && (
+        <div
+          className={`arrowLeftBottom-2 absolute bottom-0 right-9 rounded bg-white p-2 md:!w-48`}
+          style={{ width: "70vw" }}
+        >
+          <section className="flex w-full flex-col">
+            {/* ASSUNTO */}
+            <div className="my-2 flex w-full w-10/12  items-center justify-center border-b-2 border-gray-300">
+              <textarea
+                x-model="input3"
+                className="w-full py-1 text-gray-800 focus:outline-none"
+                placeholder="Assunto"
+                rows={10}
+                onChange={(e) => {
+                  setSubject(e.target.value);
+                }}
+                value={subject}
+              >
+                {subject}
+              </textarea>
+            </div>
+            <button
+              onClick={() => {
+                setSubject(
+                  "Olá, estou entrando em contato para uma oportunidade de entrevista de emprego."
+                );
+              }}
+              className="mb-2 inline-flex w-full items-center justify-center rounded border-b-2 border-sky-500 bg-white py-2 px-6 font-bold text-gray-800 shadow-md hover:border-sky-600 hover:bg-sky-500 hover:text-white"
+            >
+              <span className="mr-2 text-xs md:text-sm">Gerar texto</span>
+            </button>
+            {/* BOTÃO ENVIAR EMAIL */}
+            <div>
+              <a
+                href={`https://api.whatsapp.com/send?phone=5561984847214&text=${subject}`}
+                target="_blank"
+                className={`${subject === "" && "pointer-events-none opacity-50"
+                  } inline-flex w-full items-center justify-center rounded border-b-2 border-green-500 bg-white py-2 px-6 font-bold text-gray-800 shadow-md hover:border-green-600 hover:bg-green-500 hover:text-white`}
+              >
+                <span className="mr-2 text-xs md:text-sm">Enviar</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentcolor"
+                    d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </section>
         </div>
-      </div>
-
-      {/* ASSUNTO */}
-      <div className="my-2 mx-auto flex w-10/12  items-center justify-center rounded-md border border-[2px] shadow-md">
-        <textarea
-          x-model="input3"
-          className="w-full rounded-r-md border border-gray-100 px-4 py-1 text-gray-800 focus:outline-none"
-          placeholder="Assunto"
-          rows={6}
-        ></textarea>
-      </div>
-
-      {/* BOTÃO ENVIAR EMAIL */}
-      <div className="flex justify-center">
-        <button className="mt-4 inline-flex w-56 items-center justify-center rounded border-b-2 border-green-500 bg-white py-2 px-6 font-bold text-gray-800 shadow-md hover:border-green-600 hover:bg-green-500 hover:text-white">
-          <span className="mr-2">Enviar email</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentcolor"
-              d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
-            ></path>
-          </svg>
-        </button>
-      </div>
-    </section>
+      )}
+    </div>
   );
 }
 

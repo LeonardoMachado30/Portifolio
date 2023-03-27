@@ -3,7 +3,9 @@ import Image from "next/image";
 import { icon_github, icon_redirect } from "@/assets/svg/index";
 import moment from "moment";
 import axios from "axios";
+import gsap from "gsap";
 import { RepositoriesModel } from "@/models/Repositories";
+import { entryAnimation } from "@/utils/animations"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -12,12 +14,13 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 
 // import required modules
-import { EffectCube, Pagination, Mousewheel } from "swiper";
+import { Pagination, EffectCards, Navigation, EffectCreative } from "swiper";
 
 export default function Repositories({ page }: any): JSX.Element {
   const [repositories, setRepositories] =
     useState<Array<RepositoriesModel> | null>();
-  const swiperRef = useRef<any>();
+  const swiperRef = useRef<any>(null);
+  const titleRef = useRef<any>(null);
   function formatDate(date: any) {
     const dateCurrent = moment();
     const dateLastUpdate = moment(date?.updated_at);
@@ -62,7 +65,7 @@ export default function Repositories({ page }: any): JSX.Element {
   async function fetchData() {
     const getStorage = localStorage.getItem("Repositories");
     let reposObject = getStorage && JSON.parse(getStorage);
-    console.log(reposObject);
+
     if (reposObject !== null) {
       setRepositories(reposObject);
       return;
@@ -101,63 +104,87 @@ export default function Repositories({ page }: any): JSX.Element {
     setRepositories(reposNewObjectOrder);
     return;
   }
+
+  function buttonAnimation(element: any, scale: number) {
+
+    const to = {
+      scale: scale,
+      duration: 0.2,
+      ease: "ease-in-out"
+    }
+
+    gsap.to(element, to);
+  }
   useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
-    if (page === 3) {
-      swiperRef?.current?.classList?.add("bounce-in-top");
+    if (page === 3 && titleRef) {
+      entryAnimation(titleRef?.current)
+      entryAnimation(swiperRef?.current)
     }
   }, [page]);
 
   return (
     <>
+      <h2
+        className="mb-12 w-full text-center text-5xl font-semibold"
+        ref={titleRef}
+      >
+        Projetos
+      </h2>
+
       {repositories ? (
         <Swiper
-          effect={"cube"}
-          direction={"vertical"}
-          grabCursor={true}
-          cubeEffect={{
-            shadow: true,
-            slideShadows: true,
-            shadowOffset: 20,
-            shadowScale: 0.94,
-          }}
-          mousewheel={true}
+          effect={"cards"}
           pagination={{
             clickable: true,
           }}
-          modules={[EffectCube, Pagination, Mousewheel]}
-          className="mySwiper flex max-h-96 max-w-sm items-center justify-center "
-          style={{ background: "transparent" }}
+          grabCursor={true}
+          navigation={true}
+          modules={[EffectCards, Pagination, Navigation]}
+          className="swiper !max-w-3xl !w-full !px-16 md:!px-48 !py-8 !md:mt-0 !mt-4"
           ref={swiperRef}
         >
           {repositories?.map((element, index) => {
             const created_at = moment(element?.created_at);
             const lastUpdate = formatDate(element);
+            const name = element?.name
+              .replace(/[-]/g, " ")
+              .replace(/_/g, " ")
+              .toLocaleUpperCase()
 
             return (
               <SwiperSlide
-                className="  bg-white bg-transparent"
-                style={{ padding: 0 }}
+                className=" !flex flex-col !justify-between !text-black !shadow"
                 key={index}
               >
-                <div
-                  // href={`${element?.url}`}
-                  className="relative flex h-full flex-col justify-between bg-white p-7 text-gray-600 shadow-md hover:shadow-lg"
-                  style={{ minWidth: "300px" }}
-                  // target="_blank"
-                  title={element?.name}
-                >
+                {/* <div> */}
+                <h2 className="mb-2 font-bold w-full text-center">
+                  {name}
+                </h2>
+                <p className="mb-9 w-full text-center">
+                  Tecnologia: {element?.language ?? "Não listada"}
+                </p>
+
+                <p className="w-full text-center">
+                  {element?.description !== null
+                    ? element?.description
+                    : "(Descrição em desenvolvimento)"}
+                </p>
+                {/* </div> */}
+
+                <div className="flex gap-4 justify-center items-center w-full">
                   {element?.homepage && (
                     <a
                       href={element.homepage}
                       target="_blank"
                       title={"Ir para o site"}
                       type="button"
-                      className="absolute right-20 bottom-8 flex w-10 justify-center rounded p-2 shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-                    >
+                      className="flex w-10 justify-center rounded p-2 shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.4),0_4px_18px_0_rgba(59,113,202,0.4)]"
+                      onMouseEnter={(e) => buttonAnimation(e.target, 1.1)}
+                      onMouseLeave={(e) => buttonAnimation(e.target, 1)}>
                       <Image src={icon_redirect} alt="Ir para site" />
                     </a>
                   )}
@@ -167,33 +194,18 @@ export default function Repositories({ page }: any): JSX.Element {
                     target="_blank"
                     title={"Ir para o repositorio"}
                     type="button"
-                    className="absolute right-6 bottom-8 flex w-10 justify-center rounded p-2 shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                    className="flex w-10 justify-center rounded p-2 shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.4),0_4px_18px_0_rgba(59,113,202,0.4)]"
+                    onMouseEnter={(e) => buttonAnimation(e.target, 1.1)}
+                    onMouseLeave={(e) => buttonAnimation(e.target, 1)}
                   >
                     <Image src={icon_github} alt="Github" />
                   </a>
+                </div>
 
-                  <div>
-                    <h2 className="mb-2 text-2xl font-bold text-black">
-                      {element?.name
-                        .replace(/[-]/g, " ")
-                        .replace(/_/g, " ")
-                        .toLocaleUpperCase()}
-                    </h2>
-                    <p className="mb-9 text-black">
-                      Tecnologia: {element?.language ?? "Não listada"}
-                    </p>
+                <div className="w-full  text-gray-500">
+                  <p className="text-sm">Ultima atualização: {lastUpdate}</p>
 
-                    <p>
-                      {element?.description !== null
-                        ? element?.description
-                        : "(Descrição em desenvolvimento)"}
-                    </p>
-                  </div>
-                  <div className="w-full text-sm">
-                    <p>Ultima atualização: {lastUpdate}</p>
-
-                    <p>Criado: {created_at.format("DD/MM/YYYY")}</p>
-                  </div>
+                  <p className="text-sm">Criado: {created_at.format("DD/MM/YYYY")}</p>
                 </div>
               </SwiperSlide>
             );
