@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import Head from "next/head";
 import {
@@ -14,7 +14,6 @@ import Image from "next/image";
 import { LanguageContext } from "@/utils/Contexct";
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -36,7 +35,6 @@ export default function Home(): JSX.Element {
   const classDefault =
     "relative !flex flex-col items-center text-white spacing_content bg-animation";
 
-  useEffect(() => { }, [language]);
   return (
     <>
       <Head>
