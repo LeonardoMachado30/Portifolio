@@ -32,9 +32,16 @@ export default function Welcome({ page }: any): JSX.Element {
         className="mb-20 mt-20"
         style={{ borderRadius: "100%" }}
       />
-      <div className="flex flex-col gap-2 text-center px-6 md:px-0">
-        <p ref={myNameRef} className="font-bold uppercase text-3xl md:text-5xl">{localizer?.myName}</p>
-        <p ref={welcomeRef} className="font-bold uppercase text-3xl md:text-5xl">{localizer?.welcome}</p>
+      <div className="flex flex-col gap-2 px-6 text-center md:px-0">
+        <p ref={myNameRef} className="text-3xl font-bold uppercase md:text-5xl">
+          {localizer?.myName}
+        </p>
+        <p
+          ref={welcomeRef}
+          className="text-3xl font-bold uppercase md:text-5xl"
+        >
+          {localizer?.welcome}
+        </p>
       </div>
 
       {/* </div> */}
