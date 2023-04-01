@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[585],{6585:function(e,t,a){a.r(t),a.d(t,{localizer:function(){return c}});let c={title:"Projects",lastUpdated:"Last update",create:"Create"}}}]);
