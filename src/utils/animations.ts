@@ -1,40 +1,44 @@
-import gsap from "gsap";
+import { gsap } from "gsap";
 
+interface IPositionY {
+  from?: string | number;
+  to?: string | number;
+}
 /**
- *
- *
- *
  * @param element {any} element reference
- * @tl {number} timeline three
- * @delay {number} delay to() method
- * @y {string} position y in from() method
- *
+ * @param tl {number} timeline three
+ * @param IPositionY from: string | number  - to: string | number
+ * @param delay {number} delay to() method
+ * @param durantion number
  */
-
-export function entryAnimation(
+export function animationSlider(
   element: any,
-  tl: any = null,
-  delay: number = 0,
-  y: string = "100%"
+  tl: gsap.core.Timeline = null,
+  y: IPositionY = {
+    from: 0,
+    to: 0,
+  },
+  delay: number = 0.4,
+  durantion: number = 1
 ): any {
   if (element) {
-    const from = {
-      y: y,
-      opacity: 0,
-    };
-    const to = {
-      y: 0,
-      delay: delay,
-      opacity: 1,
-      ease: "ease-out",
-      duration: 1.2,
-    };
-
     if (tl === null) {
       tl = gsap.timeline();
     }
-
-    return tl.fromTo(element, from, to);
+    return tl.fromTo(
+      element,
+      {
+        y: y.from,
+        opacity: y.from === 0 ? 1 : 0,
+      },
+      {
+        y: y.to,
+        delay: delay,
+        opacity: y.to === 0 ? 1 : 0,
+        ease: "ease-out",
+        duration: durantion,
+      }
+    );
   }
 }
 
