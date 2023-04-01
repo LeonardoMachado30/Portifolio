@@ -1,23 +1,56 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import useRessource from "@/utils/ressource";
-import { entryAnimation } from "@/utils/animations";
-
-interface ChildHandle {
-  handleAnimation: () => void;
+import { animationSlider } from "@/utils/animations";
+interface IChildHandle {
+  handleStart: () => void;
+  handleEnd: () => void;
 }
-
-const AboutMe = forwardRef<ChildHandle, any>((props, ref) => {
+const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
   const localizer = useRessource("AboutMe");
-  const aboutMeRef = useRef<HTMLParagraphElement>(null);
-  const titleRef = useRef<any>(null);
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
-  const handleAnimation = () => {
-    const timeLine = entryAnimation(titleRef?.current, null, 1);
-    entryAnimation(aboutMeRef?.current, timeLine, 0);
+  const handleStart = () => {
+    const TimelineTitle = animationSlider(
+      titleRef?.current,
+      null,
+      {
+        from: "300%",
+        to: 0,
+      },
+      1.1
+    );
+    animationSlider(
+      paragraphRef?.current,
+      TimelineTitle,
+      {
+        from: "60%",
+        to: 0,
+      },
+      0
+    );
+  };
+
+  const handleEnd = () => {
+    const TimelineTitle = animationSlider(
+      titleRef?.current,
+      null,
+      {
+        from: 0,
+        to: "60%",
+      },
+      0,
+      2
+    );
+    animationSlider(paragraphRef?.current, TimelineTitle, {
+      from: 0,
+      to: "100%",
+    });
   };
 
   useImperativeHandle(ref, () => ({
-    handleAnimation,
+    handleEnd,
+    handleStart,
   }));
 
   return (
@@ -28,7 +61,7 @@ const AboutMe = forwardRef<ChildHandle, any>((props, ref) => {
 
       <p
         className={`mb:mb-0 scroll-custom mx-12 overflow-auto bg-scroll px-4 text-center md:max-w-4xl`}
-        ref={aboutMeRef}
+        ref={paragraphRef}
       >
         {localizer?.p1}
         <br />
