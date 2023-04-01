@@ -1,3 +1,4 @@
+import { animationSlider } from "@/utils/animations";
 import {
   //? REACT
   forwardRef,
@@ -11,7 +12,6 @@ import {
   icon_redirect,
   //? OTHERS
   moment,
-  entryAnimation,
   formatDate,
   fetchRepos,
   RepositoriesModel,
@@ -30,15 +30,16 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 
 interface ChildHandle {
-  handleAnimation: () => void;
+  handleStart: () => void;
+  handleEnd: () => void;
 }
 
 const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
+  const titleRef = useRef<any>(null);
+  const swiperRef = useRef<any>(null);
   const [repositories, setRepositories] = useState<
     RepositoriesModel[] | null
   >();
-  const swiperRef = useRef<any>(null);
-  const titleRef = useRef<any>(null);
 
   useEffect(() => {
     async function handleFetch() {
@@ -48,13 +49,37 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
     handleFetch();
   }, []);
 
-  const handleAnimation = () => {
-    const timeLine = entryAnimation(swiperRef?.current, null);
-    entryAnimation(titleRef?.current, timeLine);
+  const handleStart = () => {
+    const TimelineName = animationSlider(
+      titleRef?.current,
+      null,
+      {
+        from: "100%",
+        to: 0,
+      },
+      1
+    );
+    animationSlider(swiperRef?.current, TimelineName, {
+      from: "100%",
+      to: 0,
+    });
   };
 
+  const handleEnd = () => {
+    const TimelineName = animationSlider(
+      titleRef?.current,
+      null,
+      { from: 0, to: "-100%" },
+      1
+    );
+    animationSlider(swiperRef?.current, TimelineName, {
+      from: 0,
+      to: "-100%",
+    });
+  };
   useImperativeHandle(ref, () => ({
-    handleAnimation,
+    handleStart,
+    handleEnd,
   }));
 
   return (

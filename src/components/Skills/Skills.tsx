@@ -22,24 +22,50 @@ import {
   gsap,
 } from "@/assets/svg/index";
 import useRessource from "@/utils/ressource";
-import { entryAnimation } from "@/utils/animations";
+import { animationSlider } from "@/utils/animations";
 
 interface ChildHandle {
-  handleAnimation: () => void;
+  handleStart: () => void;
+  handleEnd: () => void;
 }
 
 const Skills = forwardRef<ChildHandle, any>((props, ref) => {
+  const titleRef = useRef<HTMLHeadElement>(null);
   const listSkillsRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<any>(null);
   const localizer = useRessource("Skills");
 
-  const handleAnimation = () => {
-    const timeLine = entryAnimation(listSkillsRef?.current, null);
-    entryAnimation(titleRef?.current, timeLine);
+  const handleStart = () => {
+    const TimelineName = animationSlider(
+      titleRef?.current,
+      null,
+      {
+        from: "100%",
+        to: 0,
+      },
+      1
+    );
+    animationSlider(listSkillsRef?.current, TimelineName, {
+      from: "100%",
+      to: 0,
+    });
+  };
+
+  const handleEnd = () => {
+    const TimelineName = animationSlider(
+      titleRef?.current,
+      null,
+      { from: 0, to: "-100%" },
+      1
+    );
+    animationSlider(listSkillsRef?.current, TimelineName, {
+      from: 0,
+      to: "-100%",
+    });
   };
 
   useImperativeHandle(ref, () => ({
-    handleAnimation,
+    handleStart,
+    handleEnd,
   }));
 
   return (

@@ -2,10 +2,11 @@ import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import Image from "next/image";
 import useRessource from "@/utils/ressource";
 import profile from "@/assets/profile.jpg";
-import { entryAnimation } from "@/utils/animations";
+import { animationSlider } from "@/utils/animations";
 
 interface ChildHandle {
-  handleAnimation: () => void;
+  handleStart: () => void;
+  handleEnd: () => void;
 }
 const Welcome = forwardRef<ChildHandle, any>((props, ref) => {
   const localizer = useRessource("Welcome");
@@ -13,19 +14,50 @@ const Welcome = forwardRef<ChildHandle, any>((props, ref) => {
   const welcomeRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
-  const handleAnimation = () => {
-    const timelineName = entryAnimation(myNameRef?.current, null, 1);
-    entryAnimation(welcomeRef?.current, timelineName);
-    entryAnimation(imageRef?.current, timelineName, 0, "-100%");
+  const handleStart = () => {
+    const TimelineName = animationSlider(
+      myNameRef?.current,
+      null,
+      {
+        from: "100%",
+        to: 0,
+      },
+      1
+    );
+    const TimelineWelcome = animationSlider(welcomeRef?.current, TimelineName, {
+      from: "100%",
+      to: 0,
+    });
+    animationSlider(imageRef?.current, TimelineWelcome, {
+      from: "-100%",
+      to: 0,
+    });
+  };
+
+  const handleEnd = () => {
+    const TimelineName = animationSlider(
+      myNameRef?.current,
+      null,
+      { from: 0, to: "-100%" },
+      1
+    );
+    const TimelineWelcome = animationSlider(welcomeRef?.current, TimelineName, {
+      from: 0,
+      to: "-100%",
+    });
+    animationSlider(imageRef?.current, TimelineWelcome, {
+      from: 0,
+      to: "100%",
+    });
   };
 
   useImperativeHandle(ref, () => ({
-    handleAnimation,
+    handleStart,
+    handleEnd,
   }));
 
   return (
     <>
-      {/* <div className={`absolute px-4 text-center md:px-0`}> */}
       <Image
         ref={imageRef}
         src={profile ? profile : "profle"}
@@ -46,19 +78,6 @@ const Welcome = forwardRef<ChildHandle, any>((props, ref) => {
           {localizer?.welcome}
         </p>
       </div>
-
-      {/* </div> */}
-      {/* <div>
-        <canvas></canvas>
-
-        <Image
-          alt="Blind Effect"
-          className="asset-img h-3/4 opacity-0 md:h-3/5"
-          id="light-img"
-          src={lightBlindsEffect}
-          style={{ width: "100%" }}
-        />
-      </div> */}
     </>
   );
 });
