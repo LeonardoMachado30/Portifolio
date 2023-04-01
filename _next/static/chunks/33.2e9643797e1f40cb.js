@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[33],{9033:function(e,l,o){o.r(l),o.d(l,{localizer:function(){return i}});let i={myName:"Helo, my name is Fl\xe1vio",welcome:"Welcome to my portfolio",altProfileImage:"Profile image"}}}]);
