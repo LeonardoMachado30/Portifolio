@@ -6,19 +6,19 @@ import gsap from "gsap";
 
 import { LanguageContext } from "@/utils/Contexct";
 
-export default function Language({ openSetting }: any): JSX.Element {
+export default function Language(): JSX.Element {
   const refLangage = useRef<HTMLDivElement>(null);
   const { setLanguage } = useContext(LanguageContext);
 
-  useEffect(() => {
-    if (openSetting) {
-      gsap.fromTo(
-        refLangage?.current,
-        { y: "50%", opacity: 0, delay: 0.1 },
-        { y: 0, opacity: 1 }
-      );
-    }
-  }, [openSetting]);
+  // useEffect(() => {
+  //   if (openSetting) {
+  //     gsap.fromTo(
+  //       refLangage?.current,
+  //       { y: "50%", opacity: 0, delay: 0.1 },
+  //       { y: 0, opacity: 1 }
+  //     );
+  //   }
+  // }, [openSetting]);
 
   return (
     <div

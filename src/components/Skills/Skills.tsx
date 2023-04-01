@@ -1,4 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import {
   html,
@@ -18,23 +24,33 @@ import {
 import useRessource from "@/utils/ressource";
 import { entryAnimation } from "@/utils/animations";
 
-function Skills({ page }: any): JSX.Element {
+interface ChildHandle {
+  handleAnimation: () => void;
+}
+
+const Skills = forwardRef<ChildHandle, any>((props, ref) => {
   const listSkillsRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<any>(null);
   const localizer = useRessource("Skills");
-  useEffect(() => {
-    if (page === 2 && titleRef && listSkillsRef) {
-      entryAnimation(titleRef?.current)
-      entryAnimation(listSkillsRef?.current)
-    }
-  }, [page]);
+
+  const handleAnimation = () => {
+    const timeLine = entryAnimation(listSkillsRef?.current, null);
+    entryAnimation(titleRef?.current, timeLine);
+  };
+
+  useImperativeHandle(ref, () => ({
+    handleAnimation,
+  }));
+
   return (
     <>
-      <h2 className="mb-12 text-5xl font-semibold" ref={titleRef}>{localizer?.title}</h2>
+      <h2 className="mb-12 text-5xl font-semibold" ref={titleRef}>
+        {localizer?.title}
+      </h2>
 
       <section className="card box flex flex-col">
         <div
-          className="flex w-full max-w-xl flex-col gap-10"
+          className="flex w-full max-w-xl flex-col gap-10 px-6"
           ref={listSkillsRef}
         >
           <div className="flex flex-col">
@@ -64,6 +80,6 @@ function Skills({ page }: any): JSX.Element {
       </section>
     </>
   );
-};
+});
 
 export default Skills;

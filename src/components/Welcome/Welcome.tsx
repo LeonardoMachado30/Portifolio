@@ -1,31 +1,34 @@
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import Image from "next/image";
-import profile from "@/assets/profile.jpg";
 import useRessource from "@/utils/ressource";
-import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import profile from "@/assets/profile.jpg";
 import { entryAnimation } from "@/utils/animations";
-// import "./effect";
 
-export default function Welcome({ page }: any): JSX.Element {
+interface ChildHandle {
+  handleAnimation: () => void;
+}
+const Welcome = forwardRef<ChildHandle, any>((props, ref) => {
   const localizer = useRessource("Welcome");
-  const myNameRef = useRef<HTMLParagraphElement>(null)
-  const welcomeRef = useRef<HTMLParagraphElement>(null)
-  const imageRef = useRef<HTMLImageElement>(null)
+  const myNameRef = useRef<HTMLParagraphElement>(null);
+  const welcomeRef = useRef<HTMLParagraphElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    if (page === 0) {
-      entryAnimation(myNameRef?.current)
-      entryAnimation(welcomeRef?.current)
-      entryAnimation(imageRef?.current)
-    }
-  }, [page]);
+  const handleAnimation = () => {
+    const timelineName = entryAnimation(myNameRef?.current, null, 1);
+    entryAnimation(welcomeRef?.current, timelineName);
+    entryAnimation(imageRef?.current, timelineName, 0, "-100%");
+  };
+
+  useImperativeHandle(ref, () => ({
+    handleAnimation,
+  }));
 
   return (
     <>
       {/* <div className={`absolute px-4 text-center md:px-0`}> */}
       <Image
         ref={imageRef}
-        src={profile}
+        src={profile ? profile : "profle"}
         alt={localizer?.altProfileImage}
         width={200}
         height={200}
@@ -58,4 +61,6 @@ export default function Welcome({ page }: any): JSX.Element {
       </div> */}
     </>
   );
-}
+});
+
+export default Welcome;

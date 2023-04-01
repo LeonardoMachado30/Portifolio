@@ -3,7 +3,6 @@
 @tailwind utilities;
 @import "./animations.scss";
 @import "./swiperSlider.scss";
-@import "./hexagonal.scss";
 
 html,
 body,
@@ -52,19 +51,6 @@ body {
 
 .spacing_content {
   padding: 6% 0 !important;
-}
-
-@media screen and (max-width: 900px) {
-  header {
-    & > nav {
-      justify-content: center;
-
-      & > button {
-        font-size: 0.9rem;
-        margin: 0 !important;
-      }
-    }
-  }
 }
 
 .bg-animation {
@@ -139,39 +125,6 @@ body {
   &:hover ~ .tootip {
     visibility: visible;
     opacity: 1;
-  }
-}
-
-.hexagono {
-  width: 160px;
-  height: 115px;
-  background: red;
-  position: absolute;
-  bottom: 200px;
-  border: 1px solid #000;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: -25px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 80px solid transparent;
-    border-right: 80px solid transparent;
-    border-bottom: 25px solid red;
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: -25px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 80px solid transparent;
-    border-right: 80px solid transparent;
-    border-top: 25px solid red;
   }
 }
 
@@ -252,9 +205,9 @@ body {
 .arrowLeftBottom-1:after {
   content: "";
   position: absolute;
-  top: 84%;
-  right: -4%;
-  border-width: 5px;
+  top: 94%;
+  right: -8%;
+  border-width: 6px;
   border-style: solid;
   border-color: transparent transparent transparent #fff;
 }
@@ -287,4 +240,8 @@ body {
   border-width: 5px;
   border-style: solid;
   border-color: #fff transparent transparent transparent;
+}
+
+.bg-tranparent {
+  background: transparent !important;
 }

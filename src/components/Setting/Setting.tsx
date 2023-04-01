@@ -18,28 +18,31 @@ function Setting(): JSX.Element {
     if (openSetting) setOpenSetting(!openSetting);
   }, [language]);
 
+
   return (
     <>
-      <Image
+      {/* <Image
         src={icon_settings}
+        width={30}
+        height={30}
         alt="setting"
-        className="cursor-pointer fixed bottom-28 right-7 md:right-10 z-10 opacity-60 hover:opacity-100"
+        className="cursor-pointer fixed bottom-28 right-6 md:right-10 z-10 opacity-60 hover:opacity-100"
         onClick={() => {
           handle();
         }}
         ref={refBtnSettings}
-      />
-      {openSetting &&
-        <div className="arrowLeftBottom-3 fixed bottom-36 right-7 md:right-10 z-10 flex flex-col items-center justify-center gap-2 rounded border bg-white px-0.5 py-1 shadow-md"
+      /> */}
+      {/* {openSetting &&
+        <div className="arrowLeftBottom-3 fixed bottom-36 !mb-1 !mr-1 right-6 md:right-10 z-10 flex flex-col items-center justify-center gap-2 rounded border bg-white px-0.5 py-1 shadow-md"
         >
 
-          <Language openSetting={openSetting} />
+          <Language />
 
           <button title={"desativar animações"}>
             <Image src={icon_cube} alt="Desativar animações" width={30} height={30} />
           </button>
         </div>
-      }
+      } */}
     </>
   );
 }

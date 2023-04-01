@@ -1,23 +1,49 @@
 import gsap from "gsap";
 
-export function entryAnimation(element: any): void {
-    console.log(element)
-    console.log("animation")
-    if (element) {
-        const tl = gsap.timeline();
-        const from = {
-            x: "-100%",
-            opacity: 0,
-            ease: "ease-in-out",
-        };
-        const to = {
-            x: 0,
-            delay: 0.1,
-            opacity: 1,
-            ease: "ease-out",
-            duration: 1,
-        };
+/**
+ *
+ *
+ *
+ * @param element {any} element reference
+ * @tl {number} timeline three
+ * @delay {number} delay to() method
+ * @y {string} position y in from() method
+ *
+ */
 
-        tl.fromTo(element, from, to);
+export function entryAnimation(
+  element: any,
+  tl: any = null,
+  delay: number = 0,
+  y: string = "100%"
+): any {
+  if (element) {
+    const from = {
+      y: y,
+      opacity: 0,
+    };
+    const to = {
+      y: 0,
+      delay: delay,
+      opacity: 1,
+      ease: "ease-out",
+      duration: 1.2,
+    };
+
+    if (tl === null) {
+      tl = gsap.timeline();
     }
+
+    return tl.fromTo(element, from, to);
+  }
+}
+
+export function buttonAnimation(element: any, scale: number) {
+  const to = {
+    scale: scale,
+    duration: 0.2,
+    ease: "ease-in-out",
+  };
+
+  gsap.to(element, to);
 }

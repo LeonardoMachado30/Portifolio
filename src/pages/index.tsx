@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 
 import Head from "next/head";
@@ -28,12 +28,32 @@ interface UserContextValue {
   setLanguage: (language: string) => void;
 }
 
+interface IPage {
+  activeIndex?: number;
+}
+
 export default function Home(): JSX.Element {
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<IPage>({ activeIndex: 0 });
   const [language, setLanguage] = useState<string>("pt");
   const swiperRef = useRef<SwiperRef>(null);
+  const aboutMeRef = useRef<any>(null);
+  const welcomeRef = useRef<any>(null);
+  const skillsRef = useRef<any>(null);
+  const repositoriesRef = useRef<any>(null);
   const classDefault =
-    "relative !flex flex-col items-center text-white spacing_content bg-animation";
+    "relative !flex flex-col items-center text-white spacing_content bg-tranparent";
+
+  useEffect(() => {
+    if (welcomeRef && page?.activeIndex === 0) {
+      welcomeRef?.current?.handleAnimation();
+    } else if (aboutMeRef && page?.activeIndex === 1) {
+      aboutMeRef?.current?.handleAnimation();
+    } else if (skillsRef && page?.activeIndex === 2) {
+      skillsRef?.current?.handleAnimation();
+    } else if (repositoriesRef && page?.activeIndex === 3) {
+      repositoriesRef?.current?.handleAnimation();
+    }
+  }, [page]);
 
   return (
     <>
@@ -50,39 +70,52 @@ export default function Home(): JSX.Element {
           slidesPerView={1}
           spaceBetween={30}
           mousewheel={true}
-          speed={500}
+          speed={1000}
           pagination={{
             clickable: true,
           }}
           creativeEffect={{
             prev: {
-              translate: [0, "100%", 0],
+              translate: [0, "-100%", 0],
             },
             next: {
-              translate: [0, "100%", 0],
+              translate: [0, "-100%", 0],
             },
           }}
-          modules={[EffectCreative, Mousewheel, Pagination]}
+          modules={[EffectCreative, Mousewheel, Pagination, Navigation]}
           className="bg-animation h-full "
           ref={swiperRef}
-          onActiveIndexChange={(e) => {
-            setPage(e?.activeIndex);
+          onSlideNextTransitionStart={(e) => {
+            setPage({
+              activeIndex: e?.activeIndex,
+            });
           }}
+          onSlidePrevTransitionStart={(e) => {
+            setPage({
+              activeIndex: e?.activeIndex,
+            });
+          }}
+          // onActiveIndexChange={(e) => {
+          //   setPage({
+          //     activeIndex: e?.activeIndex,
+          //     previousIndex: e.previousIndex,
+          //   });
+          // }}
         >
           <SwiperSlide className={`${classDefault} welcome !justify-start`}>
-            <Welcome page={page} />
+            <Welcome ref={welcomeRef} />
           </SwiperSlide>
 
           <SwiperSlide className={`${classDefault} aboutMe`}>
-            <AboutMe page={page} />
+            <AboutMe ref={aboutMeRef} />
           </SwiperSlide>
 
           <SwiperSlide className={`${classDefault} skills`}>
-            <Skills page={page} />
+            <Skills ref={skillsRef} />
           </SwiperSlide>
 
           <SwiperSlide className={`${classDefault} repositories`}>
-            <Repositories page={page} />
+            <Repositories ref={repositoriesRef} />
           </SwiperSlide>
 
           <ContactMe />
