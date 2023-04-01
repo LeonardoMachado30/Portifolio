@@ -22,6 +22,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation, EffectCreative, Mousewheel } from "swiper";
+import { entryAnimation } from "@/utils/animations";
 
 interface UserContextValue {
   language: string;
@@ -45,15 +46,9 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     if (welcomeRef && page?.activeIndex === 0) {
-      welcomeRef?.current?.handleAnimation();
-    } else if (aboutMeRef && page?.activeIndex === 1) {
-      aboutMeRef?.current?.handleAnimation();
-    } else if (skillsRef && page?.activeIndex === 2) {
-      skillsRef?.current?.handleAnimation();
-    } else if (repositoriesRef && page?.activeIndex === 3) {
-      repositoriesRef?.current?.handleAnimation();
+      welcomeRef?.current?.handleStart();
     }
-  }, [page]);
+  }, []);
 
   return (
     <>
@@ -70,7 +65,7 @@ export default function Home(): JSX.Element {
           slidesPerView={1}
           spaceBetween={30}
           mousewheel={true}
-          speed={1000}
+          speed={1500}
           pagination={{
             clickable: true,
           }}
@@ -79,28 +74,39 @@ export default function Home(): JSX.Element {
               translate: [0, "-100%", 0],
             },
             next: {
-              translate: [0, "-100%", 0],
+              translate: [0, "100%", 0],
             },
           }}
           modules={[EffectCreative, Mousewheel, Pagination, Navigation]}
           className="bg-animation h-full "
           ref={swiperRef}
           onSlideNextTransitionStart={(e) => {
-            setPage({
-              activeIndex: e?.activeIndex,
-            });
+            console.log("next");
+
+            if (welcomeRef && e?.activeIndex === 0) {
+              welcomeRef?.current?.handleStart();
+            } else if (aboutMeRef && e?.activeIndex === 1) {
+              aboutMeRef?.current?.handleStart();
+            } else if (skillsRef && e?.activeIndex === 2) {
+              skillsRef?.current?.handleStart();
+            } else if (repositoriesRef && e?.activeIndex === 3) {
+              repositoriesRef?.current?.handleStart();
+            }
           }}
           onSlidePrevTransitionStart={(e) => {
-            setPage({
-              activeIndex: e?.activeIndex,
-            });
+            console.log("prev");
+            console.log(e?.previousIndex);
+
+            if (welcomeRef && e?.activeIndex === 0) {
+              welcomeRef?.current?.handleStart();
+            } else if (aboutMeRef && e?.activeIndex === 1) {
+              aboutMeRef?.current?.handleEnd();
+            } else if (skillsRef && e?.activeIndex === 2) {
+              skillsRef?.current?.handleEnd();
+            } else if (repositoriesRef && e?.activeIndex === 3) {
+              repositoriesRef?.current?.handleEnd();
+            }
           }}
-          // onActiveIndexChange={(e) => {
-          //   setPage({
-          //     activeIndex: e?.activeIndex,
-          //     previousIndex: e.previousIndex,
-          //   });
-          // }}
         >
           <SwiperSlide className={`${classDefault} welcome !justify-start`}>
             <Welcome ref={welcomeRef} />
