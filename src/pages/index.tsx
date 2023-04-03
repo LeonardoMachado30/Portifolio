@@ -2,16 +2,17 @@ import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 
 import Head from "next/head";
+
+import { LanguageContext } from "@/utils/Context";
+
 import {
   AboutMe,
   Skills,
   Repositories,
   Welcome,
-  ContactMe,
-  Setting,
+  OptionsFixed,
 } from "@/components/export";
-import Image from "next/image";
-import { LanguageContext } from "@/utils/Contexct";
+
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -22,7 +23,6 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation, EffectCreative, Mousewheel } from "swiper";
-import { entryAnimation } from "@/utils/animations";
 
 interface UserContextValue {
   language: string;
@@ -35,7 +35,6 @@ interface IPage {
 
 export default function Home(): JSX.Element {
   const [page, setPage] = useState<IPage>({ activeIndex: 0 });
-  const [language, setLanguage] = useState<string>("pt");
   const swiperRef = useRef<SwiperRef>(null);
   const aboutMeRef = useRef<any>(null);
   const welcomeRef = useRef<any>(null);
@@ -43,6 +42,7 @@ export default function Home(): JSX.Element {
   const repositoriesRef = useRef<any>(null);
   const classDefault =
     "relative !flex flex-col items-center text-white spacing_content bg-tranparent";
+  const [language, setLanguage] = useState<string>("pt");
 
   useEffect(() => {
     if (welcomeRef && page?.activeIndex === 0) {
@@ -63,9 +63,9 @@ export default function Home(): JSX.Element {
           direction={"vertical"}
           // navigation={true}
           slidesPerView={1}
-          spaceBetween={30}
+          spaceBetween={100}
           mousewheel={true}
-          speed={1500}
+          speed={2000}
           pagination={{
             clickable: true,
           }}
@@ -81,8 +81,6 @@ export default function Home(): JSX.Element {
           className="bg-animation h-full "
           ref={swiperRef}
           onSlideNextTransitionStart={(e) => {
-            console.log("next");
-
             if (welcomeRef && e?.activeIndex === 0) {
               welcomeRef?.current?.handleStart();
             } else if (aboutMeRef && e?.activeIndex === 1) {
@@ -94,11 +92,8 @@ export default function Home(): JSX.Element {
             }
           }}
           onSlidePrevTransitionStart={(e) => {
-            console.log("prev");
-            console.log(e?.previousIndex);
-
             if (welcomeRef && e?.activeIndex === 0) {
-              welcomeRef?.current?.handleStart();
+              welcomeRef?.current?.handleEnd();
             } else if (aboutMeRef && e?.activeIndex === 1) {
               aboutMeRef?.current?.handleEnd();
             } else if (skillsRef && e?.activeIndex === 2) {
@@ -124,9 +119,7 @@ export default function Home(): JSX.Element {
             <Repositories ref={repositoriesRef} />
           </SwiperSlide>
 
-          <ContactMe />
-
-          <Setting />
+          <OptionsFixed />
         </Swiper>
       </LanguageContext.Provider>
     </>

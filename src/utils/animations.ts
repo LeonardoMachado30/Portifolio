@@ -19,7 +19,7 @@ export function animationSlider(
     to: 0,
   },
   delay: number = 0.4,
-  durantion: number = 1
+  durantion: number = 0.8
 ): any {
   if (element) {
     if (tl === null) {
@@ -37,6 +37,7 @@ export function animationSlider(
         opacity: y.to === 0 ? 1 : 0,
         ease: "ease-out",
         duration: durantion,
+        stagger: 2000,
       }
     );
   }

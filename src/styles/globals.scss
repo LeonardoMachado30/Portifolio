@@ -57,21 +57,27 @@ body {
   width: 100%;
   background-size: 500% 100% !important;
   height: 100vh;
-  background: rgb(131, 58, 180);
-  background: -moz-linear-gradient(
-    111deg,
-    rgba(131, 58, 180, 1) 14%,
-    rgba(253, 29, 29, 1) 50%,
-    rgba(252, 176, 69, 1) 87%
-  );
-  background: -webkit-linear-gradient(
-    111deg,
-    rgba(131, 58, 180, 1) 14%,
-    rgba(253, 29, 29, 1) 50%,
-    rgba(252, 176, 69, 1) 87%
-  );
-  background: linear-gradient(45deg, rgba(131, 58, 180, 1) 14%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 87%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4",endColorstr="#fcb045",GradientType=1);
+  // background: rgb(131, 58, 180);
+  // background: -moz-linear-gradient(
+  //   111deg,
+  //   rgba(131, 58, 180, 1) 14%,
+  //   rgba(253, 29, 29, 1) 50%,
+  //   rgba(252, 176, 69, 1) 87%
+  // );
+  // background: -webkit-linear-gradient(
+  //   111deg,
+  //   rgba(131, 58, 180, 1) 14%,
+  //   rgba(253, 29, 29, 1) 50%,
+  //   rgba(252, 176, 69, 1) 87%
+  // );
+  // background: linear-gradient(45deg, rgba(131, 58, 180, 1) 14%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 87%);
+  // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4",endColorstr="#fcb045",GradientType=1);
+  background: rgb(2, 0, 36);
+  background: -moz-linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 50%, rgba(0, 212, 255, 1) 100%);
+  background: -webkit-linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 50%, rgba(0, 212, 255, 1) 100%);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 50%, rgba(0, 212, 255, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00d4ff",GradientType=1);
+
   animation: backgroundPosition 40s ease-in-out infinite;
 }
 
@@ -205,8 +211,8 @@ body {
 .arrowLeftBottom-1:after {
   content: "";
   position: absolute;
-  top: 94%;
-  right: -8%;
+  bottom: 18px;
+  right: -12px;
   border-width: 6px;
   border-style: solid;
   border-color: transparent transparent transparent #fff;
@@ -215,33 +221,52 @@ body {
 .arrowLeftBottom-2:after {
   content: "";
   position: absolute;
-  top: 94%;
+  top: 80%;
   right: -4%;
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent transparent #fff;
 }
 
-.arrowLeftBottom-3:after {
-  content: "";
-  position: absolute;
-  bottom: -12px;
-  right: 6%;
-  border-width: 6px;
-  border-style: solid;
-  border-color: #fff transparent transparent transparent;
-}
-
-.arrowMiddleBottom:after {
-  content: "";
-  position: absolute;
-  bottom: -38%;
-  left: 44%;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #fff transparent transparent transparent;
-}
-
 .bg-tranparent {
   background: transparent !important;
+}
+
+.btn-transition:hover {
+  transform: scale(1.2, 1.2);
+  transition: transform 0.4s ease-in-out;
+}
+
+.b {
+  &-1 {
+    bottom: 40px;
+
+    @media screen and (max-width: 600px) {
+      bottom: 60px;
+    }
+  }
+
+  &-2 {
+    bottom: 100px;
+
+    @media screen and (max-width: 600px) {
+      bottom: 120px;
+    }
+  }
+
+  &-3 {
+    bottom: 160px;
+
+    @media screen and (max-width: 600px) {
+      bottom: 180px;
+    }
+  }
+
+  &-4 {
+    bottom: 200px;
+
+    @media screen and (max-width: 600px) {
+      bottom: 220px;
+    }
+  }
 }

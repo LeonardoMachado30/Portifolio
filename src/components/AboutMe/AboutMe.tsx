@@ -1,6 +1,7 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useContext, useEffect, useImperativeHandle, useRef } from "react";
 import useRessource from "@/utils/ressource";
 import { animationSlider } from "@/utils/animations";
+
 interface IChildHandle {
   handleStart: () => void;
   handleEnd: () => void;
@@ -8,23 +9,23 @@ interface IChildHandle {
 const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
   const localizer = useRessource("AboutMe");
   const paragraphRef = useRef<HTMLParagraphElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<any>(null);
 
   const handleStart = () => {
     const TimelineTitle = animationSlider(
       titleRef?.current,
       null,
       {
-        from: "300%",
+        from: "100%",
         to: 0,
       },
-      1.1
+      0.6
     );
     animationSlider(
       paragraphRef?.current,
       TimelineTitle,
       {
-        from: "60%",
+        from: "100%",
         to: 0,
       },
       0
@@ -33,19 +34,23 @@ const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
 
   const handleEnd = () => {
     const TimelineTitle = animationSlider(
-      titleRef?.current,
+      paragraphRef?.current,
       null,
       {
-        from: 0,
-        to: "60%",
+        from: "-100%",
+        to: 0,
       },
-      0,
-      2
+      0.6
     );
-    animationSlider(paragraphRef?.current, TimelineTitle, {
-      from: 0,
-      to: "100%",
-    });
+    animationSlider(
+      titleRef?.current,
+      TimelineTitle,
+      {
+        from: "-100%",
+        to: 0,
+      },
+      0
+    );
   };
 
   useImperativeHandle(ref, () => ({

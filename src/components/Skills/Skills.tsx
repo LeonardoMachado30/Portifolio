@@ -30,7 +30,7 @@ interface ChildHandle {
 }
 
 const Skills = forwardRef<ChildHandle, any>((props, ref) => {
-  const titleRef = useRef<HTMLHeadElement>(null);
+  const titleRef = useRef<any>(null);
   const listSkillsRef = useRef<HTMLDivElement>(null);
   const localizer = useRessource("Skills");
 
@@ -42,25 +42,35 @@ const Skills = forwardRef<ChildHandle, any>((props, ref) => {
         from: "100%",
         to: 0,
       },
-      1
+      0.3
     );
-    animationSlider(listSkillsRef?.current, TimelineName, {
-      from: "100%",
-      to: 0,
-    });
+    animationSlider(
+      listSkillsRef?.current,
+      TimelineName,
+      {
+        from: "100%",
+        to: 0,
+      },
+      0.3
+    );
   };
 
   const handleEnd = () => {
     const TimelineName = animationSlider(
-      titleRef?.current,
+      listSkillsRef?.current,
       null,
-      { from: 0, to: "-100%" },
-      1
+      {
+        from: "-100%",
+        to: 0,
+      },
+      0.4
     );
-    animationSlider(listSkillsRef?.current, TimelineName, {
-      from: 0,
-      to: "-100%",
-    });
+    animationSlider(
+      titleRef?.current,
+      TimelineName,
+      { from: "-100%", to: 0 },
+      0
+    );
   };
 
   useImperativeHandle(ref, () => ({
@@ -82,24 +92,24 @@ const Skills = forwardRef<ChildHandle, any>((props, ref) => {
           <div className="flex flex-col">
             <h3 className="mb-4 text-center text-3xl">Front-end</h3>
             <div className="flex w-full flex-wrap justify-center gap-2">
-              <Image src={html} alt={"html"} />
-              <Image src={css} alt={"css"} />
-              <Image src={javascript} alt={"javascript"} />
-              <Image src={react} alt={"react"} />
-              <Image src={typescript} alt={"typescript"} />
-              <Image src={bootstrap} alt={"bootstrap"} />
-              <Image src={jquery} alt={"jquery"} />
-              <Image src={sass} alt={"sass"} />
-              <Image src={gsap} alt={"gsap"} />
+              <Image src={html} alt="html" />
+              <Image src={css} alt="css" />
+              <Image src={javascript} alt="javascript" />
+              <Image src={react} alt="react" />
+              <Image src={typescript} alt="typescript" />
+              <Image src={bootstrap} alt="bootstrap" />
+              <Image src={jquery} alt="jquery" />
+              <Image src={sass} alt="sass" />
+              <Image src={gsap} alt="gsap" />
             </div>
           </div>
           <div className="flex flex-col">
             <h3 className="mb-4 text-center text-3xl">Back-end</h3>
             <div className="flex w-full flex-wrap justify-center gap-2">
-              <Image src={csharp} alt={"csharp"} />
-              <Image src={php} alt={"php"} />
-              <Image src={next} alt={"next"} />
-              <Image src={gulp} alt={"gulp"} />
+              <Image src={csharp} alt="csharp" />
+              <Image src={php} alt="php" />
+              <Image src={next} alt="next" />
+              <Image src={gulp} alt="gulp" />
             </div>
           </div>
         </div>

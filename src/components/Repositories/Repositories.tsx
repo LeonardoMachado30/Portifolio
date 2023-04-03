@@ -1,4 +1,3 @@
-import { animationSlider } from "@/utils/animations";
 import {
   //? REACT
   forwardRef,
@@ -23,6 +22,10 @@ import {
   Navigation,
   buttonAnimation,
 } from "./index";
+import { animationSlider } from "@/utils/animations";
+import useRessource from "@/utils/ressource";
+
+import ressource from "@/utils/ressource";
 
 // Import Swiper styles
 import "swiper/css";
@@ -40,7 +43,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
   const [repositories, setRepositories] = useState<
     RepositoriesModel[] | null
   >();
-
+  const localizer = useRessource("Repositories");
   useEffect(() => {
     async function handleFetch() {
       const res = await fetchRepos();
@@ -57,12 +60,17 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
         from: "100%",
         to: 0,
       },
-      1
+      0.4
     );
-    animationSlider(swiperRef?.current, TimelineName, {
-      from: "100%",
-      to: 0,
-    });
+    animationSlider(
+      swiperRef?.current,
+      TimelineName,
+      {
+        from: "100%",
+        to: 0,
+      },
+      0
+    );
   };
 
   const handleEnd = () => {
@@ -70,7 +78,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
       titleRef?.current,
       null,
       { from: 0, to: "-100%" },
-      1
+      0.4
     );
     animationSlider(swiperRef?.current, TimelineName, {
       from: 0,
@@ -88,7 +96,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
         className="mb-12 w-full text-center text-5xl font-semibold"
         ref={titleRef}
       >
-        Projetos
+        {localizer?.title}
       </h2>
 
       {repositories ? (
@@ -151,15 +159,17 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
                     onMouseEnter={(e) => buttonAnimation(e.target, 1.1)}
                     onMouseLeave={(e) => buttonAnimation(e.target, 1)}
                   >
-                    <Image src={icon_github} alt="Github" />
+                    <Image src={icon_github} alt="ir para Github" />
                   </a>
                 </div>
 
                 <div className="w-full  text-gray-500">
-                  <p className="text-sm">Ultima atualização: {lastUpdate}</p>
+                  <p className="text-sm">
+                    {localizer?.lastUpdated}: {lastUpdate}
+                  </p>
 
                   <p className="text-sm">
-                    Criado: {created_at.format("DD/MM/YYYY")}
+                    {localizer?.create}: {created_at.format("DD/MM/YYYY")}
                   </p>
                 </div>
               </SwiperSlide>

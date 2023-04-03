@@ -4,7 +4,7 @@ import Schooling from "./Schooling/Schooling";
 import Repositories from "./Repositories/Repositories";
 import Welcome from "./Welcome/Welcome";
 import StampLinkedIn from "./StampLinkedIn/StampLinkedIn";
-import ContactMe from "./ContactMe/ContactMe";
+import OptionsFixed from "./OptionsFixed/OptionsFixed";
 import Setting from "./Setting/Setting";
 import ButtonFloat from "./ButtonFloat/ButtonFloat";
 
@@ -15,7 +15,7 @@ export {
   Repositories,
   Welcome,
   StampLinkedIn,
-  ContactMe,
+  OptionsFixed,
   Setting,
   ButtonFloat,
 };

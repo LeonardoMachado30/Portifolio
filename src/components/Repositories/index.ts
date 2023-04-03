@@ -11,7 +11,6 @@ import fetchRepos from "./fetch";
 import moment from "moment";
 import gsap from "gsap";
 import { RepositoriesModel } from "@/models/Repositories";
-import { entryAnimation } from "@/utils/animations";
 import { formatDate } from "./handle";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -50,7 +49,6 @@ export {
 export {
   //? OTHERS
   moment,
-  entryAnimation,
   formatDate,
   fetchRepos,
 };

@@ -1,6 +1,6 @@
 export const localizer = {
   title: `Sobre mim`,
-  p1: `Iniciei minha jornada na tecnologia trabalhando com reparos em
+  p1: `Olá, me chamo Flávio, iniciei minha jornada na tecnologia trabalhando com reparos em
       dispositivos eletrônicos, como notebooks, computadores, celulares e
       outros.Realizei um estágio no Colégio Objetivo por 6 meses como suporte
       técnico, ajudando os funcionários durante a pandemia com as aulas online.
@@ -25,5 +25,5 @@ export const localizer = {
       contribuir com a criação de jogos que possam ser apreciados por pessoas de
       todas as idades e lugares. Acredito que a combinação de minhas habilidades
       técnicas e minha paixão por jogos tornará possível alcançar meu objetivo
-      de se tornar um desenvolvedor de jogos de sucesso.`
-}
+      de se tornar um desenvolvedor de jogos de sucesso.`,
+};

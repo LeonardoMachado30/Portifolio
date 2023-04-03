@@ -1,6 +1,6 @@
 export const localizer = {
   title: `About me`,
-  p1: `I started my journey in technology working with repairs to
+  p1: `Hell, i´m Flávio, I started my journey in technology working with repairs to
        electronic devices such as notebooks, computers, cell phones and
        Others.
        Technician, helping employees during the pandemic with online classes.
@@ -25,5 +25,5 @@ export const localizer = {
        contribute to the creation of games that can be appreciated by people of
        all ages and places. I believe that the combination of my skills
        techniques and my passion for games will make it possible to achieve my goal
-       to become a successful game developer.`
-}
+       to become a successful game developer.`,
+};

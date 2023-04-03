@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { LanguageContext } from "./Contexct";
+import { LanguageContext } from "./Context";
 
 /**
  *
@@ -29,3 +29,4 @@ export default function useRessource(path: string) {
 
   return localizer;
 }
+
