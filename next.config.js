@@ -3,7 +3,7 @@
 
 const isProd =
   process.env.NODE_ENV === "production"
-    ? "https://leonardomachado30.github.io/React__app__portifolio/"
+    ? "https://react-app-portifolio.vercel.app/"
     : process.env.STATIC_ASSETS_URL;
 
 const nextConfig = {
