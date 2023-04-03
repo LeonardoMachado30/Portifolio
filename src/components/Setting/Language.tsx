@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 
-import { LanguageContext } from "@/utils/Contexct";
+import { LanguageContext } from "@/utils/Context";
 
 export default function Language(): JSX.Element {
   const refLangage = useRef<HTMLDivElement>(null);

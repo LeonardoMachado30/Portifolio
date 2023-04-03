@@ -3,7 +3,7 @@ import { icon_settings, icon_cube } from "@/assets/svg/index";
 import Image from "next/image";
 import { useContext, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { LanguageContext } from "@/utils/Contexct";
+import { LanguageContext } from "@/utils/Context";
 
 function Setting(): JSX.Element {
   const [openSetting, setOpenSetting] = useState<boolean>(false);
