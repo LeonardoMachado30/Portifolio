@@ -106,7 +106,7 @@ const Skills = forwardRef<ChildHandle, any>((props, ref) => {
           <div className="flex flex-col">
             <h3 className="mb-4 text-center text-3xl">Back-end</h3>
             <div className="flex w-full flex-wrap justify-center gap-2">
-              <Image src={csharp} alt="csharp" />
+              {/* <Image src={csharp} alt="csharp" /> */}
               <Image src={php} alt="php" />
               <Image src={next} alt="next" />
               <Image src={gulp} alt="gulp" />

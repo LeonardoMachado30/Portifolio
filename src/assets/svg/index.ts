@@ -7,7 +7,7 @@ import next from "./next.svg";
 import bootstrap from "./bootstrap.svg";
 import jquery from "./jquery.svg";
 import react from "./react.svg";
-import csharp from "./csharp.svg";
+// import csharp from "./csharp.svg";
 import sass from "./sass.svg";
 import php from "./php.svg";
 import gsap from "./gsap.svg";
@@ -33,7 +33,7 @@ export {
   bootstrap,
   jquery,
   react,
-  csharp,
+  // csharp,
   sass,
   php,
   gsap,
