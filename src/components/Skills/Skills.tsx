@@ -17,7 +17,7 @@ import {
   bootstrap,
   jquery,
   react,
-  csharp,
+  // csharp,
   php,
   gsap,
 } from "@/assets/svg/index";
