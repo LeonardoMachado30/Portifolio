@@ -1,4 +1,10 @@
-import { forwardRef, useContext, useEffect, useImperativeHandle, useRef } from "react";
+import {
+  forwardRef,
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import useRessource from "@/utils/ressource";
 import { animationSlider } from "@/utils/animations";
 
@@ -65,7 +71,8 @@ const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
       </h2>
 
       <p
-        className={`mb:mb-0 scroll-custom mx-12 overflow-auto bg-scroll px-4 text-center md:max-w-4xl`}
+        className={`mb:mb-0 scroll-custom mx-12 overflow-auto bg-scroll px-4 text-justify md:max-w-4xl`}
+        style={{ lineHeight: "20px" }}
         ref={paragraphRef}
       >
         {localizer?.p1}

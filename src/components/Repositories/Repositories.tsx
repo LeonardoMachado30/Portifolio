@@ -164,9 +164,9 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
                 </div>
 
                 <div className="w-full  text-gray-500">
-                  <p className="text-sm">
+                  {/* <p className="text-sm">
                     {localizer?.lastUpdated}: {lastUpdate}
-                  </p>
+                  </p> */}
 
                   <p className="text-sm">
                     {localizer?.create}: {created_at.format("DD/MM/YYYY")}

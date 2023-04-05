@@ -16,16 +16,17 @@ export default async function fetchRepos(): Promise<
   if (resp.status !== 200) return null;
 
   dateObj = await resp.data;
-
   const date = handleMapList(dateObj);
 
   const filter = (obj: any) => !obj.fork && obj.language !== null;
   const dateFilter = date.filter(filter);
 
-  const dateOrder = orderByDate(dateFilter);
-  localStorage.setItem("Repositories", JSON.stringify(dateOrder));
+  // const dateOrder = orderByDate(dateFilter);
+  // console.log(dateOrder);
 
-  return dateOrder;
+  localStorage.setItem("Repositories", JSON.stringify(dateFilter));
+
+  return dateFilter;
 }
 
 function handleMapList(obj: any) {

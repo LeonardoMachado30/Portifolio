@@ -5,7 +5,6 @@ import Repositories from "./Repositories/Repositories";
 import Welcome from "./Welcome/Welcome";
 import StampLinkedIn from "./StampLinkedIn/StampLinkedIn";
 import OptionsFixed from "./OptionsFixed/OptionsFixed";
-import Setting from "./Setting/Setting";
 import ButtonFloat from "./ButtonFloat/ButtonFloat";
 
 export {
@@ -16,6 +15,5 @@ export {
   Welcome,
   StampLinkedIn,
   OptionsFixed,
-  Setting,
   ButtonFloat,
 };

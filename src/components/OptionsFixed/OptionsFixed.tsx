@@ -51,36 +51,45 @@ function OptionsFixed(): JSX.Element {
   const email = "flmp.leonardo@gmail.com";
   const { setLanguage } = useContext(LanguageContext);
 
-  const handleOpenModal = (prop) => {
+  const handleOpenModal = (prop, openModalp) => {
+    console.log(prop, openModalp);
+    const whatsapp = prop === "whatsapp";
+    const email = prop === "email";
+    const settings = prop === "settings";
     setOpenModal({
-      whatsapp: prop === "whatsapp",
-      email: prop === "email",
-      settings: prop === "settings",
+      whatsapp: whatsapp,
+      email: email,
+      settings: settings,
     });
   };
 
   const handleClipboard = () => {
     const button = refButtonClipboard?.current;
     if (button) {
-      navigator.clipboard.writeText(email).then(
-        function () {
-          button?.classList.remove("bg-teal-500");
-          button?.classList.remove("bg-red-500");
-          button?.classList.add("bg-green-500");
-          button.textContent = "copiado";
-        },
-        function (err) {
-          button?.classList.remove("bg-teal-500");
-          button?.classList.add("bg-red-500");
-          button.textContent = "Erro ao copiar";
-        }
-      );
+      navigator.clipboard
+        .writeText(email)
+        .then(() => {
+          button?.classList.add("border-sky-500");
+          button?.classList.add("pointer-events-none");
+          button?.classList.add("opacity-70");
+          button?.classList.remove("border-green-500");
+          button.children[0].textContent = "Copiado";
+        })
+        .catch((err) => {
+          button?.classList.add("border-red-500");
+          button?.classList.remove("pointer-events-none");
+          button?.classList.remove("opacity-70");
+          button?.classList.remove("border-sky-500");
+          button?.classList.remove("border-green-500");
+          button.children[0].textContent = "Erro ao copiar";
+        });
       setTimeout(() => {
-        button?.classList.add("bg-teal-500");
-        button?.classList.remove("bg-red-500");
-        button?.classList.remove("bg-green-500");
-        button.textContent = "copiar";
-      }, 2000);
+        button?.classList.add("border-green-500");
+        button?.classList.remove("pointer-events-none");
+        button?.classList.remove("opacity-70");
+        button?.classList.remove("border-sky-500");
+        button.children[0].textContent = email;
+      }, 3000);
     }
   };
 
@@ -196,14 +205,28 @@ function OptionsFixed(): JSX.Element {
           <Modal
             className={`arrowLeftBottom-1 b-1 fixed right-20 z-10 ml-auto mr-auto flex w-auto flex-col items-center justify-center gap-2 rounded !border-0 bg-white p-2 `}
           >
-            <p className="p-2 text-sm text-gray-500 md:text-lg">{email}</p>
-
             <button
               ref={refButtonClipboard}
-              className="w-full rounded  bg-teal-500 p-2 text-sm text-white md:text-lg"
               onClick={(e) => handleClipboard()}
+              className={
+                " inline-flex w-full cursor-pointer items-center justify-center rounded border-b-2 border-green-500  bg-white px-6 py-2 font-bold text-gray-800 shadow-md hover:border-green-600 hover:bg-green-500 hover:text-white"
+              }
             >
-              Copiar
+              <span className="mr-2 text-xs md:text-sm">{email}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z"
+                />
+              </svg>
             </button>
           </Modal>
         )}

@@ -18,33 +18,15 @@ interface IProps {
 interface IProp {
   prop: IProps;
   children?: ReactNode;
-  handleOpenModal?: (prop) => void;
+  handleOpenModal?: (prop: string, openModal: boolean) => void;
 }
-
-const Box = styled.div``;
-const Modal = styled.div`
-  // z-index: -1;
-  box-shadow: 16px 17px 34px -4px rgba(0, 0, 0, 0.67);
-  -webkit-box-shadow: 16px 17px 34px -4px rgba(0, 0, 0, 0.67);
-  -moz-box-shadow: 16px 17px 34px -4px rgba(0, 0, 0, 0.67);
-  max-width: 300px;
-  // min-width: 150px;
-
-  @media screen and (max-width: 380px) {
-    max-width: 220px;
-  }
-
-  @media screen and (max-width: 280px) {
-    max-width: 200px;
-  }
-  // transition: all 1s ease-in-out;
-`;
 interface Child {
   ModalRef: any;
 }
 const ButtonFloat = forwardRef<Child, any>(
   ({ prop, children, handleOpenModal }: IProp, ref) => {
     {
+      const [openModal, setOpenModal] = useState<boolean>(false);
       const { src, alt, bottom } = prop;
       const _alt = alt ? alt : "alt generico";
       // const [openModal, setOpenModal] = useState<boolean>(false);
@@ -60,13 +42,17 @@ const ButtonFloat = forwardRef<Child, any>(
       return (
         <>
           <div className={`fixed right-6 z-20 ml-10 w-full b-${bottom}`}>
-            <Box
+            <button
+              value={"true"}
               className={`absolute bottom-0 right-0 w-12 cursor-pointer rounded-full bg-white  p-2 text-center opacity-70 shadow hover:opacity-100`}
-              onClick={(e) => handleOpenModal(_alt)}
+              onClick={(e) => {
+                setOpenModal(!openModal);
+                handleOpenModal(_alt, openModal);
+              }}
             >
               <Image src={src} alt={_alt} width={30} height={30} />
-            </Box>
-            {children}
+            </button>
+            {openModal && children}
           </div>
         </>
       );
