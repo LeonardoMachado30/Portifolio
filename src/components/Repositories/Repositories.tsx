@@ -108,7 +108,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
           grabCursor={true}
           navigation={true}
           modules={[EffectCards, Pagination, Navigation]}
-          className="swiper !w-full !h-full md:!h-auto !max-w-3xl !px-20 !py-5 md:!py-8 md:!px-48"
+          className="swiper !w-full !h-4/5 md:!h-auto !max-w-3xl !px-20 !py-12 !pt-4 md:!py-8 md:!px-48"
           ref={swiperRef}
         >
           {repositories?.map((element, index) => {
