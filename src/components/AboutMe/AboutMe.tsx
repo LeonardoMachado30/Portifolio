@@ -71,7 +71,7 @@ const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
       </h2>
 
       <p
-        className={`mb:mb-0 scroll-custom mx-12 overflow-auto bg-scroll px-4 text-justify md:max-w-4xl`}
+        className={`mb:mb-0 scroll-custom mx-12 overflow-auto bg-scroll px-4 text-justify md:max-w-4xl text-sm mb-12`}
         style={{ lineHeight: "20px" }}
         ref={paragraphRef}
       >

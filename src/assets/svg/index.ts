@@ -22,6 +22,7 @@ import icon_Bandeira_EUA from "./icon_Bandeira_EUA.svg";
 import icons_arrow_down from "./icons_arrow_down.svg";
 import icons_arrow_up from "./icons_arrow_up.svg";
 import icon_cube from "./icon_cube.svg";
+import icon_bar from "./icon_bar.svg";
 
 export {
   css,
@@ -48,4 +49,5 @@ export {
   icons_arrow_up,
   icon_Bandeira_EUA,
   icon_cube,
+  icon_bar,
 };

@@ -200,32 +200,22 @@ body {
 .arrowTop:after {
   content: "";
   position: absolute;
-  bottom: 100%;
+  bottom: 94%;
   left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
+  margin-left: -8px;
+  border-width: 8px;
   border-style: solid;
   border-color: transparent transparent #fff transparent;
 }
 
-.arrowLeftBottom-1:after {
+.arrowLeft:after {
   content: "";
   position: absolute;
-  bottom: 18px;
-  right: -12px;
-  border-width: 6px;
+  right: 94%;
+  margin-left: -8px;
+  border-width: 8px;
   border-style: solid;
-  border-color: transparent transparent transparent #fff;
-}
-
-.arrowLeftBottom-2:after {
-  content: "";
-  position: absolute;
-  top: 80%;
-  right: -4%;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent #fff;
+  border-color: transparent #fff transparent  transparent ;
 }
 
 .bg-tranparent {
@@ -235,38 +225,4 @@ body {
 .btn-transition:hover {
   transform: scale(1.2, 1.2);
   transition: transform 0.4s ease-in-out;
-}
-
-.b {
-  &-1 {
-    bottom: 40px;
-
-    @media screen and (max-width: 600px) {
-      bottom: 60px;
-    }
-  }
-
-  &-2 {
-    bottom: 100px;
-
-    @media screen and (max-width: 600px) {
-      bottom: 120px;
-    }
-  }
-
-  &-3 {
-    bottom: 160px;
-
-    @media screen and (max-width: 600px) {
-      bottom: 180px;
-    }
-  }
-
-  &-4 {
-    bottom: 200px;
-
-    @media screen and (max-width: 600px) {
-      bottom: 220px;
-    }
-  }
 }
