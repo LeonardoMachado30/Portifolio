@@ -99,13 +99,14 @@ function OptionsFixed(): JSX.Element {
   };
 
   return (
-    <div className="fixed bottom-16 right-4 z-20 flex flex-col gap-2 md:bottom-10 md:right-10">
+    <div className="fixed bottom-20 right-4 z-20 flex flex-col gap-2  md:right-10 lg:bottom-10">
       <div className={`relative`}>
         <Button
           prop={{ src: icon_bar, alt: "bar" }}
           handleClick={handleClickBar}
           className={`${openModalBar && "arrowTop"}`}
         />
+
         {openModalBar && (
           <div className="absolute bottom-10 left-0 right-0 ml-auto mr-auto flex w-auto flex-col items-center justify-center gap-2 p-2 ">
             <Button
