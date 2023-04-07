@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
   const skillsRef = useRef<any>(null);
   const repositoriesRef = useRef<any>(null);
   const classDefault =
-    "relative !flex flex-col items-center text-white spacing_content bg-tranparent";
+    "relative !flex flex-col !justify-start lg:!justify-center text-white spacing_content bg-tranparent";
   const [language, setLanguage] = useState<string>("pt");
 
   useEffect(() => {

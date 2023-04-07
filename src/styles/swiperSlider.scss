@@ -32,6 +32,10 @@
 
 .swiper-pagination-horizontal {
     bottom: 0px !important;
+
+    @media screen and (max-width: 420px){
+        display: none !important;
+    }
 }
 
 // .swiper-slide:nth-child(1n) {

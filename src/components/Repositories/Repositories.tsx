@@ -93,7 +93,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
   return (
     <>
       <h2
-        className="mb-12 w-full text-center text-5xl font-semibold"
+        className="mb-4 lg:mb-12 w-full text-center text-5xl font-semibold"
         ref={titleRef}
       >
         {localizer?.title}
@@ -108,7 +108,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
           grabCursor={true}
           navigation={true}
           modules={[EffectCards, Pagination, Navigation]}
-          className="swiper !md:mt-0 !mt-4 !w-full !max-w-3xl !px-16 !py-8 md:!px-48"
+          className="swiper !w-full !h-full md:!h-auto !max-w-3xl !px-20 !py-5 md:!py-8 md:!px-48"
           ref={swiperRef}
         >
           {repositories?.map((element, index) => {
