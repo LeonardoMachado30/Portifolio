@@ -51,6 +51,12 @@ export default function Home(): JSX.Element {
     }
   }, []);
 
+  useEffect(() => {
+    animation
+      ? document.querySelector("body").classList.add("!overflow-hidden")
+      : document.querySelector("body").classList.remove("!overflow-hidden");
+  }, [animation]);
+
   return (
     <>
       <Head>
