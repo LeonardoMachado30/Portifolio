@@ -1,3 +1,4 @@
+import { animationSlider } from "@/utils/animations/animationSlider";
 import {
   //? REACT
   forwardRef,
@@ -22,7 +23,6 @@ import {
   Navigation,
   buttonAnimation,
 } from "./index";
-import { animationSlider } from "@/utils/animations";
 import useRessource from "@/utils/ressource";
 
 import ressource from "@/utils/ressource";
@@ -93,7 +93,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
   return (
     <>
       <h2
-        className="mb-4 lg:mb-12 w-full text-center text-5xl font-semibold"
+        className="mb-4 w-full text-center text-5xl font-semibold lg:mb-12"
         ref={titleRef}
       >
         {localizer?.title}
@@ -108,7 +108,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
           grabCursor={true}
           navigation={true}
           modules={[EffectCards, Pagination, Navigation]}
-          className="swiper !w-full !h-4/5 md:!h-auto !max-w-3xl !px-20 !py-12 !pt-4 md:!py-8 md:!px-48"
+          className="swiper !h-4/5 !w-full !max-w-3xl !px-20 !py-12 !pt-4 md:!h-auto md:!px-48 md:!py-8"
           ref={swiperRef}
         >
           {repositories?.map((element, index) => {
@@ -121,7 +121,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
 
             return (
               <SwiperSlide
-                className=" !flex flex-col !justify-between !text-black !shadow"
+                className=" card-height !flex flex-col !justify-between !text-black !shadow"
                 key={index}
               >
                 <h2 className="mb-2 w-full text-center font-bold">{name}</h2>

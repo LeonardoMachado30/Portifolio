@@ -2,8 +2,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import Image from "next/image";
 import useRessource from "@/utils/ressource";
 import profile from "@/assets/profile.jpg";
-import { animationSlider } from "@/utils/animations";
-
+import { animationSlider } from "@/utils/animations/animationSlider";
 interface ChildHandle {
   handleStart: () => void;
   handleEnd: () => void;
@@ -76,15 +75,18 @@ const Welcome = forwardRef<ChildHandle, any>((props, ref) => {
 
   return (
     <>
-      <Image
-        ref={imageRef}
-        src={profile ? profile : "profle"}
-        alt={localizer?.altProfileImage}
-        width={200}
-        height={200}
-        className="mb-20 mt-20 border-sky-600 shadow-lg"
-        style={{ borderRadius: "100%" }}
-      />
+      <div className="flex w-full items-center justify-center">
+        <Image
+          ref={imageRef}
+          src={profile ? profile : "profle"}
+          alt={localizer?.altProfileImage}
+          width={200}
+          height={200}
+          className="mb-20 mt-20 border-sky-600 text-center shadow-lg"
+          style={{ borderRadius: "100%", width: "200px", height: "220px", border: "10px double black" }}
+        />
+      </div>
+
       <div className="flex flex-col gap-2 px-6 text-center md:px-0">
         {/* <p ref={myNameRef} className="text-3xl font-bold uppercase md:text-5xl">
           {localizer?.myName}

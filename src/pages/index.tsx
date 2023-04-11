@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 
 import Head from "next/head";
 
-import { LanguageContext } from "@/utils/Context";
+import { LanguageContext, AnimationContext } from "@/utils/Context";
 
 import {
   AboutMe,
@@ -41,8 +41,9 @@ export default function Home(): JSX.Element {
   const skillsRef = useRef<any>(null);
   const repositoriesRef = useRef<any>(null);
   const classDefault =
-    "relative !flex flex-col !justify-start lg:!justify-center text-white spacing_content bg-tranparent";
+    "relative !flex flex-col !justify-start lg:!justify-center text-white spacing_content bg-tranparent h-screen";
   const [language, setLanguage] = useState<string>("pt");
+  const [animation, setAnimation] = useState<boolean>(true);
 
   useEffect(() => {
     if (welcomeRef && page?.activeIndex === 0) {
@@ -58,69 +59,88 @@ export default function Home(): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <LanguageContext.Provider value={{ language, setLanguage }}>
-        <Swiper
-          effect={"creative"}
-          direction={"vertical"}
-          // navigation={true}
-          slidesPerView={1}
-          spaceBetween={100}
-          mousewheel={true}
-          speed={2000}
-          pagination={{
-            clickable: true,
-          }}
-          creativeEffect={{
-            prev: {
-              translate: [0, "-100%", 0],
-            },
-            next: {
-              translate: [0, "100%", 0],
-            },
-          }}
-          modules={[EffectCreative, Mousewheel, Pagination, Navigation]}
-          className="bg-animation h-full "
-          ref={swiperRef}
-          onSlideNextTransitionStart={(e) => {
-            if (welcomeRef && e?.activeIndex === 0) {
-              welcomeRef?.current?.handleStart();
-            } else if (aboutMeRef && e?.activeIndex === 1) {
-              aboutMeRef?.current?.handleStart();
-            } else if (skillsRef && e?.activeIndex === 2) {
-              skillsRef?.current?.handleStart();
-            } else if (repositoriesRef && e?.activeIndex === 3) {
-              repositoriesRef?.current?.handleStart();
-            }
-          }}
-          onSlidePrevTransitionStart={(e) => {
-            if (welcomeRef && e?.activeIndex === 0) {
-              welcomeRef?.current?.handleEnd();
-            } else if (aboutMeRef && e?.activeIndex === 1) {
-              aboutMeRef?.current?.handleEnd();
-            } else if (skillsRef && e?.activeIndex === 2) {
-              skillsRef?.current?.handleEnd();
-            } else if (repositoriesRef && e?.activeIndex === 3) {
-              repositoriesRef?.current?.handleEnd();
-            }
-          }}
-        >
-          <SwiperSlide className={`${classDefault} welcome !justify-start`}>
-            <Welcome ref={welcomeRef} />
-          </SwiperSlide>
+        <AnimationContext.Provider value={{ animation, setAnimation }}>
+          {animation ? (
+            <Swiper
+              effect={"creative"}
+              direction={"vertical"}
+              // navigation={true}
+              slidesPerView={1}
+              spaceBetween={100}
+              mousewheel={true}
+              speed={2000}
+              pagination={{
+                clickable: true,
+              }}
+              creativeEffect={{
+                prev: {
+                  translate: [0, "-100%", 0],
+                },
+                next: {
+                  translate: [0, "100%", 0],
+                },
+              }}
+              modules={[EffectCreative, Mousewheel, Pagination, Navigation]}
+              className="bg-animation !h-screen"
+              ref={swiperRef}
+              onSlideNextTransitionStart={(e) => {
+                if (welcomeRef && e?.activeIndex === 0) {
+                  welcomeRef?.current?.handleStart();
+                } else if (aboutMeRef && e?.activeIndex === 1) {
+                  aboutMeRef?.current?.handleStart();
+                } else if (skillsRef && e?.activeIndex === 2) {
+                  skillsRef?.current?.handleStart();
+                } else if (repositoriesRef && e?.activeIndex === 3) {
+                  repositoriesRef?.current?.handleStart();
+                }
+              }}
+              onSlidePrevTransitionStart={(e) => {
+                if (welcomeRef && e?.activeIndex === 0) {
+                  welcomeRef?.current?.handleEnd();
+                } else if (aboutMeRef && e?.activeIndex === 1) {
+                  aboutMeRef?.current?.handleEnd();
+                } else if (skillsRef && e?.activeIndex === 2) {
+                  skillsRef?.current?.handleEnd();
+                } else if (repositoriesRef && e?.activeIndex === 3) {
+                  repositoriesRef?.current?.handleEnd();
+                }
+              }}
+            >
+              <SwiperSlide className={`${classDefault} welcome !justify-start`}>
+                <Welcome ref={welcomeRef} />
+              </SwiperSlide>
 
-          <SwiperSlide className={`${classDefault} aboutMe`}>
-            <AboutMe ref={aboutMeRef} />
-          </SwiperSlide>
+              <SwiperSlide className={`${classDefault} aboutMe`}>
+                <AboutMe ref={aboutMeRef} />
+              </SwiperSlide>
 
-          <SwiperSlide className={`${classDefault} skills`}>
-            <Skills ref={skillsRef} />
-          </SwiperSlide>
+              <SwiperSlide className={`${classDefault} skills`}>
+                <Skills ref={skillsRef} />
+              </SwiperSlide>
 
-          <SwiperSlide className={`${classDefault} repositories`}>
-            <Repositories ref={repositoriesRef} />
-          </SwiperSlide>
+              <SwiperSlide className={`${classDefault} repositories`}>
+                <Repositories ref={repositoriesRef} />
+              </SwiperSlide>
+            </Swiper>
+          ) : (
+            <div className="bg-animation">
+              <div className={`${classDefault} welcome !justify-start`}>
+                <Welcome ref={welcomeRef} />
+              </div>
+              <div className={`${classDefault} aboutMe !h-auto `}>
+                <AboutMe ref={aboutMeRef} />
+              </div>
+              <div className={`${classDefault}  skills `}>
+                <Skills ref={skillsRef} />
+              </div>
+              <div className={`${classDefault} repositories `}>
+                <Repositories ref={repositoriesRef} />
+              </div>
+            </div>
+          )}
 
           <OptionsFixed />
-        </Swiper>
+        </AnimationContext.Provider>
       </LanguageContext.Provider>
     </>
   );

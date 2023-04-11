@@ -16,7 +16,7 @@ import { formatDate } from "./handle";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Pagination, EffectCards, Navigation, EffectCreative } from "swiper";
-import { buttonAnimation } from "@/utils/animations";
+import { buttonAnimation } from "@/utils/animations/buttonAnimation";
 
 export type { RepositoriesModel };
 

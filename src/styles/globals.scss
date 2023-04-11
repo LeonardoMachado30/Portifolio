@@ -16,6 +16,11 @@ main {
   left: 0;
 }
 
+body {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
 p,
 span,
 h1,
@@ -56,7 +61,7 @@ body {
 .bg-animation {
   width: 100%;
   background-size: 500% 100% !important;
-  height: 100vh;
+  // height: 100vh;
   // background: rgb(131, 58, 180);
   // background: -moz-linear-gradient(
   //   111deg,
@@ -215,7 +220,41 @@ body {
   margin-left: -8px;
   border-width: 8px;
   border-style: solid;
-  border-color: transparent #fff transparent  transparent ;
+  border-color: transparent #fff transparent transparent;
+  animation: openArrow 400ms ease-in-out;
+}
+
+@keyframes openArrow {
+  from {
+    border-width: 0px;
+  }
+  to {
+    border-width: 8px;
+  }
+}
+
+.t-open {
+  animation: openModal 900ms ease-in-out;
+}
+
+@keyframes openModal {
+  0% {
+    right: -60px;
+    transform: scale(0, 0);
+    opacity: 0 !important;
+  }
+
+  98% {
+    opacity: 50% !important;
+  }
+
+  100% {
+    overflow-x: 0;
+    right: 3.5rem;
+    transform: scale(100%, 100%);
+    display: flex !important;
+    opacity: 1 !important;
+  }
 }
 
 .bg-tranparent {
@@ -225,4 +264,8 @@ body {
 .btn-transition:hover {
   transform: scale(1.2, 1.2);
   transition: transform 0.4s ease-in-out;
+}
+
+.card-height {
+  height: 350px !important;
 }

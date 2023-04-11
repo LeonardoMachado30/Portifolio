@@ -6,7 +6,7 @@ import {
   useRef,
 } from "react";
 import useRessource from "@/utils/ressource";
-import { animationSlider } from "@/utils/animations";
+import { animationSlider } from "@/utils/animations/animationSlider";
 
 interface IChildHandle {
   handleStart: () => void;
@@ -70,19 +70,21 @@ const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
         {localizer?.title}
       </h2>
 
-      <p
-        className={`mb:mb-0 scroll-custom mx-16 overflow-auto bg-scroll px-4 text-justify md:max-w-4xl text-sm mb-12`}
-        style={{ lineHeight: "20px" }}
-        ref={paragraphRef}
-      >
-        {localizer?.p1}
-        <br />
-        <br />
-        {localizer?.p2}
-        <br />
-        <br />
-        {localizer?.p3}
-      </p>
+      <div className="scroll-custom flex w-full items-center justify-center overflow-auto bg-scroll !px-4 !mb-20 text-center md:!px-72 z-50">
+        <p
+          className={`h-full w-full px-4 text-justify text-xs  md:text-sm`}
+          style={{ lineHeight: "20px" }}
+          ref={paragraphRef}
+        >
+          {localizer?.p1}
+          <br />
+          <br />
+          {localizer?.p2}
+          <br />
+          <br />
+          {localizer?.p3}
+        </p>
+      </div>
     </>
   );
 });

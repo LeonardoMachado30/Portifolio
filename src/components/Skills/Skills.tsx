@@ -22,7 +22,7 @@ import {
   gsap,
 } from "@/assets/svg/index";
 import useRessource from "@/utils/ressource";
-import { animationSlider } from "@/utils/animations";
+import { animationSlider } from "@/utils/animations/animationSlider";
 
 interface ChildHandle {
   handleStart: () => void;
@@ -84,7 +84,7 @@ const Skills = forwardRef<ChildHandle, any>((props, ref) => {
         {localizer?.title}
       </h2>
 
-      <section className="card box flex flex-col">
+      <section className="card box flex flex-col items-center justify-center">
         <div
           className="flex w-full max-w-xl flex-col gap-10 px-6"
           ref={listSkillsRef}
