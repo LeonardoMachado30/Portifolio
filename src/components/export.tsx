@@ -6,6 +6,7 @@ import Welcome from "./Welcome/Welcome";
 import StampLinkedIn from "./StampLinkedIn/StampLinkedIn";
 import OptionsFixed from "./OptionsFixed/OptionsFixed";
 import ButtonFloat from "./ButtonFloat/ButtonFloat";
+import Timeline from "./Timeline/Timeline";
 
 export {
   AboutMe,
@@ -16,4 +17,5 @@ export {
   StampLinkedIn,
   OptionsFixed,
   ButtonFloat,
+  Timeline,
 };

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Head from "next/head";
 
@@ -11,7 +10,10 @@ import {
   Repositories,
   Welcome,
   OptionsFixed,
+  Timeline,
 } from "@/components/export";
+
+import Draggable from "@/components/Timeline/draggle";
 
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
@@ -116,8 +118,10 @@ export default function Home(): JSX.Element {
                 <Welcome ref={welcomeRef} />
               </SwiperSlide>
 
-              <SwiperSlide className={`${classDefault} aboutMe`}>
-                <AboutMe ref={aboutMeRef} />
+              <SwiperSlide className={`${classDefault} aboutMe !z-50`}>
+                {/* <AboutMe ref={aboutMeRef} /> */}
+                <Timeline />
+                {/* <Draggable /> */}
               </SwiperSlide>
 
               <SwiperSlide className={`${classDefault} skills`}>

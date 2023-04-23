@@ -23,6 +23,8 @@ import icons_arrow_down from "./icons_arrow_down.svg";
 import icons_arrow_up from "./icons_arrow_up.svg";
 import icon_cube from "./icon_cube.svg";
 import icon_bar from "./icon_bar.svg";
+import image_none from "./image_none.svg";
+import certification_component from "./certification_component.svg";
 
 export {
   css,
@@ -50,4 +52,6 @@ export {
   icon_Bandeira_EUA,
   icon_cube,
   icon_bar,
+  image_none,
+  certification_component,
 };
