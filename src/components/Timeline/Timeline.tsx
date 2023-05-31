@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import styled from "styled-components";
+import Draggable from "./Draggable";
+import { GetServerSideProps } from "next";
 
 const Bubble = styled.image`
   -webkit-animation: slide-all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite
@@ -44,7 +46,7 @@ const Timeline = (): JSX.Element => {
   const bubbleRef = useRef<HTMLDivElement>(null);
   const circulo1 = useRef(null);
   const circulo2 = useRef(null);
-  const [colision, setColision] = useState(false);
+  const [colision, setColision] = useState({ x: 0, y: 0 });
 
   const containerRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -102,6 +104,13 @@ const Timeline = (): JSX.Element => {
     }
   };
 
+  function checkCollision(rect1, rect2) {
+    const horizontal = rect1.right >= rect2.left && rect2.right >= rect1.left;
+    const vertical = rect1.bottom >= rect2.top && rect2.bottom >= rect1.top;
+    // verifica se há interseção entre os limites
+    return { horizontal, vertical };
+  }
+
   // Função que verifica se há colisão entre dois elementos
   // function colisao(elemento1, elemento2) {
   //   // Obter as coordenadas e dimensões dos elementos após a transformação
@@ -118,13 +127,12 @@ const Timeline = (): JSX.Element => {
 
   // Função que verifica se há colisão entre dois elementos e os repele
   function colisaoERepulsao(elemento1, elemento2) {
-    // Obter as coordenadas e dimensões dos elementos após a transformação
-    var rect1 = elemento1.getBoundingClientRect();
-    var rect2 = elemento2.getBoundingClientRect();
+    // obtém os limites dos elementos
+    const rect1 = elemento1.getBoundingClientRect();
+    const rect2 = elemento2.getBoundingClientRect();
 
-    // Verificar se há sobreposição nas direções horizontal e vertical
-    let horizontal = rect1.right >= rect2.left && rect2.right >= rect1.left;
-    let vertical = rect1.bottom >= rect2.top && rect2.bottom >= rect1.top;
+    // Obter as coordenadas e dimensões dos elementos após a transformação
+    const { horizontal, vertical } = checkCollision(rect1, rect2);
 
     // Se houver sobreposição nas duas direções, significa que houve colisão
     if (horizontal && vertical) {
@@ -147,47 +155,43 @@ const Timeline = (): JSX.Element => {
       );
 
       // Definir um fator de repulsão arbitrário
-      var fator = 50;
+      let fator = 50;
+      const scaleY = 1.1;
 
       // Alterar os valores das propriedades de transformação dos elementos de acordo com a direção da colisão
       if (rect1.right >= rect2.left && rect1.left <= rect2.left) {
         // Colisão pela direita do elemento 1
         translateX1 -= fator;
         translateX2 += fator;
-      }
-      if (rect1.left <= rect2.right && rect1.right >= rect2.right) {
+      } else if (rect1.left <= rect2.right && rect1.right >= rect2.right) {
         // Colisão pela esquerda do elemento 1
         translateX1 += fator;
         translateX2 -= fator;
-      }
-      if (rect1.bottom >= rect2.top && rect1.top <= rect2.top) {
+      } else if (rect1.bottom >= rect2.top && rect1.top <= rect2.top) {
         // Colisão por baixo do elemento 1
         translateY1 -= fator;
         translateY2 += fator;
-      }
-      if (rect1.top <= rect2.bottom && rect1.bottom >= rect2.bottom) {
+      } else if (rect1.top <= rect2.bottom && rect1.bottom >= rect2.bottom) {
         // Colisão por cima do elemento 1
         translateY1 += fator;
         translateY2 -= fator;
       }
 
-      const scaleY = 1.1;
-
-      elemento1.style.setProperty("--translate-x", `${translateX1}px`);
-      elemento1.style.setProperty("--translate-y", `${translateY1}px`);
-      elemento1.style.setProperty("--scale-y", `${scaleY}`);
-      elemento2.style.setProperty("--translate-x", `${translateX2}px`);
-      elemento2.style.setProperty("--translate-y", `${translateY2}px`);
-      elemento2.style.setProperty("--scale-y", `${scaleY}`);
-
-      elemento1.style.setProperty(
-        "transform",
-        `translate(${translateX1}px ${translateY1}px) scaleY(${scaleY})`
-      );
-      elemento2.style.setProperty(
-        "transform",
-        `translate(${translateX2}px ${translateY2}px) scaleY(${scaleY})`
-      );
+      // elemento1.style.setProperty("--translate-x", `${translateX1}px`);
+      // elemento1.style.setProperty("--translate-y", `${translateY1}px`);
+      // elemento1.style.setProperty("--scale-y", `${scaleY}`);
+      // elemento2.style.setProperty("--translate-x", `${translateX2}px`);
+      // elemento2.style.setProperty("--translate-y", `${translateY2}px`);
+      // elemento2.style.setProperty("--scale-y", `${scaleY}`);
+      setColision({ x: translateX1, y: translateY1 });
+      // elemento1.style.setProperty(
+      //   "transform",
+      //   `translate(${translateX1}px ${translateY1}px) scaleY(${scaleY})`
+      // );
+      // elemento2.style.setProperty(
+      //   "transform",
+      //   `translate(${translateX2}px ${translateY2}px) scaleY(${scaleY})`
+      // );
     }
 
     return horizontal && vertical;
@@ -195,25 +199,25 @@ const Timeline = (): JSX.Element => {
 
   // Usar um hook de efeito para monitorar as mudanças nos elementos
   useEffect(() => {
-    const elemento1 = boxRef.current;
-    const elemento2 = circulo2.current;
+    if (boxRef.current && circulo2.current) {
+      const elemento1 = boxRef.current;
+      const elemento2 = circulo2.current;
 
-    elemento1.style.setProperty("--translate-x", "0px");
-    elemento1.style.setProperty("--translate-y", "0px");
-    elemento1.style.setProperty("--scale-y", "1");
-    elemento2.style.setProperty("--translate-x", "0px");
-    elemento2.style.setProperty("--translate-y", "0px");
-    elemento2.style.setProperty("--scale-y", "1");
+      // elemento1.style.setProperty("--translate-x", "0px");
+      // elemento1.style.setProperty("--translate-y", "0px");
+      // elemento1.style.setProperty("--scale-y", "1");
+      // elemento2.style.setProperty("--translate-x", "0px");
+      // elemento2.style.setProperty("--translate-y", "0px");
+      // elemento2.style.setProperty("--scale-y", "1");
 
-    if (elemento1 && elemento2) {
       // Criar uma função que verifica a colisão a cada intervalo de tempo
       const handleColision = () => {
         const isColision = colisaoERepulsao(elemento1, elemento2);
         console.log(isColision ? "Colidiu" : "Não colidiu");
 
-        if (isColision) {
-          isClicked.current = false;
-        }
+        // if (isColision) {
+        //   isClicked.current = false;
+        // }
       };
 
       const timeOut = 300;
@@ -258,50 +262,47 @@ const Timeline = (): JSX.Element => {
   // }, [colision]);
 
   // ? Event move element in the window
+
+  const onMouseDown = (e: MouseEvent) => {
+    e.preventDefault();
+    isClicked.current = true;
+    coords.current.startX = e.clientX;
+    coords.current.startY = e.clientY;
+  };
+
+  const onMouseUp = (e) => {
+    e.preventDefault();
+    const itemRef = e.target;
+    isClicked.current = false;
+    coords.current.lastX = itemRef.offsetLeft;
+    coords.current.lastY = itemRef.offsetTop;
+  };
+
+  const onMouseMove = (e) => {
+    if (!isClicked.current) return;
+    const itemRef = e.target;
+    console.log(itemRef);
+    const nextX = e.clientX - coords.current.startX + coords.current.lastX;
+    const nextY = e.clientY - coords.current.startY + coords.current.lastY;
+
+    itemRef.style.top = `${nextY}px`;
+    itemRef.style.left = `${nextX}px`;
+  };
+
   useEffect(() => {
     if (!boxRef.current || !containerRef.current) return;
 
     const box = boxRef.current;
     const container = containerRef.current;
 
-    const onMouseDown = (e: MouseEvent) => {
-      e.preventDefault();
-      isClicked.current = true;
-      coords.current.startX = e.clientX;
-      coords.current.startY = e.clientY;
-    };
+    // const cleanup = () => {
+    //   box.removeEventListener("mousedown", onMouseDown);
+    //   box.removeEventListener("mouseup", onMouseUp);
+    //   container.removeEventListener("mousemove", onMouseMove);
+    //   container.removeEventListener("mouseleave", onMouseUp);
+    // };
 
-    const onMouseUp = (e: MouseEvent) => {
-      e.preventDefault();
-
-      isClicked.current = false;
-      coords.current.lastX = box.offsetLeft;
-      coords.current.lastY = box.offsetTop;
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isClicked.current) return;
-
-      const nextX = e.clientX - coords.current.startX + coords.current.lastX;
-      const nextY = e.clientY - coords.current.startY + coords.current.lastY;
-
-      box.style.top = `${nextY}px`;
-      box.style.left = `${nextX}px`;
-    };
-
-    box.addEventListener("mousedown", onMouseDown);
-    box.addEventListener("mouseup", onMouseUp);
-    container.addEventListener("mousemove", onMouseMove);
-    container.addEventListener("mouseleave", onMouseUp);
-
-    const cleanup = () => {
-      box.removeEventListener("mousedown", onMouseDown);
-      box.removeEventListener("mouseup", onMouseUp);
-      container.removeEventListener("mousemove", onMouseMove);
-      container.removeEventListener("mouseleave", onMouseUp);
-    };
-
-    return cleanup;
+    // return cleanup;
   }, []);
 
   // ? Function disabled mouse event button right
@@ -315,20 +316,24 @@ const Timeline = (): JSX.Element => {
       className="container-drag flex gap-4"
       ref={containerRef}
       onContextMenu={disableContextMenu}
+      onMouseLeave={(e: any) => onMouseUp(e)}
+      onMouseMove={(e: any) => onMouseMove(e)}
     >
       <div
         // ref={circulo1}
-        ref={boxRef}
+        // ref={boxRef}
+        onMouseDown={(e: any) => onMouseDown(e)}
+        onMouseUp={(e: any) => onMouseUp(e)}
         className="box-drag"
         style={{
           width: "100px",
           height: "100px",
           borderRadius: "50%",
           backgroundColor: "red",
-          transform: "translateX(20px) scaleY(1)",
-          transition: "transform 4s",
-          animation:
-            "slide-all 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both",
+          transform: `translate(${colision.x}px ${colision.y}px) scaleY(1)`,
+          // transition: "transform 4s",
+          // animation:
+          //   "slide-all 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both",
         }}
       >
         <Image
@@ -361,8 +366,16 @@ const Timeline = (): JSX.Element => {
           ref={circulo2}
         />
       </div>
+
+      {/* <Draggable /> */}
     </div>
   );
 };
 
 export default Timeline;
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   return {
+//     props:
+//   }
+// }

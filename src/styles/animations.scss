@@ -640,3 +640,31 @@
     // width: 60px;
     cursor: pointer;
 }
+
+@keyframes cloudMoveIn {
+    0% {
+        transform: translate(-200px, -400px) skew(30deg);
+    }
+
+    50% {
+        transform: translate(0px, 0px);
+    }
+
+    100% {
+        transform: translate(-200px, -400px);
+    }
+}
+
+@keyframes cloudMoveOutRightTop {
+    0% {
+        transform: translate(100%, 100%);
+    }
+
+    50% {
+        transform: translate(80%, 0px);
+    }
+
+    100% {
+        transform: translate(110%, 40%);
+    }
+}

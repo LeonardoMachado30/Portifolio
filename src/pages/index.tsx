@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 
 import { LanguageContext, AnimationContext } from "@/utils/Context";
-
+import nuvem_realista from "@/assets/nuvem_realista.png";
+import nuvem2 from "@/assets/nuvem2.png";
 import {
   AboutMe,
   Skills,
@@ -12,8 +13,8 @@ import {
   OptionsFixed,
   Timeline,
 } from "@/components/export";
-
-import Draggable from "@/components/Timeline/draggle";
+import Image from "next/image";
+// import Draggable from "@/components/Timeline/draggle";
 
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
@@ -68,6 +69,51 @@ export default function Home(): JSX.Element {
       </Head>
       <LanguageContext.Provider value={{ language, setLanguage }}>
         <AnimationContext.Provider value={{ animation, setAnimation }}>
+          <Image
+            src={nuvem_realista}
+            alt=""
+            width={2000}
+            height={2000}
+            style={{
+              position: "absolute",
+              top: "-200px",
+              left: "-400px",
+              // transform: "skew(30deg)",
+              animation: "cloudMoveIn 6s ease-in-out 1s infinite",
+              backgroundColor: "transparent",
+              zIndex: "100",
+            }}
+          />
+
+          <Image
+            src={nuvem2}
+            alt=""
+            width={2000}
+            height={2000}
+            style={{
+              position: "absolute",
+              top: "0",
+              right: "0",
+              // transform: "skew(30deg)",
+              animation: "cloudMoveOutRightTop 6s ease-in-out 1s infinite",
+              backgroundColor: "transparent",
+              zIndex: "100",
+            }}
+          />
+          {/*
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              zIndex: "100",
+              backgroundColor: "yellow",
+              width: "30px",
+              height: "30px",
+              borderRadius: "100%",
+              filter: "blur(8px) contrast(200%)",
+            }}
+          ></div> */}
           {animation ? (
             <Swiper
               effect={"creative"}
@@ -148,7 +194,6 @@ export default function Home(): JSX.Element {
               </div>
             </div>
           )}
-
           <OptionsFixed />
         </AnimationContext.Provider>
       </LanguageContext.Provider>

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export && gh-pages -d out -t true"
+    "deploy": "next build && next export && gh-pages -d out -t true",
+    "plop": "plop"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.16",
@@ -37,6 +38,7 @@
     "postcss-preset-env": "^8.0.1",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.3",
-    "tailwindcss": "^3.3.1"
+    "tailwindcss": "^3.3.1",
+    "plop": "^3.1.2"
   }
 }
