@@ -1,19 +1,8 @@
 import { useRef, useState, useContext, useEffect } from "react";
-import {
-  icon_whatsapp,
-  icon_email,
-  icon_bar,
-  icon_github,
-  icon_redirect,
-} from "@/assets/svg/index";
+
 import { ButtonFloat } from "@/components/export";
 import Button from "./Button";
-import {
-  icon_settings,
-  icon_Bandeiro_Brasil,
-  icon_Bandeira_EUA,
-  icon_cube,
-} from "@/assets/svg/index";
+import imgs from "@/assets/svg/index";
 import Image from "next/image";
 import { AnimationContext, LanguageContext } from "@/utils/Context";
 
@@ -123,7 +112,7 @@ function OptionsFixed(): JSX.Element {
     <div className="fixed bottom-20 right-4 z-20 flex flex-col gap-2  md:right-10 lg:bottom-10">
       <div className={`relative`}>
         <Button
-          prop={{ src: icon_bar, alt: "bar" }}
+          prop={{ src: imgs.icons.icon_bar, alt: "bar" }}
           handleClick={handleClickBar}
           className={`${openModalBar && "arrowTop"}`}
         />
@@ -132,26 +121,25 @@ function OptionsFixed(): JSX.Element {
           <div className="absolute bottom-11 left-0 right-0 ml-auto mr-auto flex w-auto flex-col items-center justify-center gap-2 p-2 ">
             <Button
               className={widthHeight}
-              prop={{ src: icon_whatsapp, alt: "Whatsapp" }}
+              prop={{ src: imgs.icons.icon_whatsapp, alt: "Whatsapp" }}
               handleClick={() => handleClickRedirect("whatsapp")}
             />
             <Button
               className={widthHeight}
-              prop={{ src: icon_redirect, alt: "LinkedIn" }}
+              prop={{ src: imgs.icons.icon_redirect, alt: "LinkedIn" }}
               handleClick={() => handleClickRedirect("linkedin")}
             />
             <Button
               className={widthHeight}
-              prop={{ src: icon_github, alt: "Github" }}
+              prop={{ src: imgs.icons.icon_github, alt: "Github" }}
               handleClick={() => handleClickRedirect("github")}
             />
             <div className="relative">
               <Button
                 className={`h-9 w-9 ${openModalEmail && "arrowLeft"}`}
-                prop={{ src: icon_email, alt: "Email" }}
+                prop={{ src: imgs.icons.icon_email, alt: "Email" }}
                 handleClick={handleClickEmail}
               />
-              {/* {openModalEmail && ( */}
               <div
                 className={`t-open absolute bottom-0 right-14 flex flex-col items-center justify-center gap-2 rounded !border-0 bg-white p-1 ${
                   !openModalEmail && "hidden"
@@ -165,7 +153,6 @@ function OptionsFixed(): JSX.Element {
                   <span className="mr-2 text-xs md:text-sm">{email}</span>
                 </button>
               </div>
-              {/* )} */}
             </div>
           </div>
         )}
@@ -173,7 +160,7 @@ function OptionsFixed(): JSX.Element {
 
       <div className={`relative`}>
         <Button
-          prop={{ src: icon_settings, alt: "Opções" }}
+          prop={{ src: imgs.icons.icon_settings, alt: "Opções" }}
           handleClick={handleClickSetting}
           className={`${openModalSettings && "arrowLeft"}`}
         />
@@ -188,7 +175,7 @@ function OptionsFixed(): JSX.Element {
                 className={`btn-transition cursor-pointer ${
                   language === "pt" && "pointer-events-none opacity-60"
                 }`}
-                src={icon_Bandeiro_Brasil}
+                src={imgs.icons.icon_Bandeiro_Brasil}
                 width={24}
                 height={26}
                 alt={"bandeira Brasil"}
@@ -201,7 +188,7 @@ function OptionsFixed(): JSX.Element {
                 className={`btn-transition cursor-pointer ${
                   language === "en" && "pointer-events-none opacity-60"
                 }`}
-                src={icon_Bandeira_EUA}
+                src={imgs.icons.icon_Bandeira_EUA}
                 width={28}
                 height={30}
                 alt={"bandeira Estados Unidos"}
@@ -213,7 +200,7 @@ function OptionsFixed(): JSX.Element {
             </div>
             <Image
               className="btn-transition cursor-pointer"
-              src={icon_cube}
+              src={imgs.icons.icon_cube}
               width={26}
               height={26}
               alt={"Ativar animação"}

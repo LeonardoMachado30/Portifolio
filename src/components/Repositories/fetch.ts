@@ -22,7 +22,6 @@ export default async function fetchRepos(): Promise<
   const dateFilter = date.filter(filter);
 
   // const dateOrder = orderByDate(dateFilter);
-  // console.log(dateOrder);
 
   localStorage.setItem("Repositories", JSON.stringify(dateFilter));
 
