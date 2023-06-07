@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 
@@ -41,7 +42,7 @@ export default function Home(): JSX.Element {
   const skillsRef = useRef<any>(null);
   const repositoriesRef = useRef<any>(null);
   const classDefault =
-    "relative !flex flex-col !justify-start lg:!justify-center text-white spacing_content bg-tranparent h-screen";
+    "relative !flex flex-col !justify-start lg:!justify-center text-white bg-tranparent h-screen";
   const [language, setLanguage] = useState<string>("pt");
   const [animation, setAnimation] = useState<boolean>(true);
 

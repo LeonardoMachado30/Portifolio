@@ -24,30 +24,23 @@ import icons_arrow_up from "./icons_arrow_up.svg";
 import icon_cube from "./icon_cube.svg";
 import icon_bar from "./icon_bar.svg";
 
-export {
-  css,
-  gulp,
-  html,
-  javascript,
-  typescript,
-  next,
-  bootstrap,
-  jquery,
-  react,
-  // csharp,
-  sass,
-  php,
-  gsap,
-  info,
-  icon_github,
-  icon_redirect,
-  icon_whatsapp,
-  icon_email,
-  icon_settings,
-  icon_Bandeiro_Brasil,
-  icons_arrow_down,
-  icons_arrow_up,
-  icon_Bandeira_EUA,
-  icon_cube,
-  icon_bar,
+const imgs = {
+  front: { css, html, javascript, bootstrap, jquery, react, sass, gsap },
+  back: { gulp, typescript, next, php },
+  icons: {
+    icon_github,
+    icon_redirect,
+    icon_whatsapp,
+    icon_email,
+    icon_settings,
+    icon_Bandeiro_Brasil,
+    icons_arrow_down,
+    icons_arrow_up,
+    icon_Bandeira_EUA,
+    icon_cube,
+    icon_bar,
+    info,
+  },
 };
+
+export default imgs;
