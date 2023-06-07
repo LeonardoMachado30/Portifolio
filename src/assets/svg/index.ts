@@ -24,7 +24,35 @@ import icons_arrow_up from "./icons_arrow_up.svg";
 import icon_cube from "./icon_cube.svg";
 import icon_bar from "./icon_bar.svg";
 
-const imgs = {
+interface IImgs {
+  front: {
+    css: string;
+    html: string;
+    javascript: string;
+    bootstrap: string;
+    jquery: string;
+    react: string;
+    sass: string;
+    gsap: string;
+  };
+  back: { gulp: string; typescript: string; next: string; php: string };
+  icons: {
+    icon_github: string;
+    icon_redirect: string;
+    icon_whatsapp: string;
+    icon_email: string;
+    icon_settings: string;
+    icon_Bandeiro_Brasil: string;
+    icons_arrow_down: string;
+    icons_arrow_up: string;
+    icon_Bandeira_EUA: string;
+    icon_cube: string;
+    icon_bar: string;
+    info: string;
+  };
+}
+
+const imgs: IImgs = {
   front: { css, html, javascript, bootstrap, jquery, react, sass, gsap },
   back: { gulp, typescript, next, php },
   icons: {

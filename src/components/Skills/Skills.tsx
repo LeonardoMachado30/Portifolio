@@ -75,7 +75,6 @@ const Skills = forwardRef<ChildHandle, any>((props, ref) => {
   }
 
   function ImageDefault(item: any) {
-    console.log(item?.src);
     const regex = /\/media\/([^\.]+)\./;
     const match = item?.src.match(regex);
     return (

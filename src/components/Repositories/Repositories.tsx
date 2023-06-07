@@ -7,9 +7,7 @@ import {
   useRef,
   useState,
   Image,
-  //? ICONS
-  icon_github,
-  icon_redirect,
+
   //? OTHERS
   moment,
   formatDate,
@@ -22,6 +20,8 @@ import {
   EffectCards,
   Navigation,
   buttonAnimation,
+  //? ICONS
+  imgs,
 } from "./index";
 import useRessource from "@/utils/ressource";
 
@@ -44,6 +44,9 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
     RepositoriesModel[] | null
   >();
   const localizer = useRessource("Repositories");
+  const icon_github = Object.values(imgs.icons.icon_github)[0];
+  const icon_redirect = Object.values(imgs.icons.icon_redirect)[0];
+  console.log(icon_redirect);
   useEffect(() => {
     async function handleFetch() {
       const res = await fetchRepos();
@@ -146,7 +149,12 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
                       onMouseEnter={(e) => buttonAnimation(e.target, 1.1)}
                       onMouseLeave={(e) => buttonAnimation(e.target, 1)}
                     >
-                      <Image src={icon_redirect} alt="Ir para site" />
+                      <Image
+                        src={icon_redirect}
+                        alt="Ir para site"
+                        width={30}
+                        height={30}
+                      />
                     </a>
                   )}
 
@@ -159,7 +167,12 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
                     onMouseEnter={(e) => buttonAnimation(e.target, 1.1)}
                     onMouseLeave={(e) => buttonAnimation(e.target, 1)}
                   >
-                    <Image src={icon_github} alt="ir para Github" />
+                    <Image
+                      src={icon_github}
+                      alt="ir para Github"
+                      width={30}
+                      height={30}
+                    />
                   </a>
                 </div>
 

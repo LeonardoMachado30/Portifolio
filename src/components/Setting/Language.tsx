@@ -1,8 +1,8 @@
-import { icon_Bandeiro_Brasil, icon_Bandeira_EUA } from "@/assets/svg/index";
+// import { icon_Bandeiro_Brasil, icon_Bandeira_EUA } from "@/assets/svg/index";
+import imgs from "@/assets/svg/index";
 
 import Image from "next/image";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import gsap from "gsap";
+import { useContext, useRef } from "react";
 
 import { LanguageContext } from "@/utils/Context";
 
@@ -26,7 +26,7 @@ export default function Language(): JSX.Element {
       ref={refLangage}
     >
       <Image
-        src={icon_Bandeiro_Brasil}
+        src={imgs.icons.icon_Bandeiro_Brasil}
         alt={"Bandeira do Brasil"}
         className="cursor-pointer"
         width={30}
@@ -38,7 +38,7 @@ export default function Language(): JSX.Element {
       />
 
       <Image
-        src={icon_Bandeira_EUA}
+        src={imgs.icons.icon_Bandeira_EUA}
         alt={"Bandeira dos Estados Unidos"}
         className="cursor-pointer"
         width={30}

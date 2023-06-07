@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import Image from "next/image";
-import { icon_github, icon_redirect } from "@/assets/svg/index";
+import imgs from "@/assets/svg/index";
 import fetchRepos from "./fetch";
 import moment from "moment";
 import gsap from "gsap";
@@ -31,12 +31,6 @@ export {
 };
 
 export {
-  //? ICONS
-  icon_github,
-  icon_redirect,
-};
-
-export {
   //? SWIPER
   Swiper,
   SwiperSlide,
@@ -57,4 +51,9 @@ export {
   //? ANIMATIONS
   gsap,
   buttonAnimation,
+};
+
+export {
+  //? ICONS
+  imgs,
 };
