@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { icon_whatsapp, icon_email, icon_bar } from "@/assets/svg/index";
-
 interface IProps {
   src: any;
   alt: string;
