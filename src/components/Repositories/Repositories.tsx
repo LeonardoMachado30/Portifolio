@@ -1,4 +1,4 @@
-import { animationSlider } from "@/utils/animations/animationSlider";
+import useRessource from "@/utils/ressource";
 import {
   //? REACT
   forwardRef,
@@ -7,7 +7,6 @@ import {
   useRef,
   useState,
   Image,
-
   //? OTHERS
   moment,
   formatDate,
@@ -21,12 +20,10 @@ import {
   Navigation,
   buttonAnimation,
   //? ICONS
-  imgs,
+  icons,
 } from "./index";
-import useRessource from "@/utils/ressource";
-
+import { animationSlider } from "@/utils/animations/animationSlider";
 import ressource from "@/utils/ressource";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cube";
@@ -40,20 +37,20 @@ interface ChildHandle {
 const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
   const titleRef = useRef<any>(null);
   const swiperRef = useRef<any>(null);
+  const localizer = useRessource("Repositories");
   const [repositories, setRepositories] = useState<
     RepositoriesModel[] | null
   >();
-  const localizer = useRessource("Repositories");
-  const icon_github = Object.values(imgs.icons.icon_github)[0];
-  const icon_redirect = Object.values(imgs.icons.icon_redirect)[0];
-  console.log(icon_redirect);
-  useEffect(() => {
-    async function handleFetch() {
+  async function handleFetch() {
+    try {
       const res = await fetchRepos();
       if (res !== null) setRepositories(res);
+    } catch (Exception) {
+      console.log(Exception);
     }
-    handleFetch();
-  }, []);
+  }
+
+  handleFetch();
 
   const handleStart = () => {
     const TimelineName = animationSlider(
@@ -96,7 +93,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
   return (
     <>
       <h2
-        className="mb-4 w-full text-center text-5xl font-semibold lg:mb-12"
+        className="mb-4 w-full text-center text-4xl font-semibold lg:mb-12"
         ref={titleRef}
       >
         {localizer?.title}
@@ -124,7 +121,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
 
             return (
               <SwiperSlide
-                className=" card-height !flex flex-col !justify-between !text-black !shadow"
+                className=" card-height !flex flex-col !justify-between !text-black !shadow-lg"
                 key={index}
               >
                 <h2 className="mb-2 w-full text-center font-bold">{name}</h2>
@@ -150,7 +147,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
                       onMouseLeave={(e) => buttonAnimation(e.target, 1)}
                     >
                       <Image
-                        src={icon_redirect}
+                        src={icons.icon_redirect}
                         alt="Ir para site"
                         width={30}
                         height={30}
@@ -168,7 +165,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
                     onMouseLeave={(e) => buttonAnimation(e.target, 1)}
                   >
                     <Image
-                      src={icon_github}
+                      src={icons.icon_github}
                       alt="ir para Github"
                       width={30}
                       height={30}

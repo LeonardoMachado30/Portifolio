@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import Image from "next/image";
-import imgs from "@/assets/svg/index";
+import { front, back, icons } from "@/assets/svg/index";
 import fetchRepos from "./fetch";
 import moment from "moment";
 import gsap from "gsap";
@@ -55,5 +55,7 @@ export {
 
 export {
   //? ICONS
-  imgs,
+  front,
+  back,
+  icons,
 };

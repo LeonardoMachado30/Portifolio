@@ -18,7 +18,9 @@ export default async function fetchRepos(): Promise<
   dateObj = await resp.data;
   const date = handleMapList(dateObj);
 
-  const filter = (obj: any) => !obj.fork && obj.language !== null;
+  const filter = (obj: any) =>
+    !obj.fork && obj.language !== null && obj.homepage;
+
   const dateFilter = date.filter(filter);
 
   // const dateOrder = orderByDate(dateFilter);
