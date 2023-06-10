@@ -1,3 +1,3 @@
 export const localizer = {
-  title: `Habilidades`,
+  title: `PRINCIPAIS HABILIDADES`,
 }
