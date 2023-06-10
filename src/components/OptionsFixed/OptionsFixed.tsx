@@ -1,36 +1,8 @@
-import { useRef, useState, useContext, useEffect } from "react";
-
-import { ButtonFloat } from "@/components/export";
-import Button from "./Button";
-import imgs from "@/assets/svg/index";
-import Image from "next/image";
+import { useRef, useState, useContext } from "react";
 import { AnimationContext, LanguageContext } from "@/utils/Context";
-
-import styled from "styled-components";
-
-const Modal = styled.div`
-  // z-index: -1;
-  // box-shadow: 16px 17px 34px -4px rgba(0, 0, 0, 0.67);
-  // -webkit-box-shadow: 16px 17px 34px -4px rgba(0, 0, 0, 0.67);
-  // -moz-box-shadow: 16px 17px 34px -4px rgba(0, 0, 0, 0.67);
-  // max-width: 300px;
-  // min-width: 150px;
-
-  // @media screen and (max-width: 380px) {
-  //   max-width: 220px;
-  // }
-
-  // @media screen and (max-width: 280px) {
-  //   max-width: 200px;
-  // }
-  // transition: all 1s ease-in-out;
-`;
-
-interface IOpenModal {
-  bar?: boolean;
-  settings?: boolean;
-}
-
+import { icons } from "@/assets/svg/index";
+import Button from "./Button";
+import Image from "next/image";
 function OptionsFixed(): JSX.Element {
   const [openModalBar, setOpenModalBar] = useState<boolean>(false);
   const [openModalSettings, setOpenModalSettings] = useState<boolean>(false);
@@ -112,7 +84,7 @@ function OptionsFixed(): JSX.Element {
     <div className="fixed bottom-20 right-4 z-20 flex flex-col gap-2  md:right-10 lg:bottom-10">
       <div className={`relative`}>
         <Button
-          prop={{ src: imgs.icons.icon_bar, alt: "bar" }}
+          prop={{ src: icons.icon_bar, alt: "bar" }}
           handleClick={handleClickBar}
           className={`${openModalBar && "arrowTop"}`}
         />
@@ -121,23 +93,23 @@ function OptionsFixed(): JSX.Element {
           <div className="absolute bottom-11 left-0 right-0 ml-auto mr-auto flex w-auto flex-col items-center justify-center gap-2 p-2 ">
             <Button
               className={widthHeight}
-              prop={{ src: imgs.icons.icon_whatsapp, alt: "Whatsapp" }}
+              prop={{ src: icons.icon_whatsapp, alt: "Whatsapp" }}
               handleClick={() => handleClickRedirect("whatsapp")}
             />
             <Button
               className={widthHeight}
-              prop={{ src: imgs.icons.icon_redirect, alt: "LinkedIn" }}
+              prop={{ src: icons.icon_redirect, alt: "LinkedIn" }}
               handleClick={() => handleClickRedirect("linkedin")}
             />
             <Button
               className={widthHeight}
-              prop={{ src: imgs.icons.icon_github, alt: "Github" }}
+              prop={{ src: icons.icon_github, alt: "Github" }}
               handleClick={() => handleClickRedirect("github")}
             />
             <div className="relative">
               <Button
                 className={`h-9 w-9 ${openModalEmail && "arrowLeft"}`}
-                prop={{ src: imgs.icons.icon_email, alt: "Email" }}
+                prop={{ src: icons.icon_email, alt: "Email" }}
                 handleClick={handleClickEmail}
               />
               <div
@@ -160,7 +132,7 @@ function OptionsFixed(): JSX.Element {
 
       <div className={`relative`}>
         <Button
-          prop={{ src: imgs.icons.icon_settings, alt: "Opções" }}
+          prop={{ src: icons.icon_settings, alt: "Opções" }}
           handleClick={handleClickSetting}
           className={`${openModalSettings && "arrowLeft"}`}
         />
@@ -175,7 +147,7 @@ function OptionsFixed(): JSX.Element {
                 className={`btn-transition cursor-pointer ${
                   language === "pt" && "pointer-events-none opacity-60"
                 }`}
-                src={imgs.icons.icon_Bandeiro_Brasil}
+                src={icons.icon_Bandeiro_Brasil}
                 width={24}
                 height={26}
                 alt={"bandeira Brasil"}
@@ -188,7 +160,7 @@ function OptionsFixed(): JSX.Element {
                 className={`btn-transition cursor-pointer ${
                   language === "en" && "pointer-events-none opacity-60"
                 }`}
-                src={imgs.icons.icon_Bandeira_EUA}
+                src={icons.icon_Bandeira_EUA}
                 width={28}
                 height={30}
                 alt={"bandeira Estados Unidos"}
@@ -200,7 +172,7 @@ function OptionsFixed(): JSX.Element {
             </div>
             <Image
               className="btn-transition cursor-pointer"
-              src={imgs.icons.icon_cube}
+              src={icons.icon_cube}
               width={26}
               height={26}
               alt={"Ativar animação"}
