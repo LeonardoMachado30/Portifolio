@@ -7,10 +7,11 @@ import next from "./next.svg";
 import bootstrap from "./bootstrap.svg";
 import jquery from "./jquery.svg";
 import react from "./react.svg";
-// import csharp from "./csharp.svg";
+import csharp from "./csharp.svg";
 import sass from "./sass.svg";
 import php from "./php.svg";
 import gsap from "./gsap.svg";
+import tailwindcss from "./tailwindcss.svg";
 import info from "./info.svg";
 import icon_github from "./icon_github.svg";
 import icon_redirect from "./icon_redirect.svg";
@@ -24,51 +25,37 @@ import icons_arrow_up from "./icons_arrow_up.svg";
 import icon_cube from "./icon_cube.svg";
 import icon_bar from "./icon_bar.svg";
 
-interface IImgs {
-  front: {
-    css: string;
-    html: string;
-    javascript: string;
-    bootstrap: string;
-    jquery: string;
-    react: string;
-    sass: string;
-    gsap: string;
-  };
-  back: { gulp: string; typescript: string; next: string; php: string };
-  icons: {
-    icon_github: string;
-    icon_redirect: string;
-    icon_whatsapp: string;
-    icon_email: string;
-    icon_settings: string;
-    icon_Bandeiro_Brasil: string;
-    icons_arrow_down: string;
-    icons_arrow_up: string;
-    icon_Bandeira_EUA: string;
-    icon_cube: string;
-    icon_bar: string;
-    info: string;
-  };
-}
-
-const imgs: IImgs = {
-  front: { css, html, javascript, bootstrap, jquery, react, sass, gsap },
-  back: { gulp, typescript, next, php },
-  icons: {
-    icon_github,
-    icon_redirect,
-    icon_whatsapp,
-    icon_email,
-    icon_settings,
-    icon_Bandeiro_Brasil,
-    icons_arrow_down,
-    icons_arrow_up,
-    icon_Bandeira_EUA,
-    icon_cube,
-    icon_bar,
-    info,
-  },
+export const back = {
+  gulp,
+  typescript,
+  next,
+  php,
+  csharp,
 };
 
-export default imgs;
+export const front = {
+  css,
+  html,
+  javascript,
+  bootstrap,
+  jquery,
+  react,
+  sass,
+  gsap,
+  tailwindcss,
+};
+
+export const icons = {
+  icon_github,
+  icon_redirect,
+  icon_whatsapp,
+  icon_email,
+  icon_settings,
+  icon_Bandeiro_Brasil,
+  icons_arrow_down,
+  icons_arrow_up,
+  icon_Bandeira_EUA,
+  icon_cube,
+  icon_bar,
+  info,
+};

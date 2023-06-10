@@ -137,7 +137,7 @@ export default function Home(): JSX.Element {
               <div className={`${classDefault} aboutMe !h-auto `}>
                 <AboutMe ref={aboutMeRef} />
               </div>
-              <div className={`${classDefault}  skills `}>
+              <div className={`${classDefault} skills `}>
                 <Skills ref={skillsRef} />
               </div>
               <div className={`${classDefault} repositories `}>
