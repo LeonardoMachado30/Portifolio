@@ -1,5 +1,5 @@
 export const localizer = {
-  title: `About me`,
+  title: `ABOUT ME`,
   p1: `Hell, i´m Flávio, I started my journey in technology working with repairs to
        electronic devices such as notebooks, computers, cell phones and
        Others.

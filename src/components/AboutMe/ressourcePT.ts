@@ -1,5 +1,5 @@
 export const localizer = {
-  title: `Sobre mim`,
+  title: `SOBRE MIM`,
   p1: `Olá, me chamo Flávio, iniciei minha jornada na tecnologia trabalhando com reparos em
       dispositivos eletrônicos, como notebooks, computadores, celulares e
       outros.Realizei um estágio no Colégio Objetivo por 6 meses como suporte

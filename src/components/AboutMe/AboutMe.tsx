@@ -66,7 +66,7 @@ const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
 
   return (
     <>
-      <h2 className="mb-12 text-5xl font-semibold" ref={titleRef}>
+      <h2 className="mb-12 text-4xl font-semibold" ref={titleRef}>
         {localizer?.title}
       </h2>
 
