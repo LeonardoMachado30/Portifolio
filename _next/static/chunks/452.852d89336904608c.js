@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[452],{7452:function(e,t,a){a.r(t),a.d(t,{localizer:function(){return l}});let l={title:"Projetos",lastUpdated:"Ultima atualiz\xe7\xe3o",create:"Criado"}}}]);
