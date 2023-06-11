@@ -3,6 +3,7 @@ import { AnimationContext, LanguageContext } from "@/utils/Context";
 import { icons } from "@/assets/svg/index";
 import Button from "./Button";
 import Image from "next/image";
+
 function OptionsFixed(): JSX.Element {
   const [openModalBar, setOpenModalBar] = useState<boolean>(false);
   const [openModalSettings, setOpenModalSettings] = useState<boolean>(false);

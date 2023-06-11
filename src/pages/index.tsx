@@ -1,18 +1,15 @@
-"use client"
+"use client";
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 
 import Head from "next/head";
 
+import AboutMe from "@components/AboutMe";
+import Skills from "@components/Skills";
+import Welcome from "@components/Welcome";
+import OptionsFixed from "@components/OptionsFixed";
+import Repositories from "@components/Repositories";
 import { LanguageContext, AnimationContext } from "@/utils/Context";
-
-import {
-  AboutMe,
-  Skills,
-  Repositories,
-  Welcome,
-  OptionsFixed,
-} from "@/components/export";
 
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";

@@ -17,8 +17,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Pagination, EffectCards, Navigation, EffectCreative } from "swiper";
 import { buttonAnimation } from "@/utils/animations/buttonAnimation";
+import { animationSlider } from "@utils/animations/animationSlider";
+import ressource from "@utils/ressource";
+import useRessource from "@utils/ressource";
 
 export type { RepositoriesModel };
+
+export {
+  animationSlider,
+  ressource,
+  useRessource,
+};
 
 export {
   //? REACT

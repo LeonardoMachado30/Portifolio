@@ -1,4 +1,4 @@
-import useRessource from "@/utils/ressource";
+import React from "react";
 import {
   //? REACT
   forwardRef,
@@ -21,9 +21,11 @@ import {
   buttonAnimation,
   //? ICONS
   icons,
-} from "./index";
-import { animationSlider } from "@/utils/animations/animationSlider";
-import ressource from "@/utils/ressource";
+  animationSlider,
+  ressource,
+  useRessource,
+} from "./export";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cube";
@@ -41,16 +43,19 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
   const [repositories, setRepositories] = useState<
     RepositoriesModel[] | null
   >();
-  async function handleFetch() {
-    try {
-      const res = await fetchRepos();
-      if (res !== null) setRepositories(res);
-    } catch (Exception) {
-      console.log(Exception);
-    }
-  }
 
-  handleFetch();
+  useEffect(() => {
+    async function handleFetch() {
+      try {
+        const res = await fetchRepos();
+        if (res !== null) setRepositories(res);
+      } catch (Exception) {
+        console.log(Exception);
+      }
+    }
+
+    handleFetch();
+  });
 
   const handleStart = () => {
     const TimelineName = animationSlider(
@@ -85,6 +90,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
       to: "-100%",
     });
   };
+
   useImperativeHandle(ref, () => ({
     handleStart,
     handleEnd,
