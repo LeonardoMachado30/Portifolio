@@ -21,12 +21,11 @@ export default function useRessource(path: string) {
         setLocalizer(resp.localizer);
       });
     }
-  }, [language]);
+  }, [language, path]);
 
   useEffect(() => {
     languageRequest();
-  }, [language]);
+  }, [language, languageRequest]);
 
   return localizer;
 }
-

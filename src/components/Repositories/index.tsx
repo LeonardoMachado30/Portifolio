@@ -1,16 +1,11 @@
 import React from "react";
 import {
   //? REACT
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
   useRef,
   useState,
   Image,
   //? OTHERS
   moment,
-  formatDate,
-  fetchRepos,
   RepositoriesModel,
   //? SWIPER
   Swiper,
@@ -21,8 +16,6 @@ import {
   buttonAnimation,
   //? ICONS
   icons,
-  animationSlider,
-  ressource,
   useRessource,
 } from "./export";
 
@@ -31,70 +24,13 @@ import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 
-interface ChildHandle {
-  handleStart: () => void;
-  handleEnd: () => void;
-}
-
-const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
+function Repositories({ data }) {
   const titleRef = useRef<any>(null);
   const swiperRef = useRef<any>(null);
   const localizer = useRessource("Repositories");
   const [repositories, setRepositories] = useState<
     RepositoriesModel[] | null
   >();
-
-  useEffect(() => {
-    async function handleFetch() {
-      try {
-        const res = await fetchRepos();
-        if (res !== null) setRepositories(res);
-      } catch (Exception) {
-        console.log(Exception);
-      }
-    }
-
-    handleFetch();
-  });
-
-  const handleStart = () => {
-    const TimelineName = animationSlider(
-      titleRef?.current,
-      null,
-      {
-        from: "100%",
-        to: 0,
-      },
-      0.4
-    );
-    animationSlider(
-      swiperRef?.current,
-      TimelineName,
-      {
-        from: "100%",
-        to: 0,
-      },
-      0
-    );
-  };
-
-  const handleEnd = () => {
-    const TimelineName = animationSlider(
-      titleRef?.current,
-      null,
-      { from: 0, to: "-100%" },
-      0.4
-    );
-    animationSlider(swiperRef?.current, TimelineName, {
-      from: 0,
-      to: "-100%",
-    });
-  };
-
-  useImperativeHandle(ref, () => ({
-    handleStart,
-    handleEnd,
-  }));
 
   return (
     <>
@@ -105,7 +41,7 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
         {localizer?.title}
       </h2>
 
-      {repositories ? (
+      {data ? (
         <Swiper
           effect={"cards"}
           pagination={{
@@ -117,9 +53,9 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
           className="swiper !h-4/5 !w-full !max-w-3xl !px-20 !py-12 !pt-4 md:!h-auto md:!px-48 md:!py-8"
           ref={swiperRef}
         >
-          {repositories?.map((element, index) => {
+          {data?.map((element, index) => {
             const created_at = moment(element?.created_at);
-            const lastUpdate = formatDate(element);
+            // const lastUpdate = formatDate(element);
             const name = element?.name
               .replace(/[-]/g, " ")
               .replace(/_/g, " ")
@@ -193,10 +129,10 @@ const Repositories = forwardRef<ChildHandle, any>((props, ref) => {
           })}
         </Swiper>
       ) : (
-        <div>Erro</div>
+        <div>Error</div>
       )}
     </>
   );
-});
+}
 
 export default Repositories;

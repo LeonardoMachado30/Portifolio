@@ -108,4 +108,6 @@ const Welcome = forwardRef<ChildHandle, any>((props, ref) => {
   );
 });
 
+Welcome.displayName = "Welcome";
+
 export default Welcome;

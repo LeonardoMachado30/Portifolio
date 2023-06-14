@@ -70,7 +70,7 @@ const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
         {localizer?.title}
       </h2>
 
-      <div className="scroll-custom flex w-full items-center justify-center overflow-auto bg-scroll !mb-20 text-center md:!px-72 z-50">
+      <div className="scroll-custom z-50 !mb-20 flex w-full items-center justify-center overflow-auto bg-scroll text-center md:!px-72">
         <p
           className={`h-full w-full px-4 text-justify text-xs  md:text-sm`}
           style={{ lineHeight: "20px" }}
@@ -88,5 +88,7 @@ const AboutMe = forwardRef<IChildHandle, any>((props, ref) => {
     </>
   );
 });
+
+AboutMe.displayName = "AboutMe";
 
 export default AboutMe;

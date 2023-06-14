@@ -60,4 +60,6 @@ const ButtonFloat = forwardRef<Child, any>(
   }
 );
 
+ButtonFloat.displayName = "ButtonFloat";
+
 export default ButtonFloat;

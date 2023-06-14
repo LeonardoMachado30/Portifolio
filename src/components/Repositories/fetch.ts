@@ -5,10 +5,10 @@ import { RepositoriesModel } from "@/models/Repositories";
 export default async function fetchRepos(): Promise<
   RepositoriesModel[] | null
 > {
-  const getStorage = localStorage.getItem("Repositories");
-  let dateObj = getStorage && JSON.parse(getStorage);
+  // const getStorage = localStorage.getItem("Repositories");
+  let dateObj: any; //getStorage && JSON.parse(getStorage);
 
-  if (dateObj !== null) return dateObj;
+  // if (dateObj !== null) return dateObj;
 
   const uri = "https://api.github.com/users/LeonardoMachado30/repos";
   const resp = await axios.get(uri);
@@ -25,7 +25,7 @@ export default async function fetchRepos(): Promise<
 
   // const dateOrder = orderByDate(dateFilter);
 
-  localStorage.setItem("Repositories", JSON.stringify(dateFilter));
+  // localStorage.setItem("Repositories", JSON.stringify(dateFilter));
 
   return dateFilter;
 }
