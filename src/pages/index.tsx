@@ -10,27 +10,29 @@ import Repositories from "@components/Repositories";
 import AnimationComponent from "@/components/AnimationComponent";
 import fetchRepos from "@/components/Repositories/fetch";
 import { GetStaticProps } from "next";
+import { AnimationContext, LanguageContext } from "@/utils/Context";
 
 export default function Home({ data }): JSX.Element {
-  const aboutMeRef = useRef<any>(null);
-  const welcomeRef = useRef<any>(null);
-  const skillsRef = useRef<any>(null);
-  const repositoriesRef = useRef<any>(null);
+  const [animation, setAnimation] = useState<boolean>(true);
+  const [language, setLanguage] = useState<string>("pt");
 
   return (
     <>
       <Head>
         <title>Portifólio de Flávio Leonardo</title>
       </Head>
+      <LanguageContext.Provider value={{ language, setLanguage }}>
+        <AnimationContext.Provider value={{ animation, setAnimation }}>
+          <AnimationComponent>
+            <Welcome />
+            <AboutMe />
+            <Skills  />
+            <Repositories data={data} />
+          </AnimationComponent>
 
-      <AnimationComponent>
-        <Welcome ref={welcomeRef} />
-        <AboutMe ref={aboutMeRef} />
-        <Skills ref={skillsRef} />
-        <Repositories data={data} />
-      </AnimationComponent>
-
-      <OptionsFixed />
+          <OptionsFixed />
+        </AnimationContext.Provider>
+      </LanguageContext.Provider>
     </>
   );
 }

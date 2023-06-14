@@ -1,13 +1,7 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import Image from "next/image";
 import { front, back } from "@/assets/svg/index";
 import useRessource from "@/utils/ressource";
 import { animationSlider } from "@/utils/animations/animationSlider";
-
-interface ChildHandle {
-  handleStart: () => void;
-  handleEnd: () => void;
-}
 
 const ImageDefault = ({ prop }: any) => {
   return (
@@ -20,7 +14,6 @@ const ImageDefault = ({ prop }: any) => {
         height={10}
         className="cursor-pointer shadow-lg hover:-translate-y-1 hover:duration-300 hover:ease-in"
         style={{ height: "30px", width: "auto" }}
-        // onClick={() => click(match[1])}
       />
     )
   );
@@ -51,71 +44,16 @@ const TopicComponente = ({ prop }: IPropTopicComponente) => {
   );
 };
 
-const Skills = forwardRef<ChildHandle, any>((props, ref) => {
-  const titleRef = useRef<any>(null);
-  const listSkillsRef = useRef<HTMLDivElement>(null);
+export default function Skills() {
   const localizer = useRessource("Skills");
-
-  const handleStart = () => {
-    const TimelineName = animationSlider(
-      titleRef?.current,
-      null,
-      {
-        from: "100%",
-        to: 0,
-      },
-      0.3
-    );
-    animationSlider(
-      listSkillsRef?.current,
-      TimelineName,
-      {
-        from: "100%",
-        to: 0,
-      },
-      0.3
-    );
-  };
-
-  const handleEnd = () => {
-    const TimelineName = animationSlider(
-      listSkillsRef?.current,
-      null,
-      {
-        from: "-100%",
-        to: 0,
-      },
-      0.4
-    );
-    animationSlider(
-      titleRef?.current,
-      TimelineName,
-      { from: "-100%", to: 0 },
-      0
-    );
-  };
-
-  useImperativeHandle(ref, () => ({
-    handleStart,
-    handleEnd,
-  }));
 
   return (
     <>
-      <h2 className="mb-12 text-4xl font-semibold" ref={titleRef}>
-        {localizer?.title}
-      </h2>
-      <div
-        className="flex w-full max-w-xl flex-col gap-10 px-6"
-        ref={listSkillsRef}
-      >
+      <h2 className="mb-12 text-4xl font-semibold">{localizer?.title}</h2>
+      <div className="flex w-full max-w-xl flex-col gap-10 px-6">
         <TopicComponente prop={{ stack: front, title: "Front-end" }} />
         <TopicComponente prop={{ stack: back, title: "Back-end" }} />
       </div>
     </>
   );
-});
-
-Skills.displayName = "Skills";
-
-export default Skills;
+}

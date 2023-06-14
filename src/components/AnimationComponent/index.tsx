@@ -1,14 +1,13 @@
-import { AnimationContext, LanguageContext } from "@/utils/Context";
+import { useContext, useEffect, useRef } from "react";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, EffectCreative, Mousewheel } from "swiper";
+import { AnimationContext } from "@utils/Context";
+// import required modules
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-// import required modules
-import { Pagination, Navigation, EffectCreative, Mousewheel } from "swiper";
-import { useEffect, useRef, useState } from "react";
 
 interface IProps {
   children: React.ReactNode | [] | any;
@@ -16,9 +15,8 @@ interface IProps {
 }
 
 export default function AnimationComponent({ children }: IProps): JSX.Element {
-  const [animation, setAnimation] = useState<boolean>(true);
+  const { animation } = useContext(AnimationContext);
   // const [page] = useState<IPage>({ activeIndex: 0 });
-  const [language, setLanguage] = useState<string>("pt");
   const swiperRef = useRef<SwiperRef>(null);
   const prev = {
     translate: [0, "-100%", 0],
@@ -65,54 +63,50 @@ export default function AnimationComponent({ children }: IProps): JSX.Element {
   //   }
   // }, []);
 
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
-      <AnimationContext.Provider value={{ animation, setAnimation }}>
-        {animation ? (
-          <Swiper
-            effect={"creative"}
-            direction={"vertical"}
-            // navigation={true}
-            slidesPerView={1}
-            spaceBetween={100}
-            mousewheel={true}
-            speed={2000}
-            pagination={{
-              clickable: true,
-            }}
-            creativeEffect={{ prev, next }}
-            modules={[EffectCreative, Mousewheel, Pagination, Navigation]}
-            className="bg-animation !h-screen"
-            ref={swiperRef}
-            //TODO: onSlideNextTransitionStart={(e) => onSlideNextTransitionStart(e)}
-            //TODO: onSlidePrevTransitionStart={(e) => onSlidePrevTransitionStart(e)}
+  return animation ? (
+    <Swiper
+      effect={"creative"}
+      direction={"vertical"}
+      // navigation={true}
+      slidesPerView={1}
+      spaceBetween={100}
+      mousewheel={true}
+      speed={2000}
+      pagination={{
+        clickable: true,
+      }}
+      creativeEffect={{ prev, next }}
+      modules={[EffectCreative, Mousewheel, Pagination, Navigation]}
+      className="bg-animation !h-screen"
+      ref={swiperRef}
+      //TODO: onSlideNextTransitionStart={(e) => onSlideNextTransitionStart(e)}
+      //TODO: onSlidePrevTransitionStart={(e) => onSlidePrevTransitionStart(e)}
+    >
+      {children.map((item) => {
+        const { type } = item;
+        return (
+          <SwiperSlide
+            key={type.displayName}
+            className="bg-tranparent relative !flex h-screen flex-col !justify-start text-white lg:!justify-center"
           >
-            {children.map((item) => {
-              const { type } = item;
-              return (
-                <SwiperSlide
-                  key={type.displayName}
-                  className="bg-tranparent relative !flex h-screen flex-col !justify-start text-white lg:!justify-center "
-                >
-                  {item}
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        ) : (
-          children.map((item) => {
-            const { type } = item;
-            return (
-              <div
-                key={type}
-                className="bg-tranparent relative !flex h-screen flex-col !justify-start text-white lg:!justify-center"
-              >
-                {item}
-              </div>
-            );
-          })
-        )}
-      </AnimationContext.Provider>
-    </LanguageContext.Provider>
+            {item}
+          </SwiperSlide>
+        );
+      })}
+    </Swiper>
+  ) : (
+    <div className="bg-animation">
+      {children.map((item) => {
+        const { type } = item;
+        return (
+          <div
+            key={type}
+            className="bg-tranparent relative !flex h-screen flex-col  text-white !justify-center items-center !text-center"
+          >
+            {item}
+          </div>
+        );
+      })}
+    </div>
   );
 }

@@ -1,83 +1,13 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
-import Image from "next/image";
 import useRessource from "@/utils/ressource";
+import Image from "next/image";
 import profile from "@/assets/perfil_1.jpg";
-import { animationSlider } from "@/utils/animations/animationSlider";
-interface ChildHandle {
-  handleStart: () => void;
-  handleEnd: () => void;
-}
-const Welcome = forwardRef<ChildHandle, any>((props, ref) => {
+export default function Welcome() {
   const localizer = useRessource("Welcome");
-  const myNameRef = useRef<HTMLParagraphElement>(null);
-  const welcomeRef = useRef<HTMLParagraphElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-
-  const handleStart = () => {
-    // const TimelineName = animationSlider(myNameRef?.current, null, {
-    //   from: "100%",
-    //   to: 0,
-    // });
-    const TimelineWelcome = animationSlider(
-      welcomeRef?.current,
-      null,
-      {
-        from: "-10%",
-        to: 0,
-      },
-      0
-    );
-    animationSlider(
-      imageRef?.current,
-      TimelineWelcome,
-      {
-        from: "-10%",
-        to: 0,
-      },
-      0
-    );
-  };
-
-  const handleEnd = () => {
-    const TimelineWelcome = animationSlider(
-      welcomeRef?.current,
-      null,
-      {
-        from: "-60%",
-        to: 0,
-      },
-      0.4
-    );
-    // const TimelineName = animationSlider(
-    //   myNameRef?.current,
-    //   TimelineWelcome,
-    //   {
-    //     from: "-100%",
-    //     to: 0,
-    //   },
-    //   0
-    // );
-    animationSlider(
-      imageRef?.current,
-      TimelineWelcome,
-      {
-        from: "-60%",
-        to: 0,
-      },
-      0.4
-    );
-  };
-
-  useImperativeHandle(ref, () => ({
-    handleStart,
-    handleEnd,
-  }));
 
   return (
     <>
       <div className="flex w-full items-center justify-center">
         <Image
-          ref={imageRef}
           src={profile ? profile : "profle"}
           alt={localizer?.altProfileImage}
           width={0}
@@ -88,26 +18,15 @@ const Welcome = forwardRef<ChildHandle, any>((props, ref) => {
             maxWidth: "320px",
             width: "100%",
             height: "340px",
-            // border: "8px double white",
           }}
         />
       </div>
 
       <div className="flex flex-col gap-2 px-6 text-center md:px-0">
-        {/* <p ref={myNameRef} className="text-3xl font-bold uppercase md:text-5xl">
-          {localizer?.myName}
-        </p> */}
-        <p
-          ref={welcomeRef}
-          className="text-3xl font-bold uppercase md:text-5xl"
-        >
+        <p className="text-3xl font-bold uppercase md:text-5xl">
           {localizer?.welcome}
         </p>
       </div>
     </>
   );
-});
-
-Welcome.displayName = "Welcome";
-
-export default Welcome;
+}
