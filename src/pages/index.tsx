@@ -26,7 +26,7 @@ export default function Home({ data }): JSX.Element {
           <AnimationComponent>
             <Welcome />
             <AboutMe />
-            <Skills  />
+            <Skills />
             <Repositories data={data} />
           </AnimationComponent>
 
@@ -39,6 +39,9 @@ export default function Home({ data }): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const data = await fetchRepos(); // your fetch function here
+  const currentTime = new Date().getTime();
+  const sixHours = 6 * 60 * 60 * 1000; // 6 horas * 60 minutos * 60 segundos * 1000 milissegundos
+  const revalidationTime = currentTime + sixHours;
   return {
     props: {
       data,
