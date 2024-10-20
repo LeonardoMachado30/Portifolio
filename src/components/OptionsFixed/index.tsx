@@ -63,14 +63,14 @@ function OptionsFixed(): JSX.Element {
     let link: string = "";
 
     if (prop === "whatsapp") {
-      const phone: string = "5561984847214";
+      const phone: string = "5561981095126";
       const text: string =
         "Ol%C3%A1,%20gostaria%20de%20falar%20com%20voc%C3%AA%20sobre%20uma%20oportunidade%20de%20emprego!";
       link = `//https://api.whatsapp.com/send?phone=${phone}&text=${text}`;
     } else if (prop === "linkedin") {
       link = `https://www.linkedin.com/flavio-leonardo-ads`;
     } else if (prop === "github") {
-      link = `https://www.github.com.br/LeonardoMachado30`;
+      link = `https://github.com/LeonardoMachado30`;
     }
     setOpenModalBar(false);
     window.open(link, "_blank");
