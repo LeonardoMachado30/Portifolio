@@ -1,6 +1,6 @@
 import useRessource from "@/utils/ressource";
 import Image from "next/image";
-import profile from "@/assets/perfil_1.jpg";
+import profile from "@/assets/perfil_1.jpeg";
 export default function Welcome() {
   const localizer = useRessource("Welcome");
 
