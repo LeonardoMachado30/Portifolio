@@ -5,10 +5,9 @@ export default function AboutMe() {
   return (
     <>
       <h2 className="mb-12 text-4xl font-semibold">{localizer?.title}</h2>
-
-      <div className="scroll-custom z-50 !mb-20 flex w-full items-center justify-center overflow-auto bg-scroll text-center md:!px-72">
+      <div className="scroll-custom z-50 mx-auto !mb-20 w-full max-w-4xl flex-col items-center justify-center overflow-auto bg-scroll text-center">
         <p
-          className={`h-full w-full px-4 text-justify text-xs  md:text-sm`}
+          className={`w-full px-4 text-justify text-xs  md:text-sm`}
           style={{ lineHeight: "20px" }}
         >
           {localizer?.p1}

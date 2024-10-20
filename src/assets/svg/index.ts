@@ -24,26 +24,14 @@ import icons_arrow_down from "./icons_arrow_down.svg";
 import icons_arrow_up from "./icons_arrow_up.svg";
 import icon_cube from "./icon_cube.svg";
 import icon_bar from "./icon_bar.svg";
-
-export const back = {
-  gulp,
-  typescript,
-  next,
-  php,
-  csharp,
-};
-
-export const front = {
-  css,
-  html,
-  javascript,
-  bootstrap,
-  jquery,
-  react,
-  sass,
-  gsap,
-  tailwindcss,
-};
+import Vuejs from "./Vuejs.svg";
+import quasar from "./quasar.svg";
+import materialDesigner from "./material-designer.svg";
+import materialUi from "./material-ui.svg";
+import ionic from "./ionic.svg";
+import capacitor from "./capacitor.svg";
+import nuxtjs from "./nuxtjs.svg";
+import vsCode from "./vsCode.svg";
 
 export const icons = {
   icon_github,
@@ -59,3 +47,35 @@ export const icons = {
   icon_bar,
   info,
 };
+
+export const front = {
+  html,
+  css,
+  javascript,
+  bootstrap,
+  jquery,
+  react,
+  sass,
+  gsap,
+  tailwindcss,
+  Vuejs,
+  quasar,
+  materialDesigner,
+  materialUi,
+};
+
+export const mobile = {
+  ionic,
+  capacitor,
+};
+
+export const back = {
+  php,
+  typescript,
+  next,
+  nuxtjs,
+  csharp,
+  gulp,
+};
+
+export const other = { vsCode };

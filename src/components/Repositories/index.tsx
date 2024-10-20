@@ -35,7 +35,7 @@ function Repositories({ data }) {
   return (
     <>
       <h2
-        className="mb-4 w-full text-center text-4xl font-semibold lg:mb-12"
+        className="mb-4 flex  items-center text-center text-4xl font-semibold lg:mb-12"
         ref={titleRef}
       >
         {localizer?.title}
@@ -50,7 +50,7 @@ function Repositories({ data }) {
           grabCursor={true}
           navigation={true}
           modules={[EffectCards, Pagination, Navigation]}
-          className="swiper !h-4/5 !w-full !max-w-3xl !px-20 !py-12 !pt-4 md:!h-auto md:!px-48 md:!py-8"
+          className="swiper flex !h-4/5 !w-full !max-w-3xl  md:!h-auto md:!p-20"
           ref={swiperRef}
         >
           {data?.map((element, index) => {
@@ -63,7 +63,7 @@ function Repositories({ data }) {
 
             return (
               <SwiperSlide
-                className=" card-height !flex flex-col !justify-between !text-black !shadow-lg"
+                className="card-height !flex flex-col !justify-between !text-black !shadow-lg "
                 key={index}
               >
                 <h2 className="mb-2 w-full text-center font-bold">{name}</h2>

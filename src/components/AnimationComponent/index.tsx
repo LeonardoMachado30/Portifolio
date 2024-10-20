@@ -67,16 +67,15 @@ export default function AnimationComponent({ children }: IProps): JSX.Element {
     <Swiper
       effect={"creative"}
       direction={"vertical"}
-      // navigation={true}
       slidesPerView={1}
       spaceBetween={100}
       mousewheel={true}
-      speed={2000}
+      speed={600}
       pagination={{
         clickable: true,
       }}
       creativeEffect={{ prev, next }}
-      modules={[EffectCreative, Mousewheel, Pagination, Navigation]}
+      modules={[EffectCreative, Mousewheel, Pagination]}
       className="bg-animation !h-screen"
       ref={swiperRef}
       //TODO: onSlideNextTransitionStart={(e) => onSlideNextTransitionStart(e)}
@@ -85,12 +84,15 @@ export default function AnimationComponent({ children }: IProps): JSX.Element {
       {children.map((item) => {
         const { type } = item;
         return (
-          <SwiperSlide
-            key={type.displayName}
-            className="bg-tranparent relative !flex h-screen flex-col !justify-start text-white lg:!justify-center"
-          >
-            {item}
-          </SwiperSlide>
+          <>
+            <SwiperSlide
+              key={type.displayName}
+              className="bg-tranparent relative !flex h-screen flex-col justify-center !text-white"
+            >
+              {item}
+            </SwiperSlide>
+            <button>aqui</button>
+          </>
         );
       })}
     </Swiper>
@@ -101,7 +103,7 @@ export default function AnimationComponent({ children }: IProps): JSX.Element {
         return (
           <div
             key={type}
-            className="bg-tranparent relative !flex h-screen flex-col  text-white !justify-center items-center !text-center"
+            className="bg-tranparent relative !flex h-screen flex-col  items-center !justify-center !text-center text-white"
           >
             {item}
           </div>
