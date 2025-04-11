@@ -25,6 +25,8 @@ export default function Welcome() {
       <div className="flex flex-col gap-2 px-6 text-center md:px-0">
         <p className="text-3xl font-bold uppercase md:text-5xl">
           {localizer?.welcome}
+        </p>
+        <p className="text-3xl font-bold uppercase md:text-5xl">
           {localizer?.myName}
         </p>
       </div>
