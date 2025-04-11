@@ -15,8 +15,6 @@ export interface Image {
 }
 
 const ImageDefault = ({ prop, index }: any) => {
-  console.log(prop);
-
   const formatImportFileImage = (image): Image => {
     return image?.src ? image?.src.match(/\/media\/([^\.]+)\./) : image;
   };
