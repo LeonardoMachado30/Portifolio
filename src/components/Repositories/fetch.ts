@@ -18,16 +18,19 @@ export default async function fetchRepos(): Promise<
   dateObj = await resp.data;
   const date = handleMapList(dateObj);
 
-  const filter = (obj: any) =>
-    !obj.fork && obj.language !== null && obj.homepage;
+  const filter = (obj: any, index) => {
+    if (obj.homepage) {
+      return obj.homepage;
+    }
+  };
 
   const dateFilter = date.filter(filter);
 
-  // const dateOrder = orderByDate(dateFilter);
+  const reordered = dateFilter.sort((a, b) =>
+    a.name === "dvx" ? -1 : b.name === "dvx" ? 1 : 0
+  );
 
-  // localStorage.setItem("Repositories", JSON.stringify(dateFilter));
-
-  return dateFilter;
+  return reordered;
 }
 
 function handleMapList(obj: any) {

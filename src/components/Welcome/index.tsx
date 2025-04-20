@@ -6,6 +6,10 @@ export default function Welcome() {
 
   return (
     <>
+      <p className="text-3xl font-bold uppercase md:text-5xl">
+        {localizer?.welcome}
+      </p>
+
       <div className="flex w-full items-center justify-center">
         <Image
           src={profile ? profile : "profle"}
@@ -23,9 +27,6 @@ export default function Welcome() {
       </div>
 
       <div className="flex flex-col gap-2 px-6 text-center md:px-0">
-        <p className="text-3xl font-bold uppercase md:text-5xl">
-          {localizer?.welcome}
-        </p>
         <p className="text-3xl font-bold uppercase md:text-5xl">
           {localizer?.myName}
         </p>
