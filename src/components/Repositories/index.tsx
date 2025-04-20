@@ -17,6 +17,7 @@ import {
   //? ICONS
   icons,
   useRessource,
+  formatDate,
 } from "./export";
 
 // Import Swiper styles
@@ -50,23 +51,25 @@ function Repositories({ data }) {
           grabCursor={true}
           navigation={true}
           modules={[EffectCards, Pagination, Navigation]}
-          className="!h-[86vh] !w-[92vw] "
+          className="b-0 !h-[80vh] !w-full !max-w-[92vw]"
           ref={swiperRef}
         >
           {data?.map((element, index) => {
             const created_at = moment(element?.created_at);
-            // const lastUpdate = formatDate(element);
+            const lastUpdate = formatDate(element);
             const name = element?.name
               .replace(/[-]/g, " ")
               .replace(/_/g, " ")
               .toLocaleUpperCase();
             return (
               <SwiperSlide
-                className="card-height !bg-gray-300 !p-12"
+                className="card-height !h-[100vh] !bg-transparent !p-10"
                 key={index}
               >
-                <div className="text-black">{element.created_at}</div>
-                <h2 className="text-center text-black">{element.name}</h2>
+                <div className="text-end text-black">
+                  {created_at.format("YYYY")}
+                </div>
+                <h2 className="text-center text-black">{name}</h2>
                 <iframe
                   src={element.homepage}
                   title={element.name}

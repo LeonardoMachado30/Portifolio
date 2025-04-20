@@ -3,7 +3,6 @@ import { AnimationContext, LanguageContext } from "@/utils/Context";
 import { icons } from "@/assets/svg/index";
 import Button from "./Button";
 import Image from "next/image";
-
 function OptionsFixed(): JSX.Element {
   const [openModalBar, setOpenModalBar] = useState<boolean>(false);
   const [openModalSettings, setOpenModalSettings] = useState<boolean>(false);
@@ -82,7 +81,7 @@ function OptionsFixed(): JSX.Element {
   };
 
   return (
-    <div className="fixed bottom-20 right-4 z-20 flex flex-col gap-2  md:right-10 lg:bottom-10">
+    <div className="fixed bottom-20 right-4 z-20 flex flex-col justify-end  gap-4 md:right-10 lg:bottom-10">
       <div className={`relative`}>
         <Button
           prop={{ src: icons.icon_bar, alt: "bar" }}
@@ -92,21 +91,22 @@ function OptionsFixed(): JSX.Element {
 
         {openModalBar && (
           <div className="absolute bottom-11 left-0 right-0 ml-auto mr-auto flex w-auto flex-col items-center justify-center gap-2 p-2 ">
-            <Button
+            {/* <Button
               className={widthHeight}
               prop={{ src: icons.icon_whatsapp, alt: "Whatsapp" }}
               handleClick={() => handleClickRedirect("whatsapp")}
-            />
-            <Button
+            /> */}
+            {/* <Button
               className={widthHeight}
               prop={{ src: icons.icon_redirect, alt: "LinkedIn" }}
               handleClick={() => handleClickRedirect("linkedin")}
-            />
+            /> */}
             <Button
               className={widthHeight}
               prop={{ src: icons.icon_github, alt: "Github" }}
               handleClick={() => handleClickRedirect("github")}
             />
+
             <div className="relative">
               <Button
                 className={`h-9 w-9 ${openModalEmail && "arrowLeft"}`}
@@ -181,6 +181,64 @@ function OptionsFixed(): JSX.Element {
             />
           </div>
         )}
+      </div>
+
+      <div className={`relative`}>
+        <a
+          href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=flavio-leonardo-machado"
+          target="_blank"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            textAlign: "center",
+            outline: "none",
+            textDecoration: "none",
+            color: "#ffffff",
+            width: "40px",
+            height: "40px",
+            borderRadius: "100%",
+            fontFamily: "'SF Pro Text', Helvetica, sans-serif",
+          }}
+        >
+          <Image
+            src={icons.linkedin}
+            alt="linkedin"
+            width={40}
+            height={40}
+            style={{ width: "40px", height: "40px" }}
+          ></Image>
+        </a>
+      </div>
+
+      <div className={`relative`}>
+        <a
+          href="https://wa.me/5561981095126?text=Ol%C3%A1%20Fl%C3%A1vio%2C%20"
+          target="_blank"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            textAlign: "center",
+            outline: "none",
+            textDecoration: "none",
+            color: "#ffffff",
+            width: "40px",
+            height: "40px",
+            borderRadius: "100%",
+            backgroundColor: "#25D366",
+            padding: "8px",
+            fontFamily: "'SF Pro Text', Helvetica, sans-serif",
+          }}
+        >
+          <Image
+            src={icons.icon_whatsapp}
+            alt="linkedin"
+            width={40}
+            height={40}
+            style={{ width: "40px", height: "40px" }}
+          ></Image>
+        </a>
       </div>
     </div>
   );

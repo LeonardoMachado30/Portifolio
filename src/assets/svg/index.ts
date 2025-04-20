@@ -32,6 +32,7 @@ import ionic from "./ionic.svg";
 import capacitor from "./capacitor.svg";
 import nuxtjs from "./nuxtjs.svg";
 import vsCode from "./vsCode.svg";
+import linkedin from "./linkedin.svg";
 
 export const icons = {
   icon_github,
@@ -46,6 +47,7 @@ export const icons = {
   icon_cube,
   icon_bar,
   info,
+  linkedin,
 };
 
 export const front = {
