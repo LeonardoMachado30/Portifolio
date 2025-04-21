@@ -44,13 +44,12 @@ function Repositories({ data }) {
 
       {data ? (
         <Swiper
-          effect={"cards"}
           pagination={{
             clickable: true,
           }}
           grabCursor={true}
           navigation={true}
-          modules={[EffectCards, Pagination, Navigation]}
+          modules={[Pagination, Navigation]}
           className="b-0 !h-[80vh] !w-full !max-w-[92vw]"
           ref={swiperRef}
         >
@@ -66,14 +65,14 @@ function Repositories({ data }) {
                 className="card-height !h-[100vh] !bg-transparent !p-10"
                 key={index}
               >
-                <div className="text-end text-black">
+                <div className="text-end text-white">
                   {created_at.format("YYYY")}
                 </div>
-                <h2 className="text-center text-black">{name}</h2>
+                <h2 className="text-center text-white">{name}</h2>
                 <iframe
                   src={element.homepage}
                   title={element.name}
-                  className="h-full w-full"
+                  className="h-full w-full bg-white"
                 ></iframe>
               </SwiperSlide>
             );
