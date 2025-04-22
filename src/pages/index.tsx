@@ -36,7 +36,7 @@ export default function Home({ data }): JSX.Element {
                     className={positionSwaper === 0 ? classActiveMenu : ""}
                     onClick={() => swiperRef.current?.swiper.slideTo(0)}
                   >
-                    Apresentação
+                    Início
                   </button>
                 </li>
                 <li>
@@ -44,7 +44,7 @@ export default function Home({ data }): JSX.Element {
                     className={positionSwaper === 1 ? classActiveMenu : ""}
                     onClick={() => swiperRef.current?.swiper.slideTo(1)}
                   >
-                    Sobre mim
+                    Projetos
                   </button>
                 </li>
                 <li>
@@ -52,7 +52,7 @@ export default function Home({ data }): JSX.Element {
                     className={positionSwaper === 2 ? classActiveMenu : ""}
                     onClick={() => swiperRef.current?.swiper.slideTo(2)}
                   >
-                    Habilidades
+                    Sobre mim
                   </button>
                 </li>
                 <li>
@@ -60,7 +60,7 @@ export default function Home({ data }): JSX.Element {
                     className={positionSwaper === 3 ? classActiveMenu : ""}
                     onClick={() => swiperRef.current?.swiper.slideTo(3)}
                   >
-                    Projetos
+                    Habilidades
                   </button>
                 </li>
               </ul>
@@ -75,9 +75,9 @@ export default function Home({ data }): JSX.Element {
             }}
           >
             <Welcome />
+            <Repositories data={data} />
             <AboutMe />
             <Skills />
-            <Repositories data={data} />
           </AnimationComponent>
 
           <OptionsFixed />

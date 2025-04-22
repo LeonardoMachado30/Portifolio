@@ -1,5 +1,5 @@
 export const localizer = {
-  title: "MAIN PROJECTS",
+  title: "PROJECTS",
   lastUpdated: "Last update",
   create: "Create",
 };
